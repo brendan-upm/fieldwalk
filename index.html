@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fieldwalk — Property Inspection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1F26;
+    --paper:#F5F2EA;
+    --card:#FFFFFF;
+    --amber:#C98A2C;
+    --amber-dark:#8A5D18;
+    --green:#3F7D5C;
+    --green-dark:#295138;
+    --red:#A63A2E;
+    --red-dark:#6E261D;
+    --steel:#63697A;
+    --line:#DDD8CB;
+    --line-strong:#C7C1AF;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    font-family:'IBM Plex Sans', sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .frame{
+    max-width:460px;
+    margin:0 auto;
+    min-height:100vh;
+    background:var(--paper);
+    display:flex;
+    flex-direction:column;
+  }
+  .topbar{
+    background:var(--ink);
+    color:#F5F2EA;
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:5;
+  }
+  .topbar .brand{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    font-size:17px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+  .topbar .back{
+    background:none;
+    border:none;
+    color:#F5F2EA;
+    font-size:14px;
+    font-family:'IBM Plex Sans', sans-serif;
+    cursor:pointer;
+    padding:6px 4px;
+    opacity:0.85;
+  }
+  .content{
+    flex:1;
+    padding:18px 18px 40px;
+  }
+
+  /* --- Inspection tag (signature element) --- */
+  .tag{
+    background:var(--card);
+    border:1px solid var(--line-strong);
+    border-radius:4px;
+    position:relative;
+    padding:18px 18px 18px 34px;
+    margin-bottom:20px;
+    box-shadow:0 1px 0 rgba(0,0,0,0.03);
+  }
+  .tag::before{
+    content:"";
+    position:absolute;
+    left:16px;
+    top:50%;
+    transform:translateY(-50%);
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--ink);
+  }
+  .tag::after{
+    content:"";
+    position:absolute;
+    left:16px;
+    top:8px;
+    bottom:8px;
+    width:0;
+    border-left:1.5px dashed var(--line-strong);
+  }
+  .tag-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--steel);
+    margin:0 0 4px;
+  }
+  .tag-address{
+    font-family:'Oswald', sans-serif;
+    font-size:20px;
+    font-weight:600;
+    margin:0 0 8px;
+    line-height:1.2;
+  }
+  .tag-meta{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    font-size:12.5px;
+    color:var(--steel);
+  }
+  .tag-meta span b{color:var(--ink); font-weight:500;}
+  .tag-progress{
+    margin-top:12px;
+    height:5px;
+    background:var(--line);
+    border-radius:3px;
+    overflow:hidden;
+  }
+  .tag-progress-fill{
+    height:100%;
+    background:var(--amber);
+    border-radius:3px;
+    transition:width 0.25s ease;
+  }
+
+  h1,h2,h3{font-family:'Oswald', sans-serif; font-weight:600; margin:0;}
+  .section-title{
+    font-family:'Oswald', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--steel);
+    margin:24px 0 10px;
+  }
+  .section-title:first-child{margin-top:0;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px 16px;
+    margin-bottom:12px;
+  }
+
+  label{
+    display:block;
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--steel);
+    margin-bottom:5px;
+  }
+  input[type=text], input[type=date], select, textarea{
+    width:100%;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line-strong);
+    border-radius:6px;
+    background:#fff;
+    color:var(--ink);
+    margin-bottom:14px;
+  }
+  input[type=text]:last-child, textarea:last-child{margin-bottom:0;}
+  textarea{resize:vertical; min-height:56px; font-family:'IBM Plex Sans', sans-serif;}
+  input.mono, .mono{font-family:'IBM Plex Mono', monospace;}
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    padding:11px 16px;
+    border-radius:6px;
+    border:1px solid var(--line-strong);
+    background:#fff;
+    color:var(--ink);
+    cursor:pointer;
+    width:100%;
+  }
+  .btn:active{transform:scale(0.98);}
+  .btn-primary{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .btn-amber{background:var(--amber); color:#fff; border-color:var(--amber-dark);}
+  .btn-ghost{background:none; border-color:var(--line-strong);}
+  .btn-sm{padding:7px 12px; font-size:13px; width:auto;}
+  .btn-row{display:flex; gap:8px;}
+  .btn-row .btn{flex:1;}
+
+  .room-list{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin-bottom:16px;
+  }
+  .room-chip{
+    flex:0 0 auto;
+    padding:9px 14px;
+    border-radius:20px;
+    border:1px solid var(--line-strong);
+    background:#fff;
+    font-size:13px;
+    font-weight:500;
+    color:var(--steel);
+    cursor:pointer;
+    white-space:nowrap;
+    position:relative;
+  }
+  .room-chip.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .room-chip.done::after{
+    content:"";
+    position:absolute;
+    top:-3px; right:-3px;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--green);
+    border:1.5px solid var(--paper);
+  }
+
+  .check-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .check-row:last-child{border-bottom:none;}
+  .check-name{font-size:14px;}
+  .cond-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    padding:6px 12px;
+    border-radius:20px;
+    border:1px solid var(--line-strong);
+    background:#fff;
+    color:var(--steel);
+    cursor:pointer;
+  }
+  .cond-btn.good{background:#EAF2ED; color:var(--green-dark); border-color:var(--green);}
+  .cond-btn.fair{background:#F8EFE0; color:var(--amber-dark); border-color:var(--amber);}
+  .cond-btn.damage{background:#F6E7E4; color:var(--red-dark); border-color:var(--red);}
+
+  .photo-row{display:flex; gap:8px; overflow-x:auto; margin:10px 0;}
+  .photo-thumb{
+    width:64px; height:64px;
+    border-radius:6px;
+    object-fit:cover;
+    border:1px solid var(--line-strong);
+    flex:0 0 auto;
+  }
+  .photo-add{
+    width:64px; height:64px;
+    border-radius:6px;
+    border:1.5px dashed var(--line-strong);
+    background:none;
+    color:var(--steel);
+    font-size:20px;
+    flex:0 0 auto;
+    cursor:pointer;
+  }
+
+  .appliance-card{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:10px;
+    background:#FBFAF6;
+  }
+  .appliance-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;}
+  .appliance-head b{font-size:14px;}
+  .appliance-head .remove{font-size:12px; color:var(--red); cursor:pointer; background:none; border:none;}
+  .maint-hint{
+    margin-top:8px;
+    padding:8px 10px;
+    background:#EEF2EE;
+    border-left:2px solid var(--green);
+    font-size:12px;
+    color:var(--green-dark);
+    line-height:1.5;
+  }
+
+  .flag-pill{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    padding:3px 9px;
+    border-radius:20px;
+    background:#F6E7E4;
+    color:var(--red-dark);
+    margin:2px 4px 2px 0;
+  }
+  .good-pill{background:#EAF2ED; color:var(--green-dark);}
+
+  .home-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 16px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    margin-bottom:10px;
+    cursor:pointer;
+  }
+  .home-item .addr{font-weight:500; font-size:14.5px;}
+  .home-item .sub{font-size:12px; color:var(--steel); margin-top:2px;}
+  .empty{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--steel);
+  }
+  .empty .ti{font-size:32px; display:block; margin-bottom:10px;}
+
+  .report-row{display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
+  .report-row:last-child{border-bottom:none;}
+  .report-row .k{color:var(--steel);}
+
+  ::-webkit-scrollbar{display:none;}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="topbar">
+    <button class="back" id="backBtn" style="visibility:hidden;">&larr; Back</button>
+    <div class="brand" id="brandLabel">Fieldwalk</div>
+    <div style="width:52px;"></div>
+  </div>
+  <div class="content" id="app"></div>
+</div>
+
+<input type="file" id="photoInput" accept="image/*,video/*" capture="environment" style="display:none;" multiple>
+<input type="file" id="appliancePhotoInput" accept="image/*" capture="environment" style="display:none;">
+
+<script>
+const EXTERIOR_ZONES = ["Roof","Siding / exterior walls","Windows & doors (ext.)","Deck / porch / steps","Gutters & drainage","Foundation","Grounds / landscaping"];
+const DEFAULT_ROOMS = ["Kitchen","Living room","Bedroom 1","Bathroom 1"];
+const ROOM_CHECKLIST = ["Walls","Flooring","Ceiling","Windows","Doors","Trim / paint"];
+const APPLIANCE_TYPES = {
+  "Refrigerator": "Check door seals every 6 months; clean condenser coils annually.",
+  "Range / oven": "Inspect burner igniters and door seal annually.",
+  "Dishwasher": "Clean filter and inspect door gasket every 6 months.",
+  "Washer": "Inspect hoses annually; clean detergent drawer every 3 months.",
+  "Dryer": "Clean vent duct annually; check lint trap each turnover.",
+  "Water heater": "Flush tank annually; test T&P valve annually; anode check at year 3-5.",
+  "HVAC / furnace": "Replace filter every 90 days; annual professional tune-up.",
+  "Microwave": "Inspect door seal and vent filter annually."
+};
+
+let state = { view: "home", inspections: {}, order: [], currentId: null, currentRoom: null };
+let pendingPhotoTarget = null;
+
+function uid(){ return 'insp_' + Math.random().toString(36).slice(2,9); }
+
+async function loadState(){
+  try{
+    const idx = await window.storage.get('inspections-index', false);
+    if(idx && idx.value){
+      state.order = JSON.parse(idx.value);
+      for(const id of state.order){
+        try{
+          const rec = await window.storage.get('inspection:'+id, false);
+          if(rec) state.inspections[id] = JSON.parse(rec.value);
+        }catch(e){}
+      }
+    }
+  }catch(e){}
+  render();
+}
+
+async function saveIndex(){
+  try{ await window.storage.set('inspections-index', JSON.stringify(state.order), false); }catch(e){}
+}
+async function saveInspection(id){
+  try{ await window.storage.set('inspection:'+id, JSON.stringify(state.inspections[id]), false); }catch(e){}
+}
+
+function newInspection(){
+  const id = uid();
+  const rooms = {};
+  DEFAULT_ROOMS.forEach(r => rooms[r] = blankRoom());
+  const exterior = {};
+  EXTERIOR_ZONES.forEach(z => exterior[z] = blankRoom());
+  state.inspections[id] = {
+    id, address:"", type:"Pre-occupancy", inspector:"", date:new Date().toISOString().slice(0,10),
+    rooms, roomOrder:[...DEFAULT_ROOMS], exterior,
+    appliances: []
+  };
+  state.order.unshift(id);
+  state.currentId = id;
+  saveIndex(); saveInspection(id);
+  goto("setup");
+}
+
+function blankRoom(){
+  const c = {};
+  ROOM_CHECKLIST.forEach(item => c[item] = "good");
+  return { conditions:c, notes:"", photoCount:0 };
+}
+
+function goto(view, opts){
+  state.view = view;
+  if(opts && opts.room !== undefined) state.currentRoom = opts.room;
+  render();
+  window.scrollTo(0,0);
+}
+
+function current(){ return state.inspections[state.currentId]; }
+
+function roomProgress(insp){
+  const total = insp.roomOrder.length + EXTERIOR_ZONES.length;
+  let done = 0;
+  insp.roomOrder.forEach(r => { if(insp.rooms[r].notes || insp.rooms[r].photoCount>0) done++; });
+  EXTERIOR_ZONES.forEach(z => { if(insp.exterior[z].notes || insp.exterior[z].photoCount>0) done++; });
+  return Math.round((done/total)*100);
+}
+
+function esc(s){ return (s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function render(){
+  const app = document.getElementById('app');
+  const backBtn = document.getElementById('backBtn');
+  const brand = document.getElementById('brandLabel');
+  backBtn.style.visibility = state.view === 'home' ? 'hidden' : 'visible';
+  brand.textContent = state.view === 'home' ? 'Fieldwalk' : (state.view === 'report' ? 'Report' : 'Inspection');
+
+  if(state.view === 'home') return renderHome(app);
+  if(state.view === 'setup') return renderSetup(app);
+  if(state.view === 'walkthrough') return renderWalkthrough(app);
+  if(state.view === 'report') return renderReport(app);
+}
+
+function renderHome(app){
+  const items = state.order.map(id => state.inspections[id]).filter(Boolean);
+  let html = `<div class="section-title">Your inspections</div>`;
+  if(items.length === 0){
+    html += `<div class="empty"><i class="ti">&#9633;</i>No inspections yet. Start a walkthrough to capture unit condition, appliances, and exterior zones.</div>`;
+  } else {
+    items.forEach(insp => {
+      const pct = roomProgress(insp);
+      html += `<div class="home-item" onclick="openInspection('${insp.id}')">
+        <div>
+          <div class="addr">${esc(insp.address) || 'Untitled unit'}</div>
+          <div class="sub">${esc(insp.type)} &middot; ${esc(insp.date)} &middot; ${pct}% complete</div>
+        </div>
+        <span style="color:var(--steel); font-size:18px;">&rsaquo;</span>
+      </div>`;
+    });
+  }
+  html += `<button class="btn btn-primary" style="margin-top:10px;" onclick="newInspection()">+ New inspection</button>`;
+  app.innerHTML = html;
+}
+
+function openInspection(id){
+  state.currentId = id;
+  goto('setup');
+}
+
+function renderSetup(app){
+  const insp = current();
+  app.innerHTML = `
+    <div class="section-title">Unit details</div>
+    <div class="card">
+      <label>Property address</label>
+      <input type="text" id="f_address" value="${esc(insp.address)}" placeholder="123 Ocean Ave, Unit 2, Portsmouth NH">
+      <label>Inspection type</label>
+      <select id="f_type">
+        ${["Pre-occupancy","Move-out","Routine"].map(t => `<option ${insp.type===t?'selected':''}>${t}</option>`).join('')}
+      </select>
+      <label>Inspector name</label>
+      <input type="text" id="f_inspector" value="${esc(insp.inspector)}" placeholder="Tech name">
+      <label>Date</label>
+      <input type="date" id="f_date" value="${esc(insp.date)}">
+    </div>
+    <button class="btn btn-primary" onclick="saveSetupAndContinue()">Start walkthrough &rarr;</button>
+  `;
+}
+
+function saveSetupAndContinue(){
+  const insp = current();
+  insp.address = document.getElementById('f_address').value;
+  insp.type = document.getElementById('f_type').value;
+  insp.inspector = document.getElementById('f_inspector').value;
+  insp.date = document.getElementById('f_date').value;
+  saveInspection(insp.id);
+  state.currentRoom = insp.roomOrder[0];
+  goto('walkthrough');
+}
+
+function renderWalkthrough(app){
+  const insp = current();
+  const pct = roomProgress(insp);
+  const allZones = [...insp.roomOrder.map(r=>({key:r, ext:false})), ...EXTERIOR_ZONES.map(z=>({key:z, ext:true}))];
+  if(!state.currentRoom) state.currentRoom = insp.roomOrder[0];
+  const activeKey = state.currentRoom;
+  const isExt = EXTERIOR_ZONES.includes(activeKey);
+  const roomData = isExt ? insp.exterior[activeKey] : insp.rooms[activeKey];
+
+  let chips = allZones.map(z => {
+    const d = z.ext ? insp.exterior[z.key] : insp.rooms[z.key];
+    const done = d.notes || d.photoCount>0;
+    return `<div class="room-chip ${z.key===activeKey?'active':''} ${done?'done':''}" onclick="selectRoom('${z.key.replace(/'/g,"\\'")}')">${esc(z.key)}</div>`;
+  }).join('');
+
+  let checklist = ROOM_CHECKLIST.map(item => {
+    const cond = roomData.conditions[item] || 'good';
+    return `<div class="check-row">
+      <span class="check-name">${item}</span>
+      <button class="cond-btn ${cond}" onclick="cycleCondition('${activeKey.replace(/'/g,"\\'")}', ${isExt}, '${item}')">${cond}</button>
+    </div>`;
+  }).join('');
+
+  let applianceSection = '';
+  if(!isExt){
+    const roomAppliances = insp.appliances.filter(a => a.room === activeKey);
+    applianceSection = `
+      <div class="section-title">Appliances in this room</div>
+      ${roomAppliances.map((a,i) => applianceCardHTML(a, insp.appliances.indexOf(a))).join('')}
+      <button class="btn btn-ghost btn-sm" style="width:100%; margin-bottom:16px;" onclick="addAppliance('${activeKey.replace(/'/g,"\\'")}')">+ Add appliance</button>
+    `;
+  }
+
+  app.innerHTML = `
+    <div class="tag">
+      <p class="tag-label">${esc(insp.type)} inspection</p>
+      <p class="tag-address">${esc(insp.address) || 'Untitled unit'}</p>
+      <div class="tag-meta">
+        <span>Inspector <b>${esc(insp.inspector)||'—'}</b></span>
+        <span>Date <b>${esc(insp.date)}</b></span>
+      </div>
+      <div class="tag-progress"><div class="tag-progress-fill" style="width:${pct}%;"></div></div>
+    </div>
+
+    <div class="room-list">${chips}</div>
+
+    <div class="section-title">${esc(activeKey)} &mdash; capture</div>
+    <div class="photo-row" id="photoRow">
+      ${Array.from({length: roomData.photoCount}).map(()=>`<div class="photo-thumb" style="background:var(--line); display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--steel);">img</div>`).join('')}
+      <button class="photo-add" onclick="capturePhoto()">+</button>
+    </div>
+
+    <div class="section-title">Condition checklist</div>
+    <div class="card">${checklist}</div>
+
+    <div class="section-title">Notes</div>
+    <div class="card">
+      <textarea id="roomNotes" placeholder="Describe condition, damage, or anything notable...">${esc(roomData.notes)}</textarea>
+    </div>
+
+    ${applianceSection}
+
+    <div class="btn-row" style="margin-top:8px;">
+      <button class="btn btn-ghost" onclick="goto('home')">Save & exit</button>
+      <button class="btn btn-primary" onclick="goto('report')">View report</button>
+    </div>
+  `;
+
+  document.getElementById('roomNotes').addEventListener('blur', function(){
+    saveNotes(activeKey, isExt, this.value);
+  });
+}
+
+function applianceCardHTML(a, idx){
+  const hint = APPLIANCE_TYPES[a.type] || "";
+  return `<div class="appliance-card">
+    <div class="appliance-head">
+      <b>${esc(a.type)}</b>
+      <button class="remove" onclick="removeAppliance(${idx})">Remove</button>
+    </div>
+    <label>Model number</label>
+    <input class="mono" type="text" value="${esc(a.model)}" onblur="updateAppliance(${idx},'model',this.value)" placeholder="Model #">
+    <label>Serial number</label>
+    <input class="mono" type="text" value="${esc(a.serial)}" onblur="updateAppliance(${idx},'serial',this.value)" placeholder="Serial #">
+    <label>Install / purchase date</label>
+    <input type="date" value="${esc(a.installDate)}" onchange="updateAppliance(${idx},'installDate',this.value)">
+    ${hint ? `<div class="maint-hint">${hint}</div>` : ''}
+  </div>`;
+}
+
+function selectRoom(key){ state.currentRoom = key; render(); }
+
+function cycleCondition(roomKey, isExt, item){
+  const insp = current();
+  const data = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
+  const order = ['good','fair','damage'];
+  const next = order[(order.indexOf(data.conditions[item])+1) % order.length];
+  data.conditions[item] = next;
+  saveInspection(insp.id);
+  render();
+}
+
+function saveNotes(roomKey, isExt, val){
+  const insp = current();
+  const data = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
+  data.notes = val;
+  saveInspection(insp.id);
+}
+
+function capturePhoto(){
+  pendingPhotoTarget = { room: state.currentRoom };
+  document.getElementById('photoInput').click();
+}
+document.getElementById('photoInput').addEventListener('change', function(e){
+  if(!pendingPhotoTarget) return;
+  const insp = current();
+  const isExt = EXTERIOR_ZONES.includes(pendingPhotoTarget.room);
+  const data = isExt ? insp.exterior[pendingPhotoTarget.room] : insp.rooms[pendingPhotoTarget.room];
+  data.photoCount += e.target.files.length;
+  saveInspection(insp.id);
+  render();
+  e.target.value = '';
+});
+
+function addAppliance(room){
+  const insp = current();
+  insp.appliances.push({ room, type:"Refrigerator", model:"", serial:"", installDate:"" });
+  saveInspection(insp.id);
+  render();
+}
+function updateAppliance(idx, field, val){
+  const insp = current();
+  insp.appliances[idx][field] = val;
+  saveInspection(insp.id);
+}
+function removeAppliance(idx){
+  const insp = current();
+  insp.appliances.splice(idx,1);
+  saveInspection(insp.id);
+  render();
+}
+
+function renderReport(app){
+  const insp = current();
+  const allEntries = [
+    ...insp.roomOrder.map(r => ({name:r, data:insp.rooms[r]})),
+    ...EXTERIOR_ZONES.map(z => ({name:z, data:insp.exterior[z]}))
+  ];
+  const flagged = [];
+  allEntries.forEach(e => {
+    Object.entries(e.data.conditions).forEach(([item,cond]) => {
+      if(cond !== 'good') flagged.push(`${e.name} — ${item} (${cond})`);
+    });
+  });
+
+  let roomRows = allEntries.map(e => {
+    const flaggedCount = Object.values(e.data.conditions).filter(c=>c!=='good').length;
+    return `<div class="report-row"><span class="k">${esc(e.name)}</span><span>${flaggedCount>0 ? `<span class="flag-pill">${flaggedCount} flagged</span>` : `<span class="flag-pill good-pill">clear</span>`}</span></div>`;
+  }).join('');
+
+  let applianceRows = insp.appliances.map(a => {
+    return `<div class="card" style="margin-bottom:8px;">
+      <div style="font-weight:500; font-size:14px; margin-bottom:2px;">${esc(a.type)} <span style="color:var(--steel); font-weight:400; font-size:12.5px;">— ${esc(a.room)}</span></div>
+      <div class="mono" style="font-size:12px; color:var(--steel);">Model ${esc(a.model)||'—'} &middot; Serial ${esc(a.serial)||'—'}</div>
+      <div class="maint-hint">${APPLIANCE_TYPES[a.type]||''}${a.installDate ? ` Installed ${esc(a.installDate)} — verify warranty status against manufacturer terms using this date.` : ' Add an install date to estimate warranty status.'}</div>
+    </div>`;
+  }).join('') || '<div class="card" style="color:var(--steel); font-size:13px;">No appliances logged yet.</div>';
+
+  app.innerHTML = `
+    <div class="tag">
+      <p class="tag-label">${esc(insp.type)} inspection — report</p>
+      <p class="tag-address">${esc(insp.address) || 'Untitled unit'}</p>
+      <div class="tag-meta">
+        <span>Inspector <b>${esc(insp.inspector)||'—'}</b></span>
+        <span>Date <b>${esc(insp.date)}</b></span>
+      </div>
+    </div>
+
+    <div class="section-title">Condition summary</div>
+    <div class="card">${roomRows}</div>
+
+    ${flagged.length ? `<div class="section-title">Flagged items</div><div class="card">${flagged.map(f=>`<div class="report-row"><span>${esc(f)}</span></div>`).join('')}</div>` : ''}
+
+    <div class="section-title">Appliances & maintenance</div>
+    ${applianceRows}
+
+    <div class="section-title">Upgrade recommendations</div>
+    <div class="card" style="color:var(--steel); font-size:13px; line-height:1.6;">
+      This is where finish and condition data from the walkthrough gets compared against current comparable listings in the unit's market to suggest upgrades likely to support a higher rent.
+    </div>
+
+    <div class="btn-row" style="margin-top:16px;">
+      <button class="btn btn-ghost" onclick="goto('walkthrough')">Back to walkthrough</button>
+      <button class="btn btn-amber" onclick="copyReport()">Copy report text</button>
+    </div>
+  `;
+}
+
+function copyReport(){
+  const insp = current();
+  let lines = [];
+  lines.push(`${insp.type.toUpperCase()} INSPECTION — ${insp.address || 'Untitled unit'}`);
+  lines.push(`Inspector: ${insp.inspector || '—'}   Date: ${insp.date}`);
+  lines.push('');
+  lines.push('CONDITION SUMMARY');
+  [...insp.roomOrder.map(r=>({name:r,data:insp.rooms[r]})), ...EXTERIOR_ZONES.map(z=>({name:z,data:insp.exterior[z]}))].forEach(e=>{
+    lines.push(`- ${e.name}: ` + Object.entries(e.data.conditions).map(([k,v])=>`${k}=${v}`).join(', '));
+    if(e.data.notes) lines.push(`    Notes: ${e.data.notes}`);
+  });
+  lines.push('');
+  lines.push('APPLIANCES');
+  insp.appliances.forEach(a=>{
+    lines.push(`- ${a.type} (${a.room}): model ${a.model||'—'}, serial ${a.serial||'—'}, installed ${a.installDate||'—'}`);
+  });
+  const text = lines.join('\n');
+  navigator.clipboard.writeText(text).then(()=>alert('Report copied to clipboard.')).catch(()=>alert(text));
+}
+
+document.getElementById('backBtn').addEventListener('click', function(){
+  if(state.view === 'setup' || state.view === 'walkthrough' || state.view === 'report') goto('home');
+});
+
+loadState();
+</script>
+</body>
+</html>
