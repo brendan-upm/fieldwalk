@@ -176,7 +176,7 @@
     color:var(--ink);
     margin-bottom:14px;
   }
-  input[type=text]:last-child, textarea:last-child{margin-bottom:0;}
+  input[type=text]:last-child, textarea:last-child, select:last-child{margin-bottom:0;}
   textarea{resize:vertical; min-height:56px; font-family:'IBM Plex Sans', sans-serif;}
   input.mono, .mono{font-family:'IBM Plex Mono', monospace;}
 
@@ -259,26 +259,95 @@
   }
   .cond-btn.good{background:#EAF2ED; color:var(--green-dark); border-color:var(--green);}
   .cond-btn.fair{background:#F8EFE0; color:var(--amber-dark); border-color:var(--amber);}
-  .cond-btn.damage{background:#F6E7E4; color:var(--red-dark); border-color:var(--red);}
+  .cond-btn.poor{background:#F6E7E4; color:var(--red-dark); border-color:var(--red);}
 
-  .photo-row{display:flex; gap:8px; overflow-x:auto; margin:10px 0;}
-  .photo-thumb{
-    width:64px; height:64px;
+  /* --- Media capture: walkthrough video + notated damage photos --- */
+  .media-row{display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; margin:10px 0 16px;}
+  .video-thumb{
+    position:relative;
+    width:100px; height:74px;
     border-radius:6px;
-    object-fit:cover;
+    overflow:hidden;
     border:1px solid var(--line-strong);
     flex:0 0 auto;
+    cursor:pointer;
+    background:#000;
   }
-  .photo-add{
-    width:64px; height:64px;
+  .video-thumb img{width:100%; height:100%; object-fit:cover; display:block; opacity:0.82;}
+  .video-thumb .play{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:20px; text-shadow:0 1px 3px rgba(0,0,0,0.5);
+  }
+  .video-thumb .dur{
+    position:absolute; bottom:3px; right:5px;
+    font-family:'IBM Plex Mono', monospace; font-size:10px;
+    background:rgba(0,0,0,0.6); color:#fff; padding:1px 5px; border-radius:3px;
+  }
+  .video-thumb .del{
+    position:absolute; top:3px; right:3px;
+    background:rgba(0,0,0,0.55); color:#fff; border:none; border-radius:50%;
+    width:18px; height:18px; font-size:12px; line-height:1; cursor:pointer;
+  }
+  .media-add{
+    width:100px; height:74px;
     border-radius:6px;
     border:1.5px dashed var(--line-strong);
     background:none;
     color:var(--steel);
-    font-size:20px;
+    font-size:13px;
+    font-weight:500;
     flex:0 0 auto;
     cursor:pointer;
   }
+
+  .dphoto-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:4px;}
+  .dphoto{
+    position:relative;
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid var(--line-strong);
+    cursor:pointer;
+    aspect-ratio:1;
+    background:var(--line);
+  }
+  .dphoto img{width:100%; height:100%; object-fit:cover; display:block;}
+  .dphoto .flagdot{
+    position:absolute; top:3px; left:3px;
+    background:var(--red); color:#fff;
+    font-size:9px; font-family:'IBM Plex Mono', monospace;
+    padding:1px 5px; border-radius:8px; letter-spacing:0.03em;
+  }
+  .dphoto-add{
+    border:1.5px dashed var(--line-strong);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--steel); font-size:22px;
+    aspect-ratio:1; cursor:pointer; background:none;
+  }
+
+  .photo-editor{
+    border:1px solid var(--line-strong);
+    border-radius:8px;
+    padding:12px 14px;
+    margin:10px 0 16px;
+    background:#FBFAF6;
+  }
+  .photo-editor img{width:100%; border-radius:6px; margin-bottom:10px; max-height:220px; object-fit:cover; cursor:pointer;}
+
+  .lightbox{
+    position:fixed; inset:0;
+    background:rgba(10,10,10,0.92);
+    z-index:50;
+    display:flex; align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .lightbox img, .lightbox video{max-width:100%; max-height:88vh; border-radius:6px;}
+  .lightbox .close{
+    position:absolute; top:16px; right:18px;
+    background:none; border:none; color:#fff; font-size:28px; cursor:pointer; line-height:1;
+  }
+  .lightbox .loading{color:#fff; font-size:13px;}
 
   .appliance-card{
     border:1px solid var(--line);
@@ -312,6 +381,26 @@
   }
   .good-pill{background:#EAF2ED; color:var(--green-dark);}
 
+  .rating-pill{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    font-weight:500;
+    text-transform:uppercase;
+    padding:3px 10px;
+    border-radius:20px;
+  }
+  .rating-pill.good{background:#EAF2ED; color:var(--green-dark);}
+  .rating-pill.fair{background:#F8EFE0; color:var(--amber-dark);}
+  .rating-pill.poor{background:#F6E7E4; color:var(--red-dark);}
+
+  .bar{height:7px; border-radius:4px; overflow:hidden; display:flex; background:var(--line); flex:1; min-width:50px;}
+  .bar span{height:100%;}
+  .summary-row{display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--line); font-size:12.5px;}
+  .summary-row:last-child{border-bottom:none;}
+  .summary-row .zn{width:92px; flex:0 0 auto; font-weight:500; font-size:13px;}
+  .summary-row .cnt{flex:0 0 auto; width:44px; text-align:right; color:var(--steel);}
+
   .home-item{
     display:flex;
     justify-content:space-between;
@@ -332,7 +421,7 @@
   }
   .empty .ti{font-size:32px; display:block; margin-bottom:10px;}
 
-  .report-row{display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
+  .report-row{display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
   .report-row:last-child{border-bottom:none;}
   .report-row .k{color:var(--steel);}
 
@@ -348,8 +437,10 @@
   </div>
   <div class="content" id="app"></div>
 </div>
+<div id="lightboxRoot"></div>
 
-<input type="file" id="photoInput" accept="image/*,video/*" capture="environment" style="display:none;" multiple>
+<input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none;" multiple>
+<input type="file" id="videoInput" accept="video/*" capture="environment" style="display:none;" multiple>
 <input type="file" id="appliancePhotoInput" accept="image/*" capture="environment" style="display:none;">
 
 <script>
@@ -367,10 +458,104 @@ const APPLIANCE_TYPES = {
   "Microwave": "Inspect door seal and vent filter annually."
 };
 
-let state = { view: "home", inspections: {}, order: [], currentId: null, currentRoom: null };
-let pendingPhotoTarget = null;
+let state = { view: "home", inspections: {}, order: [], currentId: null, currentRoom: null, editingPhoto: null, lightbox: null };
+let pendingMediaTarget = null;
 
 function uid(){ return 'insp_' + Math.random().toString(36).slice(2,9); }
+function mediaId(){ return 'm_' + Math.random().toString(36).slice(2,10); }
+function jsEsc(s){ return String(s).replace(/'/g, "\\'"); }
+
+/* --- Raw photo/video blobs live in IndexedDB (window.storage is for small JSON state only) --- */
+const MEDIA_DB = 'fieldwalk_media';
+const MEDIA_STORE = 'blobs';
+let mediaDbPromise = null;
+function openMediaDB(){
+  if(mediaDbPromise) return mediaDbPromise;
+  mediaDbPromise = new Promise((resolve, reject) => {
+    const req = indexedDB.open(MEDIA_DB, 1);
+    req.onupgradeneeded = () => req.result.createObjectStore(MEDIA_STORE);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+  return mediaDbPromise;
+}
+async function putMediaBlob(id, blob){
+  const db = await openMediaDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(MEDIA_STORE, 'readwrite');
+    tx.objectStore(MEDIA_STORE).put(blob, id);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+async function getMediaBlob(id){
+  const db = await openMediaDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(MEDIA_STORE, 'readonly');
+    const req = tx.objectStore(MEDIA_STORE).get(id);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+async function deleteMediaBlob(id){
+  const db = await openMediaDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(MEDIA_STORE, 'readwrite');
+    tx.objectStore(MEDIA_STORE).delete(id);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+function imageThumbFromFile(file, maxW){
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width);
+      const w = Math.max(1, Math.round(img.width * scale)), h = Math.max(1, Math.round(img.height * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL('image/jpeg', 0.65));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('image decode failed')); };
+    img.src = url;
+  });
+}
+
+function videoThumbFromFile(file, maxW){
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video');
+    const url = URL.createObjectURL(file);
+    video.preload = 'metadata';
+    video.muted = true;
+    video.playsInline = true;
+    video.src = url;
+    video.onloadedmetadata = () => {
+      video.currentTime = Math.min(0.3, (video.duration || 1) / 2);
+    };
+    video.onseeked = () => {
+      const vw = video.videoWidth || 320, vh = video.videoHeight || 240;
+      const scale = Math.min(1, maxW / vw);
+      const w = Math.max(1, Math.round(vw * scale)), h = Math.max(1, Math.round(vh * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(video, 0, 0, w, h);
+      const duration = video.duration;
+      URL.revokeObjectURL(url);
+      resolve({ thumb: canvas.toDataURL('image/jpeg', 0.65), duration });
+    };
+    video.onerror = () => { URL.revokeObjectURL(url); reject(new Error('video decode failed')); };
+  });
+}
+
+function formatDuration(sec){
+  if(!sec || !isFinite(sec)) return '';
+  const m = Math.floor(sec/60), s = Math.round(sec%60);
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
 
 async function loadState(){
   try{
@@ -403,6 +588,7 @@ function newInspection(){
   EXTERIOR_ZONES.forEach(z => exterior[z] = blankRoom());
   state.inspections[id] = {
     id, address:"", type:"Pre-occupancy", inspector:"", date:new Date().toISOString().slice(0,10),
+    linkedInspectionId: "",
     rooms, roomOrder:[...DEFAULT_ROOMS], exterior,
     appliances: []
   };
@@ -415,7 +601,7 @@ function newInspection(){
 function blankRoom(){
   const c = {};
   ROOM_CHECKLIST.forEach(item => c[item] = "good");
-  return { conditions:c, notes:"", photoCount:0 };
+  return { conditions:c, notes:"", videos:[], photos:[] };
 }
 
 function goto(view, opts){
@@ -426,12 +612,46 @@ function goto(view, opts){
 }
 
 function current(){ return state.inspections[state.currentId]; }
+function zoneOf(insp, key){ return EXTERIOR_ZONES.includes(key) ? insp.exterior[key] : insp.rooms[key]; }
+function linkedInspection(insp){ return insp.linkedInspectionId ? state.inspections[insp.linkedInspectionId] : null; }
+
+function condRank(v){ return v === 'poor' ? 2 : v === 'fair' ? 1 : 0; }
+function zoneRating(zone){
+  const vals = Object.values(zone.conditions);
+  if(vals.some(v => v === 'poor')) return 'poor';
+  if(vals.some(v => v === 'fair')) return 'fair';
+  return 'good';
+}
+function zonePercentages(zone){
+  const vals = Object.values(zone.conditions);
+  const total = vals.length || 1;
+  const good = vals.filter(v => v === 'good').length;
+  const fair = vals.filter(v => v === 'fair').length;
+  const poor = vals.filter(v => v === 'poor').length;
+  return { good: Math.round(good/total*100), fair: Math.round(fair/total*100), poor: Math.round(poor/total*100) };
+}
+
+function allZoneEntries(insp){
+  return [
+    ...insp.roomOrder.map(r => ({name:r, data:insp.rooms[r]})),
+    ...EXTERIOR_ZONES.map(z => ({name:z, data:insp.exterior[z]}))
+  ];
+}
+
+function buildComparison(insp, prior){
+  return allZoneEntries(insp)
+    .filter(e => prior && zoneOf(prior, e.name))
+    .map(e => {
+      const priorRating = zoneRating(zoneOf(prior, e.name));
+      const curRating = zoneRating(e.data);
+      return { name: e.name, priorRating, curRating, degraded: condRank(curRating) > condRank(priorRating) };
+    });
+}
 
 function roomProgress(insp){
   const total = insp.roomOrder.length + EXTERIOR_ZONES.length;
   let done = 0;
-  insp.roomOrder.forEach(r => { if(insp.rooms[r].notes || insp.rooms[r].photoCount>0) done++; });
-  EXTERIOR_ZONES.forEach(z => { if(insp.exterior[z].notes || insp.exterior[z].photoCount>0) done++; });
+  allZoneEntries(insp).forEach(e => { if(e.data.notes || e.data.photos.length>0 || e.data.videos.length>0) done++; });
   return Math.round((done/total)*100);
 }
 
@@ -444,10 +664,41 @@ function render(){
   backBtn.style.visibility = state.view === 'home' ? 'hidden' : 'visible';
   brand.textContent = state.view === 'home' ? 'Fieldwalk' : (state.view === 'report' ? 'Report' : 'Inspection');
 
-  if(state.view === 'home') return renderHome(app);
-  if(state.view === 'setup') return renderSetup(app);
-  if(state.view === 'walkthrough') return renderWalkthrough(app);
-  if(state.view === 'report') return renderReport(app);
+  if(state.view === 'home') renderHome(app);
+  else if(state.view === 'setup') renderSetup(app);
+  else if(state.view === 'walkthrough') renderWalkthrough(app);
+  else if(state.view === 'report') renderReport(app);
+  renderLightbox();
+}
+
+function renderLightbox(){
+  const root = document.getElementById('lightboxRoot');
+  if(!state.lightbox){ root.innerHTML = ''; return; }
+  const { kind, url } = state.lightbox;
+  if(!url){
+    root.innerHTML = `<div class="lightbox"><button class="close" onclick="closeLightbox()">&times;</button><div class="loading">Loading…</div></div>`;
+    return;
+  }
+  const media = kind === 'video' ? `<video src="${url}" controls autoplay playsinline></video>` : `<img src="${url}">`;
+  root.innerHTML = `<div class="lightbox"><button class="close" onclick="closeLightbox()">&times;</button>${media}</div>`;
+}
+
+async function openLightbox(kind, id){
+  state.lightbox = { kind, id, url:null };
+  render();
+  try{
+    const blob = await getMediaBlob(id);
+    const url = URL.createObjectURL(blob);
+    if(state.lightbox && state.lightbox.id === id){
+      state.lightbox.url = url;
+      renderLightbox();
+    }
+  }catch(e){}
+}
+function closeLightbox(){
+  if(state.lightbox && state.lightbox.url) URL.revokeObjectURL(state.lightbox.url);
+  state.lightbox = null;
+  renderLightbox();
 }
 
 function renderHome(app){
@@ -478,22 +729,39 @@ function openInspection(id){
 
 function renderSetup(app){
   const insp = current();
+  const others = state.order.map(id => state.inspections[id]).filter(o => o && o.id !== insp.id);
+  const showLink = insp.type === 'Move-out';
   app.innerHTML = `
     <div class="section-title">Unit details</div>
     <div class="card">
       <label>Property address</label>
       <input type="text" id="f_address" value="${esc(insp.address)}" placeholder="123 Ocean Ave, Unit 2, Portsmouth NH">
       <label>Inspection type</label>
-      <select id="f_type">
+      <select id="f_type" onchange="onTypeChange()">
         ${["Pre-occupancy","Move-out","Routine"].map(t => `<option ${insp.type===t?'selected':''}>${t}</option>`).join('')}
       </select>
       <label>Inspector name</label>
       <input type="text" id="f_inspector" value="${esc(insp.inspector)}" placeholder="Tech name">
       <label>Date</label>
-      <input type="date" id="f_date" value="${esc(insp.date)}">
+      <input type="date" id="f_date" value="${esc(insp.date)}" ${showLink ? '' : 'style="margin-bottom:0;"'}>
+      ${showLink ? `
+      <label>Compare against prior inspection</label>
+      <select id="f_link">
+        <option value="">— None —</option>
+        ${others.map(o => `<option value="${o.id}" ${insp.linkedInspectionId===o.id?'selected':''}>${esc(o.address)||'Untitled unit'} — ${esc(o.type)} (${esc(o.date)})</option>`).join('')}
+      </select>` : ''}
     </div>
     <button class="btn btn-primary" onclick="saveSetupAndContinue()">Start walkthrough &rarr;</button>
   `;
+}
+
+function onTypeChange(){
+  const insp = current();
+  insp.address = document.getElementById('f_address').value;
+  insp.type = document.getElementById('f_type').value;
+  insp.inspector = document.getElementById('f_inspector').value;
+  insp.date = document.getElementById('f_date').value;
+  render();
 }
 
 function saveSetupAndContinue(){
@@ -502,6 +770,8 @@ function saveSetupAndContinue(){
   insp.type = document.getElementById('f_type').value;
   insp.inspector = document.getElementById('f_inspector').value;
   insp.date = document.getElementById('f_date').value;
+  const linkEl = document.getElementById('f_link');
+  insp.linkedInspectionId = linkEl ? linkEl.value : "";
   saveInspection(insp.id);
   state.currentRoom = insp.roomOrder[0];
   goto('walkthrough');
@@ -514,21 +784,55 @@ function renderWalkthrough(app){
   if(!state.currentRoom) state.currentRoom = insp.roomOrder[0];
   const activeKey = state.currentRoom;
   const isExt = EXTERIOR_ZONES.includes(activeKey);
-  const roomData = isExt ? insp.exterior[activeKey] : insp.rooms[activeKey];
+  const zone = isExt ? insp.exterior[activeKey] : insp.rooms[activeKey];
 
   let chips = allZones.map(z => {
     const d = z.ext ? insp.exterior[z.key] : insp.rooms[z.key];
-    const done = d.notes || d.photoCount>0;
-    return `<div class="room-chip ${z.key===activeKey?'active':''} ${done?'done':''}" onclick="selectRoom('${z.key.replace(/'/g,"\\'")}')">${esc(z.key)}</div>`;
+    const done = d.notes || d.photos.length>0 || d.videos.length>0;
+    return `<div class="room-chip ${z.key===activeKey?'active':''} ${done?'done':''}" onclick="selectRoom('${jsEsc(z.key)}')">${esc(z.key)}</div>`;
   }).join('');
 
   let checklist = ROOM_CHECKLIST.map(item => {
-    const cond = roomData.conditions[item] || 'good';
+    const cond = zone.conditions[item] || 'good';
     return `<div class="check-row">
       <span class="check-name">${item}</span>
-      <button class="cond-btn ${cond}" onclick="cycleCondition('${activeKey.replace(/'/g,"\\'")}', ${isExt}, '${item}')">${cond}</button>
+      <button class="cond-btn ${cond}" onclick="cycleCondition('${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}')">${cond}</button>
     </div>`;
   }).join('');
+
+  let videoRow = zone.videos.map(v => `
+    <div class="video-thumb" onclick="openLightbox('video','${v.id}')">
+      <img src="${v.thumb}">
+      <div class="play">&#9658;</div>
+      ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
+      <button class="del" onclick="event.stopPropagation(); removeVideo('${jsEsc(activeKey)}', ${isExt}, '${v.id}')">&times;</button>
+    </div>
+  `).join('');
+
+  let photoGrid = zone.photos.map(p => `
+    <div class="dphoto" onclick="toggleEditPhoto('${p.id}')">
+      <img src="${p.thumb}">
+      ${p.note ? `<div class="flagdot">FLAG</div>` : ''}
+    </div>
+  `).join('');
+
+  let photoEditor = '';
+  if(state.editingPhoto){
+    const p = zone.photos.find(p => p.id === state.editingPhoto);
+    if(p){
+      photoEditor = `
+        <div class="photo-editor">
+          <img src="${p.thumb}" onclick="openLightbox('photo','${p.id}')">
+          <label>Damage note</label>
+          <textarea id="photoNoteInput" placeholder="Describe the damage (e.g. 2in gouge in hardwood floor near closet door)">${esc(p.note)}</textarea>
+          <div class="btn-row" style="margin-top:10px;">
+            <button class="btn btn-ghost btn-sm" onclick="removePhoto('${jsEsc(activeKey)}', ${isExt}, '${p.id}')">Delete photo</button>
+            <button class="btn btn-primary btn-sm" onclick="toggleEditPhoto('${p.id}')">Done</button>
+          </div>
+        </div>
+      `;
+    }
+  }
 
   let applianceSection = '';
   if(!isExt){
@@ -536,7 +840,7 @@ function renderWalkthrough(app){
     applianceSection = `
       <div class="section-title">Appliances in this room</div>
       ${roomAppliances.map((a,i) => applianceCardHTML(a, insp.appliances.indexOf(a))).join('')}
-      <button class="btn btn-ghost btn-sm" style="width:100%; margin-bottom:16px;" onclick="addAppliance('${activeKey.replace(/'/g,"\\'")}')">+ Add appliance</button>
+      <button class="btn btn-ghost btn-sm" style="width:100%; margin-bottom:16px;" onclick="addAppliance('${jsEsc(activeKey)}')">+ Add appliance</button>
     `;
   }
 
@@ -553,18 +857,25 @@ function renderWalkthrough(app){
 
     <div class="room-list">${chips}</div>
 
-    <div class="section-title">${esc(activeKey)} &mdash; capture</div>
-    <div class="photo-row" id="photoRow">
-      ${Array.from({length: roomData.photoCount}).map(()=>`<div class="photo-thumb" style="background:var(--line); display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--steel);">img</div>`).join('')}
-      <button class="photo-add" onclick="capturePhoto()">+</button>
+    <div class="section-title">${esc(activeKey)} &mdash; walkthrough video</div>
+    <div class="media-row">
+      ${videoRow}
+      <button class="media-add" onclick="recordVideo('${jsEsc(activeKey)}')">&#9679; Record</button>
     </div>
+
+    <div class="section-title">Damage photos</div>
+    <div class="dphoto-grid">
+      ${photoGrid}
+      <button class="dphoto-add" onclick="addDamagePhoto('${jsEsc(activeKey)}')">+</button>
+    </div>
+    ${photoEditor}
 
     <div class="section-title">Condition checklist</div>
     <div class="card">${checklist}</div>
 
     <div class="section-title">Notes</div>
     <div class="card">
-      <textarea id="roomNotes" placeholder="Describe condition, damage, or anything notable...">${esc(roomData.notes)}</textarea>
+      <textarea id="roomNotes" placeholder="Describe condition, damage, or anything notable...">${esc(zone.notes)}</textarea>
     </div>
 
     ${applianceSection}
@@ -578,6 +889,14 @@ function renderWalkthrough(app){
   document.getElementById('roomNotes').addEventListener('blur', function(){
     saveNotes(activeKey, isExt, this.value);
   });
+  if(state.editingPhoto){
+    const noteEl = document.getElementById('photoNoteInput');
+    if(noteEl){
+      noteEl.addEventListener('blur', function(){
+        updatePhotoNote(activeKey, isExt, state.editingPhoto, this.value);
+      });
+    }
+  }
 }
 
 function applianceCardHTML(a, idx){
@@ -597,12 +916,12 @@ function applianceCardHTML(a, idx){
   </div>`;
 }
 
-function selectRoom(key){ state.currentRoom = key; render(); }
+function selectRoom(key){ state.currentRoom = key; state.editingPhoto = null; render(); }
 
 function cycleCondition(roomKey, isExt, item){
   const insp = current();
   const data = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
-  const order = ['good','fair','damage'];
+  const order = ['good','fair','poor'];
   const next = order[(order.indexOf(data.conditions[item])+1) % order.length];
   data.conditions[item] = next;
   saveInspection(insp.id);
@@ -616,20 +935,84 @@ function saveNotes(roomKey, isExt, val){
   saveInspection(insp.id);
 }
 
-function capturePhoto(){
-  pendingPhotoTarget = { room: state.currentRoom };
+function recordVideo(zoneKey){
+  pendingMediaTarget = { room: zoneKey };
+  document.getElementById('videoInput').click();
+}
+function addDamagePhoto(zoneKey){
+  pendingMediaTarget = { room: zoneKey };
   document.getElementById('photoInput').click();
 }
-document.getElementById('photoInput').addEventListener('change', function(e){
-  if(!pendingPhotoTarget) return;
+
+document.getElementById('photoInput').addEventListener('change', async function(e){
+  if(!pendingMediaTarget) return;
   const insp = current();
-  const isExt = EXTERIOR_ZONES.includes(pendingPhotoTarget.room);
-  const data = isExt ? insp.exterior[pendingPhotoTarget.room] : insp.rooms[pendingPhotoTarget.room];
-  data.photoCount += e.target.files.length;
+  const zone = zoneOf(insp, pendingMediaTarget.room);
+  const files = Array.from(e.target.files);
+  let lastId = null;
+  for(const file of files){
+    try{
+      const id = mediaId();
+      const thumb = await imageThumbFromFile(file, 320);
+      await putMediaBlob(id, file);
+      zone.photos.push({ id, thumb, note:'', createdAt: Date.now() });
+      lastId = id;
+    }catch(err){}
+  }
+  saveInspection(insp.id);
+  if(lastId) state.editingPhoto = lastId;
+  render();
+  e.target.value = '';
+});
+
+document.getElementById('videoInput').addEventListener('change', async function(e){
+  if(!pendingMediaTarget) return;
+  const insp = current();
+  const zone = zoneOf(insp, pendingMediaTarget.room);
+  const files = Array.from(e.target.files);
+  for(const file of files){
+    try{
+      const { thumb, duration } = await videoThumbFromFile(file, 320);
+      const id = mediaId();
+      await putMediaBlob(id, file);
+      zone.videos.push({ id, thumb, duration, createdAt: Date.now() });
+    }catch(err){}
+  }
   saveInspection(insp.id);
   render();
   e.target.value = '';
 });
+
+function toggleEditPhoto(id){
+  state.editingPhoto = state.editingPhoto === id ? null : id;
+  render();
+}
+
+function updatePhotoNote(roomKey, isExt, id, val){
+  const insp = current();
+  const zone = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
+  const p = zone.photos.find(p => p.id === id);
+  if(p){ p.note = val; saveInspection(insp.id); }
+}
+
+async function removePhoto(roomKey, isExt, id){
+  const insp = current();
+  const zone = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
+  zone.photos = zone.photos.filter(p => p.id !== id);
+  if(state.editingPhoto === id) state.editingPhoto = null;
+  saveInspection(insp.id);
+  render();
+  deleteMediaBlob(id).catch(()=>{});
+}
+
+async function removeVideo(roomKey, isExt, id){
+  const insp = current();
+  const zone = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
+  zone.videos = zone.videos.filter(v => v.id !== id);
+  saveInspection(insp.id);
+  render();
+  deleteMediaBlob(id).catch(()=>{});
+}
 
 function addAppliance(room){
   const insp = current();
@@ -651,21 +1034,57 @@ function removeAppliance(idx){
 
 function renderReport(app){
   const insp = current();
-  const allEntries = [
-    ...insp.roomOrder.map(r => ({name:r, data:insp.rooms[r]})),
-    ...EXTERIOR_ZONES.map(z => ({name:z, data:insp.exterior[z]}))
-  ];
-  const flagged = [];
-  allEntries.forEach(e => {
-    Object.entries(e.data.conditions).forEach(([item,cond]) => {
-      if(cond !== 'good') flagged.push(`${e.name} — ${item} (${cond})`);
-    });
-  });
+  const entries = allZoneEntries(insp);
 
-  let roomRows = allEntries.map(e => {
-    const flaggedCount = Object.values(e.data.conditions).filter(c=>c!=='good').length;
-    return `<div class="report-row"><span class="k">${esc(e.name)}</span><span>${flaggedCount>0 ? `<span class="flag-pill">${flaggedCount} flagged</span>` : `<span class="flag-pill good-pill">clear</span>`}</span></div>`;
+  let summaryRows = entries.map(e => {
+    const p = zonePercentages(e.data);
+    const rating = zoneRating(e.data);
+    const flags = e.data.photos.length;
+    return `<div class="summary-row">
+      <span class="zn">${esc(e.name)}</span>
+      <div class="bar">
+        <span style="width:${p.good}%; background:var(--green);"></span>
+        <span style="width:${p.fair}%; background:var(--amber);"></span>
+        <span style="width:${p.poor}%; background:var(--red);"></span>
+      </div>
+      <span class="rating-pill ${rating}">${rating}</span>
+      <span class="cnt">${flags ? '&#9873; '+flags : '—'}</span>
+      <span class="cnt">${e.data.videos.length ? '&#9658; '+e.data.videos.length : '—'}</span>
+    </div>`;
   }).join('');
+
+  let zoneDetails = entries.map(e => {
+    const rating = zoneRating(e.data);
+    const videoRow = e.data.videos.map(v => `
+      <div class="video-thumb" onclick="openLightbox('video','${v.id}')">
+        <img src="${v.thumb}">
+        <div class="play">&#9658;</div>
+        ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
+      </div>
+    `).join('');
+    const photoBlocks = e.data.photos.map(p => `
+      <div>
+        <div class="dphoto" style="width:100%;" onclick="openLightbox('photo','${p.id}')"><img src="${p.thumb}"></div>
+        ${p.note ? `<div style="font-size:12px; color:var(--red-dark); margin-top:4px;">&#9873; ${esc(p.note)}</div>` : ''}
+      </div>
+    `).join('');
+    return `
+      <div class="section-title">${esc(e.name)}</div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span class="rating-pill ${rating}">${rating}</span>
+          <span class="mono" style="font-size:12px; color:var(--steel);">${e.data.photos.length} flagged &middot; ${e.data.videos.length} video${e.data.videos.length===1?'':'s'}</span>
+        </div>
+        ${e.data.notes ? `<div style="font-size:13px; margin-bottom:10px;">${esc(e.data.notes)}</div>` : ''}
+        ${videoRow ? `<div class="media-row" style="margin:0 0 10px;">${videoRow}</div>` : ''}
+        ${photoBlocks ? `<div class="dphoto-grid">${photoBlocks}</div>` : ''}
+        ${(!videoRow && !photoBlocks) ? `<div style="font-size:12.5px; color:var(--steel);">No media captured.</div>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  const prior = linkedInspection(insp);
+  const comparison = prior ? buildComparison(insp, prior) : null;
 
   let applianceRows = insp.appliances.map(a => {
     return `<div class="card" style="margin-bottom:8px;">
@@ -685,18 +1104,16 @@ function renderReport(app){
       </div>
     </div>
 
-    <div class="section-title">Condition summary</div>
-    <div class="card">${roomRows}</div>
+    <div class="section-title">Summary</div>
+    <div class="card">${summaryRows}</div>
 
-    ${flagged.length ? `<div class="section-title">Flagged items</div><div class="card">${flagged.map(f=>`<div class="report-row"><span>${esc(f)}</span></div>`).join('')}</div>` : ''}
+    ${comparison ? renderComparisonHTML(insp, prior, comparison) : ''}
+
+    <div class="section-title">Zone detail</div>
+    ${zoneDetails}
 
     <div class="section-title">Appliances & maintenance</div>
     ${applianceRows}
-
-    <div class="section-title">Upgrade recommendations</div>
-    <div class="card" style="color:var(--steel); font-size:13px; line-height:1.6;">
-      This is where finish and condition data from the walkthrough gets compared against current comparable listings in the unit's market to suggest upgrades likely to support a higher rent.
-    </div>
 
     <div class="btn-row" style="margin-top:16px;">
       <button class="btn btn-ghost" onclick="goto('walkthrough')">Back to walkthrough</button>
@@ -705,17 +1122,62 @@ function renderReport(app){
   `;
 }
 
+function renderComparisonHTML(insp, prior, comparison){
+  const degradedZones = comparison.filter(c => c.degraded);
+  return `
+    <div class="section-title">Move-in &rarr; move-out comparison</div>
+    <div class="card" style="margin-bottom:10px; font-size:12.5px; color:var(--steel);">
+      Compared against ${esc(prior.type)} inspection dated ${esc(prior.date)}.
+    </div>
+    <div class="card">
+      ${comparison.map(c => `
+        <div class="report-row">
+          <span class="k">${esc(c.name)}</span>
+          <span>
+            <span class="rating-pill ${c.priorRating}">${c.priorRating}</span>
+            &rarr;
+            <span class="rating-pill ${c.curRating}">${c.curRating}</span>
+            ${c.degraded ? `<span class="flag-pill" style="margin-left:6px;">new damage</span>` : ''}
+          </span>
+        </div>
+      `).join('')}
+    </div>
+    ${degradedZones.length ? `
+      <div class="section-title">Damage flagged since move-in</div>
+      ${degradedZones.map(c => {
+        const zoneData = zoneOf(insp, c.name);
+        return `<div class="card" style="margin-bottom:8px;">
+          <div style="font-weight:500; font-size:14px; margin-bottom:6px;">${esc(c.name)}</div>
+          ${zoneData.photos.length ? `<div class="dphoto-grid">${zoneData.photos.map(p=>`<div class="dphoto" onclick="openLightbox('photo','${p.id}')"><img src="${p.thumb}"></div>`).join('')}</div>` : `<div style="font-size:12.5px; color:var(--steel);">No damage photos logged for this zone yet — add one from the walkthrough.</div>`}
+          ${zoneData.photos.filter(p=>p.note).map(p=>`<div style="font-size:12.5px; color:var(--red-dark); margin-top:6px;">&#9873; ${esc(p.note)}</div>`).join('')}
+        </div>`;
+      }).join('')}
+    ` : ''}
+  `;
+}
+
 function copyReport(){
   const insp = current();
+  const entries = allZoneEntries(insp);
   let lines = [];
   lines.push(`${insp.type.toUpperCase()} INSPECTION — ${insp.address || 'Untitled unit'}`);
   lines.push(`Inspector: ${insp.inspector || '—'}   Date: ${insp.date}`);
   lines.push('');
-  lines.push('CONDITION SUMMARY');
-  [...insp.roomOrder.map(r=>({name:r,data:insp.rooms[r]})), ...EXTERIOR_ZONES.map(z=>({name:z,data:insp.exterior[z]}))].forEach(e=>{
-    lines.push(`- ${e.name}: ` + Object.entries(e.data.conditions).map(([k,v])=>`${k}=${v}`).join(', '));
+  lines.push('ZONE SUMMARY');
+  entries.forEach(e => {
+    const rating = zoneRating(e.data);
+    lines.push(`- ${e.name}: ${rating.toUpperCase()} (${e.data.photos.length} flagged, ${e.data.videos.length} video)`);
     if(e.data.notes) lines.push(`    Notes: ${e.data.notes}`);
+    e.data.photos.forEach(p => { if(p.note) lines.push(`    Flag: ${p.note}`); });
   });
+  const prior = linkedInspection(insp);
+  if(prior){
+    lines.push('');
+    lines.push(`COMPARISON AGAINST: ${prior.type.toUpperCase()} — ${prior.date}`);
+    buildComparison(insp, prior).forEach(c => {
+      lines.push(`- ${c.name}: ${c.priorRating} -> ${c.curRating}${c.degraded ? '  [NEW DAMAGE]' : ''}`);
+    });
+  }
   lines.push('');
   lines.push('APPLIANCES');
   insp.appliances.forEach(a=>{
