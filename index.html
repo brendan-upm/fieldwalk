@@ -568,14 +568,21 @@ function formatDuration(sec){
   return `${m}:${String(s).padStart(2,'0')}`;
 }
 
+/* Some hosting environments inject a window.storage KV API; a real browser doesn't have
+   one, so fall back to localStorage there (both are treated as plain string get/set). */
+const storageBackend = (typeof window.storage !== 'undefined' && window.storage) ? window.storage : {
+  async get(key){ const v = localStorage.getItem(key); return v === null ? null : { value: v }; },
+  async set(key, value){ localStorage.setItem(key, value); }
+};
+
 async function loadState(){
   try{
-    const idx = await window.storage.get('inspections-index', false);
+    const idx = await storageBackend.get('inspections-index', false);
     if(idx && idx.value){
       state.order = JSON.parse(idx.value);
       for(const id of state.order){
         try{
-          const rec = await window.storage.get('inspection:'+id, false);
+          const rec = await storageBackend.get('inspection:'+id, false);
           if(rec) state.inspections[id] = JSON.parse(rec.value);
         }catch(e){}
       }
@@ -585,10 +592,10 @@ async function loadState(){
 }
 
 async function saveIndex(){
-  try{ await window.storage.set('inspections-index', JSON.stringify(state.order), false); }catch(e){}
+  try{ await storageBackend.set('inspections-index', JSON.stringify(state.order), false); }catch(e){}
 }
 async function saveInspection(id){
-  try{ await window.storage.set('inspection:'+id, JSON.stringify(state.inspections[id]), false); }catch(e){}
+  try{ await storageBackend.set('inspection:'+id, JSON.stringify(state.inspections[id]), false); }catch(e){}
 }
 
 function newInspection(){
