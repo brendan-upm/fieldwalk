@@ -6,6 +6,7 @@
 <title>Fieldwalk — Property Inspection</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
   :root{
     --ink:#1C1F26;
@@ -239,6 +240,7 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:10px;
     padding:10px 0;
     border-bottom:1px solid var(--line);
   }
@@ -256,13 +258,14 @@
     background:#fff;
     color:var(--steel);
     cursor:pointer;
+    flex:0 0 auto;
   }
   .cond-btn.good{background:#EAF2ED; color:var(--green-dark); border-color:var(--green);}
   .cond-btn.fair{background:#F8EFE0; color:var(--amber-dark); border-color:var(--amber);}
   .cond-btn.poor{background:#F6E7E4; color:var(--red-dark); border-color:var(--red);}
 
   /* --- Media capture: walkthrough video + notated damage photos --- */
-  .media-row{display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; margin:10px 0 16px;}
+  .media-row{display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; margin:10px 0 4px;}
   .video-thumb{
     position:relative;
     width:100px; height:74px;
@@ -299,6 +302,15 @@
     font-weight:500;
     flex:0 0 auto;
     cursor:pointer;
+  }
+  .drive-caption{font-size:11.5px; color:var(--steel); margin:0 0 16px;}
+  .drive-caption a{color:var(--amber-dark);}
+  .drive-video-link{
+    display:block;
+    font-size:13px;
+    color:var(--amber-dark);
+    text-decoration:underline;
+    margin:4px 0;
   }
 
   .dphoto-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:4px;}
@@ -425,6 +437,9 @@
   .report-row:last-child{border-bottom:none;}
   .report-row .k{color:var(--steel);}
 
+  .unit-row{display:flex; gap:6px; align-items:flex-end; margin-bottom:10px;}
+  .unit-row > div{margin-bottom:0;}
+
   ::-webkit-scrollbar{display:none;}
 
   @media print{
@@ -452,13 +467,61 @@
 
 <input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none;" multiple>
 <input type="file" id="videoInput" accept="video/*" capture="environment" style="display:none;" multiple>
-<input type="file" id="appliancePhotoInput" accept="image/*" capture="environment" style="display:none;">
 
 <script>
+/* ============ Inspection types & room/checklist templates ============ */
+const INSPECTION_TYPES = ["Move In","Move Out","Interior Inspection","Exterior Inspection","Asset Tracking"];
 const EXTERIOR_ZONES = ["Roof","Siding / exterior walls","Windows & doors (ext.)","Deck / porch / steps","Gutters & drainage","Foundation","Grounds / landscaping"];
-const DEFAULT_ROOMS = ["Kitchen","Living room","Bedroom 1","Bathroom 1"];
-const ROOM_CHECKLIST = ["Walls","Flooring","Ceiling","Windows","Doors","Trim / paint"];
-const APPLIANCE_TYPES = {
+const COMMON_ROOMS = ["Kitchen","Living room","Hallway"];
+
+function typeScope(type){
+  if(type === 'Exterior Inspection') return 'exterior';
+  if(type === 'Asset Tracking') return 'assets';
+  return 'interior'; // Move In, Move Out, Interior Inspection
+}
+
+const CHECKLIST_TEMPLATES = {
+  "Kitchen": ["Walls & ceiling","Flooring","Windows operate & lock","Doors operate & latch","Cabinets & drawers operate smoothly","Countertops & backsplash","Sink & faucet — no leaks, hot & cold work","Garbage disposal operates","Outlets & GFCI test properly","Exhaust fan / range hood operates","Light fixtures operate"],
+  "Bathroom": ["Walls & ceiling","Flooring","Windows operate & lock","Doors operate & latch","Toilet flushes, no leaks or rocking","Tub/shower — no leaks, drains properly","Sink & faucet — no leaks, hot & cold work","Exhaust fan operates","GFCI outlets test properly","Caulking & grout condition"],
+  "Half bathroom": ["Walls & ceiling","Flooring","Doors operate & latch","Toilet flushes, no leaks or rocking","Sink & faucet — no leaks, hot & cold work","Exhaust fan operates","GFCI outlets test properly"],
+  "Bedroom": ["Walls & ceiling","Flooring","Windows operate, lock & screens intact","Doors operate & latch","Closet doors & track","Outlets & switches","Smoke detector present & functions"],
+  "Living room": ["Walls & ceiling","Flooring","Windows operate, lock & screens intact","Doors operate & latch","Outlets & switches","Light fixtures operate"],
+  "Hallway": ["Walls & ceiling","Flooring","Doors operate & latch","Outlets & switches","Smoke / CO detector present & functions"],
+  "Laundry": ["Walls & ceiling","Flooring","Washer hookup — no leaks","Dryer vent clear & unobstructed","Outlets & GFCI test properly","Exhaust ventilation"],
+  "Generic": ["Walls & ceiling","Flooring","Windows operate & lock","Doors operate & latch","Outlets & switches"]
+};
+function checklistForRoom(name){
+  if(CHECKLIST_TEMPLATES[name]) return CHECKLIST_TEMPLATES[name];
+  if(/^Bedroom/.test(name)) return CHECKLIST_TEMPLATES.Bedroom;
+  if(/^Bathroom/.test(name)) return CHECKLIST_TEMPLATES.Bathroom;
+  if(/laundry/i.test(name)) return CHECKLIST_TEMPLATES.Laundry;
+  return CHECKLIST_TEMPLATES.Generic;
+}
+
+const EXTERIOR_CHECKLIST_TEMPLATES = {
+  "Roof": ["No visible damage or missing shingles","Flashing intact","Gutters attached & clear of debris"],
+  "Siding / exterior walls": ["No cracks, rot, or missing panels","Paint / finish condition","Caulking around penetrations intact"],
+  "Windows & doors (ext.)": ["Windows operate & lock","Screens intact","Exterior doors operate, latch & seal","Weatherstripping intact"],
+  "Deck / porch / steps": ["Structurally sound, no loose boards","Railings secure","Steps even & stable"],
+  "Gutters & drainage": ["Gutters clear & properly pitched","Downspouts direct water away from foundation","No standing water near foundation"],
+  "Foundation": ["No visible cracks or settling","Vents clear & intact","Exterior grading slopes away from house"],
+  "Grounds / landscaping": ["Walkways in good repair","Trees/shrubs clear of structure & utility lines","Fencing/gates secure"]
+};
+function checklistForExterior(name){ return EXTERIOR_CHECKLIST_TEMPLATES[name] || CHECKLIST_TEMPLATES.Generic; }
+
+function generateRoomsForUnit(unit){
+  const rooms = [...COMMON_ROOMS];
+  const bedrooms = Number(unit && unit.bedrooms) || 0;
+  const bathValue = Number(unit && unit.bathrooms) || 0;
+  const fullBaths = Math.floor(bathValue);
+  const hasHalfBath = (bathValue - fullBaths) >= 0.5;
+  for(let i=1;i<=bedrooms;i++) rooms.push(`Bedroom ${i}`);
+  for(let i=1;i<=fullBaths;i++) rooms.push(`Bathroom ${i}`);
+  if(hasHalfBath) rooms.push('Half bathroom');
+  return rooms;
+}
+
+const ASSET_TYPES = {
   "Refrigerator": "Check door seals every 6 months; clean condenser coils annually.",
   "Range / oven": "Inspect burner igniters and door seal annually.",
   "Dishwasher": "Clean filter and inspect door gasket every 6 months.",
@@ -466,17 +529,38 @@ const APPLIANCE_TYPES = {
   "Dryer": "Clean vent duct annually; check lint trap each turnover.",
   "Water heater": "Flush tank annually; test T&P valve annually; anode check at year 3-5.",
   "HVAC / furnace": "Replace filter every 90 days; annual professional tune-up.",
-  "Microwave": "Inspect door seal and vent filter annually."
+  "Microwave": "Inspect door seal and vent filter annually.",
+  "Roof": "Visual inspection twice yearly; professional inspection every 3-5 years.",
+  "Boiler / central HVAC": "Annual professional service; check pressure & venting.",
+  "Electrical panel": "Visual inspection annually; verify breakers labeled & functional.",
+  "Fire suppression / sprinkler system": "Professional inspection & test annually per local code.",
+  "Elevator": "Service contract per manufacturer/code; annual state inspection.",
+  "Exterior lighting": "Check bulbs/fixtures & timers/sensors quarterly.",
+  "Other": ""
 };
+const ASSET_LOCATION_BUILDING = "Building / Shared";
 
-let state = { view: "home", inspections: {}, order: [], currentId: null, currentRoom: null, editingPhoto: null, lightbox: null };
+/* ============ Google Drive backup for walkthrough videos ============
+   One-time setup (per Google Cloud project), then paste the Client ID below:
+   1. console.cloud.google.com -> create/select a project -> APIs & Services -> Enable "Google Drive API".
+   2. OAuth consent screen -> User type "Internal" (Workspace orgs skip Google's review this way).
+   3. Credentials -> Create OAuth client ID -> Application type "Web application" ->
+      Authorized JavaScript origins: the exact URL Fieldwalk is hosted at (e.g. https://brendan-upm.github.io).
+   4. Paste the resulting Client ID below. */
+const GOOGLE_DRIVE_CLIENT_ID = "";
+const GOOGLE_DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.file";
+const GOOGLE_DRIVE_ROOT_FOLDER_NAME = "Fieldwalk Inspections";
+
+let state = { view: "home", inspections: {}, order: [], properties: {}, propertyOrder: [], currentId: null, currentRoom: null, editingPhoto: null, lightbox: null };
 let pendingMediaTarget = null;
 
 function uid(){ return 'insp_' + Math.random().toString(36).slice(2,9); }
+function propUid(){ return 'prop_' + Math.random().toString(36).slice(2,9); }
+function unitUid(){ return 'unit_' + Math.random().toString(36).slice(2,9); }
 function mediaId(){ return 'm_' + Math.random().toString(36).slice(2,10); }
 function jsEsc(s){ return String(s).replace(/'/g, "\\'"); }
 
-/* --- Raw photo/video blobs live in IndexedDB (window.storage is for small JSON state only) --- */
+/* --- Raw photo/video blobs live in IndexedDB (window.storage/localStorage is for small JSON state only) --- */
 const MEDIA_DB = 'fieldwalk_media';
 const MEDIA_STORE = 'blobs';
 let mediaDbPromise = null;
@@ -575,7 +659,29 @@ const storageBackend = (typeof window.storage !== 'undefined' && window.storage)
   async set(key, value){ localStorage.setItem(key, value); }
 };
 
+async function loadProperties(){
+  try{
+    const idx = await storageBackend.get('properties-index', false);
+    if(idx && idx.value){
+      state.propertyOrder = JSON.parse(idx.value);
+      for(const id of state.propertyOrder){
+        try{
+          const rec = await storageBackend.get('property:'+id, false);
+          if(rec) state.properties[id] = JSON.parse(rec.value);
+        }catch(e){}
+      }
+    }
+  }catch(e){}
+}
+async function savePropertiesIndex(){
+  try{ await storageBackend.set('properties-index', JSON.stringify(state.propertyOrder), false); }catch(e){}
+}
+async function saveProperty(id){
+  try{ await storageBackend.set('property:'+id, JSON.stringify(state.properties[id]), false); }catch(e){}
+}
+
 async function loadState(){
+  try{ await loadProperties(); }catch(e){}
   try{
     const idx = await storageBackend.get('inspections-index', false);
     if(idx && idx.value){
@@ -598,17 +704,57 @@ async function saveInspection(id){
   try{ await storageBackend.set('inspection:'+id, JSON.stringify(state.inspections[id]), false); }catch(e){}
 }
 
+/* ============ Properties & units ============ */
+function newProperty(){
+  const id = propUid();
+  state.properties[id] = { id, address:'', units: [] };
+  state.propertyOrder.unshift(id);
+  savePropertiesIndex(); saveProperty(id);
+  goto('properties');
+}
+function updatePropertyAddress(id, val){
+  state.properties[id].address = val;
+  saveProperty(id);
+}
+function removeProperty(id){
+  state.propertyOrder = state.propertyOrder.filter(pid => pid !== id);
+  delete state.properties[id];
+  savePropertiesIndex();
+  render();
+}
+function addUnit(propId){
+  const p = state.properties[propId];
+  p.units.push({ id: unitUid(), label: `Unit ${p.units.length+1}`, bedrooms: 1, bathrooms: 1 });
+  saveProperty(propId);
+  render();
+}
+function updateUnit(propId, unitId, field, val){
+  const u = state.properties[propId].units.find(u => u.id === unitId);
+  if(!u) return;
+  u[field] = (field === 'bedrooms' || field === 'bathrooms') ? (parseFloat(val) || 0) : val;
+  saveProperty(propId);
+}
+function removeUnit(propId, unitId){
+  const p = state.properties[propId];
+  p.units = p.units.filter(u => u.id !== unitId);
+  saveProperty(propId);
+  render();
+}
+function propertyLabel(insp){
+  const p = state.properties[insp.propertyId];
+  if(!p) return 'Untitled property';
+  const unit = p.units.find(u => u.id === insp.unitId);
+  return p.address ? (p.address + (unit ? ` — ${unit.label}` : '')) : (unit ? unit.label : 'Untitled property');
+}
+
+/* ============ Inspections ============ */
 function newInspection(){
   const id = uid();
-  const rooms = {};
-  DEFAULT_ROOMS.forEach(r => rooms[r] = blankRoom());
-  const exterior = {};
-  EXTERIOR_ZONES.forEach(z => exterior[z] = blankRoom());
   state.inspections[id] = {
-    id, address:"", type:"Pre-occupancy", inspector:"", date:new Date().toISOString().slice(0,10),
-    linkedInspectionId: "",
-    rooms, roomOrder:[...DEFAULT_ROOMS], exterior,
-    appliances: []
+    id, type: INSPECTION_TYPES[0], propertyId: '', unitId: '',
+    inspector: '', date: new Date().toISOString().slice(0,10),
+    linkedInspectionId: '',
+    rooms: {}, roomOrder: [], exterior: {}, assets: []
   };
   state.order.unshift(id);
   state.currentId = id;
@@ -616,10 +762,10 @@ function newInspection(){
   goto("setup");
 }
 
-function blankRoom(){
+function blankZone(checklistItems){
   const c = {};
-  ROOM_CHECKLIST.forEach(item => c[item] = "good");
-  return { conditions:c, notes:"", videos:[], photos:[] };
+  checklistItems.forEach(item => c[item] = "good");
+  return { checklist: checklistItems, conditions: c, notes: "", videos: [], photos: [] };
 }
 
 function goto(view, opts){
@@ -650,10 +796,10 @@ function zonePercentages(zone){
 }
 
 function allZoneEntries(insp){
-  return [
-    ...insp.roomOrder.map(r => ({name:r, data:insp.rooms[r]})),
-    ...EXTERIOR_ZONES.map(z => ({name:z, data:insp.exterior[z]}))
-  ];
+  const scope = typeScope(insp.type);
+  if(scope === 'exterior') return EXTERIOR_ZONES.map(z => ({name:z, data:insp.exterior[z]})).filter(e => e.data);
+  if(scope === 'assets') return [];
+  return (insp.roomOrder || []).map(r => ({name:r, data:insp.rooms[r]})).filter(e => e.data);
 }
 
 function buildComparison(insp, prior){
@@ -667,10 +813,11 @@ function buildComparison(insp, prior){
 }
 
 function roomProgress(insp){
-  const total = insp.roomOrder.length + EXTERIOR_ZONES.length;
+  const entries = allZoneEntries(insp);
+  if(entries.length === 0) return 0;
   let done = 0;
-  allZoneEntries(insp).forEach(e => { if(e.data.notes || e.data.photos.length>0 || e.data.videos.length>0) done++; });
-  return Math.round((done/total)*100);
+  entries.forEach(e => { if(e.data.notes || e.data.photos.length>0 || e.data.videos.length>0) done++; });
+  return Math.round((done/entries.length)*100);
 }
 
 function esc(s){ return (s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
@@ -680,11 +827,14 @@ function render(){
   const backBtn = document.getElementById('backBtn');
   const brand = document.getElementById('brandLabel');
   backBtn.style.visibility = state.view === 'home' ? 'hidden' : 'visible';
-  brand.textContent = state.view === 'home' ? 'Fieldwalk' : (state.view === 'report' ? 'Report' : 'Inspection');
+  const brandMap = { home:'Fieldwalk', properties:'Properties', setup:'Inspection', walkthrough:'Inspection', assets:'Asset Tracking', report:'Report' };
+  brand.textContent = brandMap[state.view] || 'Fieldwalk';
 
   if(state.view === 'home') renderHome(app);
+  else if(state.view === 'properties') renderProperties(app);
   else if(state.view === 'setup') renderSetup(app);
   else if(state.view === 'walkthrough') renderWalkthrough(app);
+  else if(state.view === 'assets') renderAssets(app);
   else if(state.view === 'report') renderReport(app);
   renderLightbox();
 }
@@ -719,24 +869,34 @@ function closeLightbox(){
   renderLightbox();
 }
 
+/* ============ Home ============ */
 function renderHome(app){
   const items = state.order.map(id => state.inspections[id]).filter(Boolean);
-  let html = `<div class="section-title">Your inspections</div>`;
+  let html = '';
+  if(driveConfigured()){
+    html += `<div class="card" style="display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-size:13px;">Google Drive video backup</span>
+      ${driveConnected() ? `<span class="rating-pill good">Connected</span>` : `<button class="btn btn-ghost btn-sm" onclick="connectDrive()">Connect</button>`}
+    </div>`;
+  }
+  html += `<div class="section-title">Your inspections</div>`;
   if(items.length === 0){
-    html += `<div class="empty"><i class="ti">&#9633;</i>No inspections yet. Start a walkthrough to capture unit condition, appliances, and exterior zones.</div>`;
+    html += `<div class="empty"><i class="ti">&#9633;</i>No inspections yet. Start one to capture unit condition, exterior zones, or asset records.</div>`;
   } else {
     items.forEach(insp => {
-      const pct = roomProgress(insp);
+      const scope = typeScope(insp.type);
+      const sub = scope === 'assets' ? `${insp.assets.length} asset${insp.assets.length===1?'':'s'} logged` : `${roomProgress(insp)}% complete`;
       html += `<div class="home-item" onclick="openInspection('${insp.id}')">
         <div>
-          <div class="addr">${esc(insp.address) || 'Untitled unit'}</div>
-          <div class="sub">${esc(insp.type)} &middot; ${esc(insp.date)} &middot; ${pct}% complete</div>
+          <div class="addr">${esc(propertyLabel(insp))}</div>
+          <div class="sub">${esc(insp.type)} &middot; ${esc(insp.date)} &middot; ${sub}</div>
         </div>
         <span style="color:var(--steel); font-size:18px;">&rsaquo;</span>
       </div>`;
     });
   }
-  html += `<button class="btn btn-primary" style="margin-top:10px;" onclick="newInspection()">+ New inspection</button>`;
+  html += `<button class="btn btn-primary" style="margin-top:10px;" onclick="newInspection()">+ New inspection</button>
+    <button class="btn btn-ghost" style="margin-top:8px;" onclick="goto('properties')">Manage properties</button>`;
   app.innerHTML = html;
 }
 
@@ -745,19 +905,101 @@ function openInspection(id){
   goto('setup');
 }
 
+/* ============ Properties admin ============ */
+function renderProperties(app){
+  const props = state.propertyOrder.map(id => state.properties[id]).filter(Boolean);
+  let html = `<div class="section-title">Properties & units</div>
+    <p style="font-size:12.5px; color:var(--steel); margin:-6px 0 14px;">Set bedroom/bathroom counts per unit so interior walkthroughs automatically generate the right rooms.</p>`;
+  if(props.length === 0){
+    html += `<div class="empty"><i class="ti">&#9633;</i>No properties yet. Add one to get started.</div>`;
+  } else {
+    html += props.map(p => `
+      <div class="card" style="margin-bottom:14px;">
+        <label>Property address</label>
+        <input type="text" value="${esc(p.address)}" placeholder="123 Ocean Ave, Portsmouth NH" onblur="updatePropertyAddress('${p.id}', this.value)">
+        ${p.units.map(u => `
+          <div class="unit-row">
+            <div style="flex:2;">
+              <label>Unit</label>
+              <input type="text" value="${esc(u.label)}" onblur="updateUnit('${p.id}','${u.id}','label',this.value)">
+            </div>
+            <div style="flex:1;">
+              <label>Beds</label>
+              <input type="text" inputmode="decimal" value="${u.bedrooms}" onblur="updateUnit('${p.id}','${u.id}','bedrooms',this.value)">
+            </div>
+            <div style="flex:1;">
+              <label>Baths</label>
+              <input type="text" inputmode="decimal" value="${u.bathrooms}" onblur="updateUnit('${p.id}','${u.id}','bathrooms',this.value)">
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="removeUnit('${p.id}','${u.id}')">&times;</button>
+          </div>
+        `).join('')}
+        <div class="btn-row" style="margin-top:6px;">
+          <button class="btn btn-ghost btn-sm" onclick="addUnit('${p.id}')">+ Add unit</button>
+          <button class="btn btn-ghost btn-sm" onclick="removeProperty('${p.id}')">Remove property</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  html += `<button class="btn btn-primary" onclick="newProperty()">+ Add property</button>
+    <button class="btn btn-ghost" style="margin-top:8px;" onclick="goto('home')">Done</button>`;
+  app.innerHTML = html;
+}
+
+/* ============ Setup ============ */
+function captureSetupFields(){
+  const insp = current();
+  const typeEl = document.getElementById('f_type');
+  const propEl = document.getElementById('f_property');
+  const unitEl = document.getElementById('f_unit');
+  const inspectorEl = document.getElementById('f_inspector');
+  const dateEl = document.getElementById('f_date');
+  const linkEl = document.getElementById('f_link');
+  if(typeEl) insp.type = typeEl.value;
+  if(propEl) insp.propertyId = propEl.value;
+  if(unitEl) insp.unitId = unitEl.value;
+  if(inspectorEl) insp.inspector = inspectorEl.value;
+  if(dateEl) insp.date = dateEl.value;
+  if(linkEl) insp.linkedInspectionId = linkEl.value;
+}
+function onTypeChange(){ captureSetupFields(); render(); }
+function onPropertyChange(){ captureSetupFields(); current().unitId = ''; render(); }
+function onUnitChange(){ captureSetupFields(); render(); }
+
 function renderSetup(app){
   const insp = current();
-  const others = state.order.map(id => state.inspections[id]).filter(o => o && o.id !== insp.id);
-  const showLink = insp.type === 'Move-out';
+  const scope = typeScope(insp.type);
+  const props = state.propertyOrder.map(id => state.properties[id]).filter(Boolean);
+  const selectedProp = state.properties[insp.propertyId];
+  const needsUnit = scope === 'interior';
+  const showLink = scope === 'interior' || scope === 'exterior';
+  const others = showLink ? state.order.map(id => state.inspections[id]).filter(o =>
+    o && o.id !== insp.id && typeScope(o.type) === scope && o.propertyId === insp.propertyId &&
+    (scope !== 'interior' || o.unitId === insp.unitId)
+  ) : [];
+
   app.innerHTML = `
-    <div class="section-title">Unit details</div>
+    <div class="section-title">Inspection details</div>
     <div class="card">
-      <label>Property address</label>
-      <input type="text" id="f_address" value="${esc(insp.address)}" placeholder="123 Ocean Ave, Unit 2, Portsmouth NH">
       <label>Inspection type</label>
       <select id="f_type" onchange="onTypeChange()">
-        ${["Pre-occupancy","Move-out","Routine"].map(t => `<option ${insp.type===t?'selected':''}>${t}</option>`).join('')}
+        ${INSPECTION_TYPES.map(t => `<option ${insp.type===t?'selected':''}>${t}</option>`).join('')}
       </select>
+
+      <label>Property</label>
+      <select id="f_property" onchange="onPropertyChange()">
+        <option value="">— Select a property —</option>
+        ${props.map(p => `<option value="${p.id}" ${insp.propertyId===p.id?'selected':''}>${esc(p.address)||'Untitled property'}</option>`).join('')}
+      </select>
+      ${props.length === 0 ? `<p style="font-size:12px; color:var(--steel); margin:-10px 0 14px;">No properties saved yet — <a href="#" onclick="goto('properties'); return false;" style="color:var(--amber-dark);">add one</a> to enable auto room templates.</p>` : ''}
+
+      ${needsUnit ? `
+      <label>Unit</label>
+      <select id="f_unit" onchange="onUnitChange()">
+        <option value="">— Select a unit —</option>
+        ${selectedProp ? selectedProp.units.map(u => `<option value="${u.id}" ${insp.unitId===u.id?'selected':''}>${esc(u.label)} (${u.bedrooms} bed / ${u.bathrooms} bath)</option>`).join('') : ''}
+      </select>` : ''}
+
       <label>Inspector name</label>
       <input type="text" id="f_inspector" value="${esc(insp.inspector)}" placeholder="Tech name">
       <label>Date</label>
@@ -766,54 +1008,64 @@ function renderSetup(app){
       <label>Compare against prior inspection</label>
       <select id="f_link">
         <option value="">— None —</option>
-        ${others.map(o => `<option value="${o.id}" ${insp.linkedInspectionId===o.id?'selected':''}>${esc(o.address)||'Untitled unit'} — ${esc(o.type)} (${esc(o.date)})</option>`).join('')}
+        ${others.map(o => `<option value="${o.id}" ${insp.linkedInspectionId===o.id?'selected':''}>${esc(o.type)} — ${esc(o.date)}</option>`).join('')}
       </select>` : ''}
     </div>
-    <button class="btn btn-primary" onclick="saveSetupAndContinue()">Start walkthrough &rarr;</button>
+    <button class="btn btn-primary" onclick="saveSetupAndContinue()">${scope === 'assets' ? 'Start asset tracking' : 'Start walkthrough'} &rarr;</button>
   `;
 }
 
-function onTypeChange(){
-  const insp = current();
-  insp.address = document.getElementById('f_address').value;
-  insp.type = document.getElementById('f_type').value;
-  insp.inspector = document.getElementById('f_inspector').value;
-  insp.date = document.getElementById('f_date').value;
-  render();
-}
-
 function saveSetupAndContinue(){
+  captureSetupFields();
   const insp = current();
-  insp.address = document.getElementById('f_address').value;
-  insp.type = document.getElementById('f_type').value;
-  insp.inspector = document.getElementById('f_inspector').value;
-  insp.date = document.getElementById('f_date').value;
-  const linkEl = document.getElementById('f_link');
-  insp.linkedInspectionId = linkEl ? linkEl.value : "";
+  const scope = typeScope(insp.type);
+
+  if(scope === 'interior'){
+    if(!insp.roomOrder || insp.roomOrder.length === 0){
+      const prop = state.properties[insp.propertyId];
+      const unit = prop ? prop.units.find(u => u.id === insp.unitId) : null;
+      const roomNames = generateRoomsForUnit(unit);
+      insp.roomOrder = roomNames;
+      insp.rooms = {};
+      roomNames.forEach(r => insp.rooms[r] = blankZone(checklistForRoom(r)));
+    }
+    if(!state.currentRoom || !insp.roomOrder.includes(state.currentRoom)) state.currentRoom = insp.roomOrder[0];
+  } else if(scope === 'exterior'){
+    if(!insp.exterior || Object.keys(insp.exterior).length === 0){
+      insp.exterior = {};
+      EXTERIOR_ZONES.forEach(z => insp.exterior[z] = blankZone(checklistForExterior(z)));
+    }
+    state.currentRoom = EXTERIOR_ZONES[0];
+  } else if(scope === 'assets'){
+    if(!insp.assets) insp.assets = [];
+  }
+
   saveInspection(insp.id);
-  state.currentRoom = insp.roomOrder[0];
-  goto('walkthrough');
+  goto(scope === 'assets' ? 'assets' : 'walkthrough');
 }
 
+/* ============ Walkthrough (interior rooms or exterior zones) ============ */
 function renderWalkthrough(app){
   const insp = current();
+  const scope = typeScope(insp.type);
+  const isExt = scope === 'exterior';
+  const zoneNames = isExt ? EXTERIOR_ZONES : insp.roomOrder;
+  const zoneMap = isExt ? insp.exterior : insp.rooms;
   const pct = roomProgress(insp);
-  const allZones = [...insp.roomOrder.map(r=>({key:r, ext:false})), ...EXTERIOR_ZONES.map(z=>({key:z, ext:true}))];
-  if(!state.currentRoom) state.currentRoom = insp.roomOrder[0];
+  if(!state.currentRoom || !zoneNames.includes(state.currentRoom)) state.currentRoom = zoneNames[0];
   const activeKey = state.currentRoom;
-  const isExt = EXTERIOR_ZONES.includes(activeKey);
-  const zone = isExt ? insp.exterior[activeKey] : insp.rooms[activeKey];
+  const zone = zoneMap[activeKey];
 
-  let chips = allZones.map(z => {
-    const d = z.ext ? insp.exterior[z.key] : insp.rooms[z.key];
+  let chips = zoneNames.map(key => {
+    const d = zoneMap[key];
     const done = d.notes || d.photos.length>0 || d.videos.length>0;
-    return `<div class="room-chip ${z.key===activeKey?'active':''} ${done?'done':''}" onclick="selectRoom('${jsEsc(z.key)}')">${esc(z.key)}</div>`;
+    return `<div class="room-chip ${key===activeKey?'active':''} ${done?'done':''}" onclick="selectRoom('${jsEsc(key)}')">${esc(key)}</div>`;
   }).join('');
 
-  let checklist = ROOM_CHECKLIST.map(item => {
+  let checklist = zone.checklist.map(item => {
     const cond = zone.conditions[item] || 'good';
     return `<div class="check-row">
-      <span class="check-name">${item}</span>
+      <span class="check-name">${esc(item)}</span>
       <button class="cond-btn ${cond}" onclick="cycleCondition('${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}')">${cond}</button>
     </div>`;
   }).join('');
@@ -852,20 +1104,10 @@ function renderWalkthrough(app){
     }
   }
 
-  let applianceSection = '';
-  if(!isExt){
-    const roomAppliances = insp.appliances.filter(a => a.room === activeKey);
-    applianceSection = `
-      <div class="section-title">Appliances in this room</div>
-      ${roomAppliances.map((a,i) => applianceCardHTML(a, insp.appliances.indexOf(a))).join('')}
-      <button class="btn btn-ghost btn-sm" style="width:100%; margin-bottom:16px;" onclick="addAppliance('${jsEsc(activeKey)}')">+ Add appliance</button>
-    `;
-  }
-
   app.innerHTML = `
     <div class="tag">
-      <p class="tag-label">${esc(insp.type)} inspection</p>
-      <p class="tag-address">${esc(insp.address) || 'Untitled unit'}</p>
+      <p class="tag-label">${esc(insp.type)}</p>
+      <p class="tag-address">${esc(propertyLabel(insp))}</p>
       <div class="tag-meta">
         <span>Inspector <b>${esc(insp.inspector)||'—'}</b></span>
         <span>Date <b>${esc(insp.date)}</b></span>
@@ -880,6 +1122,7 @@ function renderWalkthrough(app){
       ${videoRow}
       <button class="media-add" onclick="recordVideo('${jsEsc(activeKey)}')">&#9679; Record</button>
     </div>
+    ${zone.videos.length ? `<div class="drive-caption">${driveStatusCaption(zone.videos)}</div>` : ''}
 
     <div class="section-title">Damage photos</div>
     <div class="dphoto-grid">
@@ -895,8 +1138,6 @@ function renderWalkthrough(app){
     <div class="card">
       <textarea id="roomNotes" placeholder="Describe condition, damage, or anything notable...">${esc(zone.notes)}</textarea>
     </div>
-
-    ${applianceSection}
 
     <div class="btn-row" style="margin-top:8px;">
       <button class="btn btn-ghost" onclick="goto('home')">Save & exit</button>
@@ -915,23 +1156,6 @@ function renderWalkthrough(app){
       });
     }
   }
-}
-
-function applianceCardHTML(a, idx){
-  const hint = APPLIANCE_TYPES[a.type] || "";
-  return `<div class="appliance-card">
-    <div class="appliance-head">
-      <b>${esc(a.type)}</b>
-      <button class="remove" onclick="removeAppliance(${idx})">Remove</button>
-    </div>
-    <label>Model number</label>
-    <input class="mono" type="text" value="${esc(a.model)}" onblur="updateAppliance(${idx},'model',this.value)" placeholder="Model #">
-    <label>Serial number</label>
-    <input class="mono" type="text" value="${esc(a.serial)}" onblur="updateAppliance(${idx},'serial',this.value)" placeholder="Serial #">
-    <label>Install / purchase date</label>
-    <input type="date" value="${esc(a.installDate)}" onchange="updateAppliance(${idx},'installDate',this.value)">
-    ${hint ? `<div class="maint-hint">${hint}</div>` : ''}
-  </div>`;
 }
 
 function selectRoom(key){ state.currentRoom = key; state.editingPhoto = null; render(); }
@@ -993,7 +1217,9 @@ document.getElementById('videoInput').addEventListener('change', async function(
       const { thumb, duration } = await videoThumbFromFile(file, 320);
       const id = mediaId();
       await putMediaBlob(id, file);
-      zone.videos.push({ id, thumb, duration, createdAt: Date.now() });
+      const entry = { id, thumb, duration, createdAt: Date.now(), driveFileId:null, driveLink:null, driveStatus:'local' };
+      zone.videos.push(entry);
+      if(driveConnected()) uploadVideoToDrive(insp, entry, file);
     }catch(err){}
   }
   saveInspection(insp.id);
@@ -1032,26 +1258,246 @@ async function removeVideo(roomKey, isExt, id){
   deleteMediaBlob(id).catch(()=>{});
 }
 
-function addAppliance(room){
+/* ============ Asset tracking (units + building-level equipment) ============ */
+function renderAssets(app){
   const insp = current();
-  insp.appliances.push({ room, type:"Refrigerator", model:"", serial:"", installDate:"" });
+  const prop = state.properties[insp.propertyId];
+  const locationOptions = [ASSET_LOCATION_BUILDING, ...(prop ? prop.units.map(u => u.label) : [])];
+  let cards = insp.assets.map((a, idx) => assetCardHTML(a, idx, locationOptions)).join('');
+
+  app.innerHTML = `
+    <div class="tag">
+      <p class="tag-label">Asset tracking</p>
+      <p class="tag-address">${esc(prop ? (prop.address || 'Untitled property') : 'Untitled property')}</p>
+      <div class="tag-meta">
+        <span>Inspector <b>${esc(insp.inspector)||'—'}</b></span>
+        <span>Date <b>${esc(insp.date)}</b></span>
+      </div>
+    </div>
+
+    <div class="section-title">Assets & equipment (${insp.assets.length})</div>
+    ${cards || '<div class="empty" style="padding:30px 20px;"><i class="ti">&#9881;</i>No assets logged yet.</div>'}
+    <button class="btn btn-ghost" style="margin-bottom:16px;" onclick="addAsset()">+ Add asset</button>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goto('home')">Save & exit</button>
+      <button class="btn btn-primary" onclick="goto('report')">View report</button>
+    </div>
+  `;
+}
+
+function assetCardHTML(a, idx, locationOptions){
+  const hint = ASSET_TYPES[a.type] || '';
+  return `<div class="appliance-card">
+    <div class="appliance-head">
+      <b>${esc(a.type)}</b>
+      <button class="remove" onclick="removeAsset(${idx})">Remove</button>
+    </div>
+    <label>Type</label>
+    <select onchange="updateAsset(${idx},'type',this.value)">
+      ${Object.keys(ASSET_TYPES).map(t => `<option ${a.type===t?'selected':''}>${t}</option>`).join('')}
+    </select>
+    <label>Location</label>
+    <select onchange="updateAsset(${idx},'location',this.value)">
+      ${locationOptions.map(loc => `<option ${a.location===loc?'selected':''}>${esc(loc)}</option>`).join('')}
+    </select>
+    <label>Model number</label>
+    <input class="mono" type="text" value="${esc(a.model)}" onblur="updateAsset(${idx},'model',this.value)" placeholder="Model #">
+    <label>Serial number</label>
+    <input class="mono" type="text" value="${esc(a.serial)}" onblur="updateAsset(${idx},'serial',this.value)" placeholder="Serial #">
+    <label>Install / purchase date</label>
+    <input type="date" value="${esc(a.installDate)}" onchange="updateAsset(${idx},'installDate',this.value)">
+    <label>Notes</label>
+    <textarea onblur="updateAsset(${idx},'notes',this.value)" placeholder="Condition notes...">${esc(a.notes)}</textarea>
+    ${hint ? `<div class="maint-hint">${hint}</div>` : ''}
+  </div>`;
+}
+
+function addAsset(){
+  const insp = current();
+  const prop = state.properties[insp.propertyId];
+  const defaultLocation = (prop && prop.units[0]) ? prop.units[0].label : ASSET_LOCATION_BUILDING;
+  insp.assets.push({ id: mediaId(), type:'Refrigerator', location: defaultLocation, model:'', serial:'', installDate:'', notes:'' });
   saveInspection(insp.id);
   render();
 }
-function updateAppliance(idx, field, val){
+function updateAsset(idx, field, val){
   const insp = current();
-  insp.appliances[idx][field] = val;
+  insp.assets[idx][field] = val;
   saveInspection(insp.id);
+  if(field === 'type') render();
 }
-function removeAppliance(idx){
+function removeAsset(idx){
   const insp = current();
-  insp.appliances.splice(idx,1);
+  insp.assets.splice(idx,1);
   saveInspection(insp.id);
   render();
 }
 
+/* ============ Google Drive backup ============ */
+let driveAccessToken = null;
+let driveTokenClient = null;
+let driveRootFolderId = null;
+let driveFolderCache = {};
+
+function driveConfigured(){ return !!GOOGLE_DRIVE_CLIENT_ID; }
+function driveConnected(){ return !!driveAccessToken; }
+
+function initDriveAuth(){
+  if(!driveConfigured() || typeof google === 'undefined' || !google.accounts) return;
+  driveTokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: GOOGLE_DRIVE_CLIENT_ID,
+    scope: GOOGLE_DRIVE_SCOPE,
+    callback: (resp) => {
+      if(resp && resp.access_token){
+        driveAccessToken = resp.access_token;
+        render();
+        retryAllPendingUploads();
+      }
+    }
+  });
+}
+(function waitForGoogleIdentity(){
+  if(!(typeof document !== 'undefined')) return;
+  let tries = 0;
+  const iv = setInterval(() => {
+    tries++;
+    if(typeof google !== 'undefined' && google.accounts){ clearInterval(iv); initDriveAuth(); }
+    else if(tries > 40){ clearInterval(iv); }
+  }, 250);
+})();
+
+function connectDrive(){
+  if(!driveConfigured()){ alert("Google Drive isn't configured yet — see the setup notes near GOOGLE_DRIVE_CLIENT_ID in index.html."); return; }
+  if(!driveTokenClient){ alert('Google Sign-In is still loading — try again in a moment.'); return; }
+  driveTokenClient.requestAccessToken();
+}
+
+function driveStatusCaption(videos){
+  if(!videos.length) return '';
+  if(!driveConfigured()) return 'Google Drive backup not configured yet.';
+  if(!driveConnected()) return `<a href="#" onclick="connectDrive(); return false;">Connect Google Drive</a> to back up these videos.`;
+  const uploaded = videos.filter(v => v.driveLink).length;
+  if(uploaded === videos.length) return `&#10003; All videos backed up to Drive.`;
+  return `${uploaded}/${videos.length} video${videos.length===1?'':'s'} backed up to Drive.`;
+}
+
+async function driveApiFetch(url, options){
+  options = options || {};
+  options.headers = Object.assign({}, options.headers, { Authorization: 'Bearer ' + driveAccessToken });
+  const res = await fetch(url, options);
+  if(res.status === 401){ const err = new Error('drive-unauthorized'); err.code = 401; throw err; }
+  return res;
+}
+
+async function ensureDriveRootFolder(){
+  if(driveRootFolderId) return driveRootFolderId;
+  const q = encodeURIComponent(`name='${GOOGLE_DRIVE_ROOT_FOLDER_NAME}' and mimeType='application/vnd.google-apps.folder' and trashed=false`);
+  const searchRes = await driveApiFetch(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name)`);
+  const searchJson = await searchRes.json();
+  if(searchJson.files && searchJson.files.length){
+    driveRootFolderId = searchJson.files[0].id;
+    return driveRootFolderId;
+  }
+  const createRes = await driveApiFetch('https://www.googleapis.com/drive/v3/files?fields=id', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: GOOGLE_DRIVE_ROOT_FOLDER_NAME, mimeType: 'application/vnd.google-apps.folder' })
+  });
+  const createJson = await createRes.json();
+  driveRootFolderId = createJson.id;
+  return driveRootFolderId;
+}
+
+async function ensureDrivePropertyFolder(propertyKey, propertyName){
+  if(driveFolderCache[propertyKey]) return driveFolderCache[propertyKey];
+  const rootId = await ensureDriveRootFolder();
+  const safeName = (propertyName || 'Untitled property').replace(/'/g, "\\'");
+  const q = encodeURIComponent(`name='${safeName}' and mimeType='application/vnd.google-apps.folder' and '${rootId}' in parents and trashed=false`);
+  const searchRes = await driveApiFetch(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name)`);
+  const searchJson = await searchRes.json();
+  let folderId;
+  if(searchJson.files && searchJson.files.length){
+    folderId = searchJson.files[0].id;
+  } else {
+    const createRes = await driveApiFetch('https://www.googleapis.com/drive/v3/files?fields=id', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: propertyName || 'Untitled property', mimeType: 'application/vnd.google-apps.folder', parents: [rootId] })
+    });
+    const createJson = await createRes.json();
+    folderId = createJson.id;
+  }
+  driveFolderCache[propertyKey] = folderId;
+  return folderId;
+}
+
+async function uploadVideoToDrive(insp, video, blob, isRetry){
+  if(!driveConnected()) return;
+  video.driveStatus = 'uploading';
+  render();
+  try{
+    const prop = state.properties[insp.propertyId];
+    const propertyKey = insp.propertyId || 'unassigned';
+    const propertyName = prop ? (prop.address || 'Untitled property') : 'Unassigned';
+    const folderId = await ensureDrivePropertyFolder(propertyKey, propertyName);
+    const metadata = {
+      name: `${propertyName} - ${insp.type} - ${insp.date} - ${video.id}.webm`,
+      parents: [folderId]
+    };
+    const form = new FormData();
+    form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+    form.append('file', blob);
+    const uploadRes = await driveApiFetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,webViewLink', {
+      method: 'POST',
+      body: form
+    });
+    const uploadJson = await uploadRes.json();
+    video.driveFileId = uploadJson.id;
+    video.driveLink = uploadJson.webViewLink;
+    video.driveStatus = 'uploaded';
+  }catch(err){
+    if(err.code === 401 && !isRetry){
+      driveAccessToken = null;
+      video.driveStatus = 'local';
+    } else {
+      video.driveStatus = 'error';
+    }
+  }
+  saveInspection(insp.id);
+  render();
+}
+
+function retryVideoUpload(videoId){
+  if(!driveConnected()){ connectDrive(); return; }
+  const insp = current();
+  for(const e of allZoneEntries(insp)){
+    const v = e.data.videos.find(v => v.id === videoId);
+    if(v){
+      getMediaBlob(videoId).then(blob => { if(blob) uploadVideoToDrive(insp, v, blob); });
+      return;
+    }
+  }
+}
+
+function retryAllPendingUploads(){
+  Object.values(state.inspections).forEach(insp => {
+    allZoneEntries(insp).forEach(e => {
+      e.data.videos.forEach(v => {
+        if(v.driveStatus !== 'uploaded' && v.driveStatus !== 'uploading'){
+          getMediaBlob(v.id).then(blob => { if(blob) uploadVideoToDrive(insp, v, blob); });
+        }
+      });
+    });
+  });
+}
+
+/* ============ Report ============ */
 function renderReport(app){
   const insp = current();
+  const scope = typeScope(insp.type);
+  if(scope === 'assets') return renderAssetReport(app, insp);
+
   const entries = allZoneEntries(insp);
 
   let summaryRows = entries.map(e => {
@@ -1073,13 +1519,7 @@ function renderReport(app){
 
   let zoneDetails = entries.map(e => {
     const rating = zoneRating(e.data);
-    const videoRow = e.data.videos.map(v => `
-      <div class="video-thumb" onclick="openLightbox('video','${v.id}')">
-        <img src="${v.thumb}">
-        <div class="play">&#9658;</div>
-        ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
-      </div>
-    `).join('');
+    const videoBlocks = e.data.videos.map(v => videoLinkHTML(v)).join('');
     const photoBlocks = e.data.photos.map(p => `
       <div>
         <div class="dphoto" style="width:100%;" onclick="openLightbox('photo','${p.id}')"><img src="${p.thumb}"></div>
@@ -1094,9 +1534,9 @@ function renderReport(app){
           <span class="mono" style="font-size:12px; color:var(--steel);">${e.data.photos.length} flagged &middot; ${e.data.videos.length} video${e.data.videos.length===1?'':'s'}</span>
         </div>
         ${e.data.notes ? `<div style="font-size:13px; margin-bottom:10px;">${esc(e.data.notes)}</div>` : ''}
-        ${videoRow ? `<div class="media-row" style="margin:0 0 10px;">${videoRow}</div>` : ''}
+        ${videoBlocks ? `<div style="margin-bottom:10px;">${videoBlocks}</div>` : ''}
         ${photoBlocks ? `<div class="dphoto-grid">${photoBlocks}</div>` : ''}
-        ${(!videoRow && !photoBlocks) ? `<div style="font-size:12.5px; color:var(--steel);">No media captured.</div>` : ''}
+        ${(!videoBlocks && !photoBlocks) ? `<div style="font-size:12.5px; color:var(--steel);">No media captured.</div>` : ''}
       </div>
     `;
   }).join('');
@@ -1104,18 +1544,10 @@ function renderReport(app){
   const prior = linkedInspection(insp);
   const comparison = prior ? buildComparison(insp, prior) : null;
 
-  let applianceRows = insp.appliances.map(a => {
-    return `<div class="card" style="margin-bottom:8px;">
-      <div style="font-weight:500; font-size:14px; margin-bottom:2px;">${esc(a.type)} <span style="color:var(--steel); font-weight:400; font-size:12.5px;">— ${esc(a.room)}</span></div>
-      <div class="mono" style="font-size:12px; color:var(--steel);">Model ${esc(a.model)||'—'} &middot; Serial ${esc(a.serial)||'—'}</div>
-      <div class="maint-hint">${APPLIANCE_TYPES[a.type]||''}${a.installDate ? ` Installed ${esc(a.installDate)} — verify warranty status against manufacturer terms using this date.` : ' Add an install date to estimate warranty status.'}</div>
-    </div>`;
-  }).join('') || '<div class="card" style="color:var(--steel); font-size:13px;">No appliances logged yet.</div>';
-
   app.innerHTML = `
     <div class="tag">
-      <p class="tag-label">${esc(insp.type)} inspection — report</p>
-      <p class="tag-address">${esc(insp.address) || 'Untitled unit'}</p>
+      <p class="tag-label">${esc(insp.type)} — report</p>
+      <p class="tag-address">${esc(propertyLabel(insp))}</p>
       <div class="tag-meta">
         <span>Inspector <b>${esc(insp.inspector)||'—'}</b></span>
         <span>Date <b>${esc(insp.date)}</b></span>
@@ -1130,9 +1562,6 @@ function renderReport(app){
     <div class="section-title">Zone detail</div>
     ${zoneDetails}
 
-    <div class="section-title">Appliances & maintenance</div>
-    ${applianceRows}
-
     <div class="btn-row no-print" style="margin-top:16px;">
       <button class="btn btn-ghost" onclick="goto('walkthrough')">Back to walkthrough</button>
       <button class="btn btn-amber" onclick="copyReport()">Copy text</button>
@@ -1144,10 +1573,57 @@ function renderReport(app){
   `;
 }
 
+function videoLinkHTML(v){
+  if(v.driveLink){
+    return `<a class="drive-video-link" href="${v.driveLink}" target="_blank" rel="noopener">&#9658; View video${v.duration ? ` (${formatDuration(v.duration)})` : ''} — Google Drive &#8599;</a>`;
+  }
+  const label = v.driveStatus === 'uploading' ? 'Backing up to Drive…' : v.driveStatus === 'error' ? 'Backup failed — tap to retry' : (driveConfigured() ? 'Not yet backed up to Drive' : '');
+  return `<div style="display:inline-block; margin-right:10px;">
+    <div class="video-thumb" onclick="openLightbox('video','${v.id}')">
+      <img src="${v.thumb}"><div class="play">&#9658;</div>
+      ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
+    </div>
+    ${label ? `<div class="drive-caption" style="text-align:center; margin:2px 0 0;" ${v.driveStatus==='error'?`onclick="retryVideoUpload('${v.id}')" style="cursor:pointer; color:var(--red-dark);"`:''}>${label}</div>` : ''}
+  </div>`;
+}
+
+function renderAssetReport(app, insp){
+  const prop = state.properties[insp.propertyId];
+  let assetRows = insp.assets.map(a => `
+    <div class="card" style="margin-bottom:8px;">
+      <div style="display:flex; justify-content:space-between; font-weight:500; font-size:14px; margin-bottom:2px;">
+        <span>${esc(a.type)}</span>
+        <span style="color:var(--steel); font-weight:400; font-size:12.5px;">${esc(a.location)}</span>
+      </div>
+      <div class="mono" style="font-size:12px; color:var(--steel);">Model ${esc(a.model)||'—'} &middot; Serial ${esc(a.serial)||'—'}${a.installDate ? ` &middot; Installed ${esc(a.installDate)}` : ''}</div>
+      ${a.notes ? `<div style="font-size:12.5px; margin-top:6px;">${esc(a.notes)}</div>` : ''}
+      ${ASSET_TYPES[a.type] ? `<div class="maint-hint">${ASSET_TYPES[a.type]}</div>` : ''}
+    </div>
+  `).join('') || '<div class="card" style="color:var(--steel); font-size:13px;">No assets logged yet.</div>';
+
+  app.innerHTML = `
+    <div class="tag">
+      <p class="tag-label">Asset tracking — report</p>
+      <p class="tag-address">${esc(prop ? (prop.address || 'Untitled property') : 'Untitled property')}</p>
+      <div class="tag-meta">
+        <span>Inspector <b>${esc(insp.inspector)||'—'}</b></span>
+        <span>Date <b>${esc(insp.date)}</b></span>
+      </div>
+    </div>
+    <div class="section-title">Assets & equipment (${insp.assets.length})</div>
+    ${assetRows}
+    <div class="btn-row no-print" style="margin-top:16px;">
+      <button class="btn btn-ghost" onclick="goto('assets')">Back to assets</button>
+      <button class="btn btn-amber" onclick="copyReport()">Copy text</button>
+    </div>
+    <button class="btn btn-primary no-print" style="margin-top:8px;" onclick="exportReportPDF()">Export report (PDF)</button>
+  `;
+}
+
 function renderComparisonHTML(insp, prior, comparison){
   const degradedZones = comparison.filter(c => c.degraded);
   return `
-    <div class="section-title">Move-in &rarr; move-out comparison</div>
+    <div class="section-title">Comparison</div>
     <div class="card" style="margin-bottom:10px; font-size:12.5px; color:var(--steel);">
       Compared against ${esc(prior.type)} inspection dated ${esc(prior.date)}.
     </div>
@@ -1165,7 +1641,7 @@ function renderComparisonHTML(insp, prior, comparison){
       `).join('')}
     </div>
     ${degradedZones.length ? `
-      <div class="section-title">Damage flagged since move-in</div>
+      <div class="section-title">Damage flagged since prior inspection</div>
       ${degradedZones.map(c => {
         const zoneData = zoneOf(insp, c.name);
         return `<div class="card" style="margin-bottom:8px;">
@@ -1180,38 +1656,43 @@ function renderComparisonHTML(insp, prior, comparison){
 
 function copyReport(){
   const insp = current();
-  const entries = allZoneEntries(insp);
+  const scope = typeScope(insp.type);
   let lines = [];
-  lines.push(`${insp.type.toUpperCase()} INSPECTION — ${insp.address || 'Untitled unit'}`);
+  lines.push(`${insp.type.toUpperCase()} — ${propertyLabel(insp)}`);
   lines.push(`Inspector: ${insp.inspector || '—'}   Date: ${insp.date}`);
   lines.push('');
-  lines.push('ZONE SUMMARY');
-  entries.forEach(e => {
-    const rating = zoneRating(e.data);
-    lines.push(`- ${e.name}: ${rating.toUpperCase()} (${e.data.photos.length} flagged, ${e.data.videos.length} video)`);
-    if(e.data.notes) lines.push(`    Notes: ${e.data.notes}`);
-    e.data.photos.forEach(p => { if(p.note) lines.push(`    Flag: ${p.note}`); });
-  });
-  const prior = linkedInspection(insp);
-  if(prior){
-    lines.push('');
-    lines.push(`COMPARISON AGAINST: ${prior.type.toUpperCase()} — ${prior.date}`);
-    buildComparison(insp, prior).forEach(c => {
-      lines.push(`- ${c.name}: ${c.priorRating} -> ${c.curRating}${c.degraded ? '  [NEW DAMAGE]' : ''}`);
+  if(scope === 'assets'){
+    lines.push('ASSETS');
+    insp.assets.forEach(a => {
+      lines.push(`- ${a.type} (${a.location}): model ${a.model||'—'}, serial ${a.serial||'—'}, installed ${a.installDate||'—'}`);
+      if(a.notes) lines.push(`    Notes: ${a.notes}`);
     });
+  } else {
+    const entries = allZoneEntries(insp);
+    lines.push('ZONE SUMMARY');
+    entries.forEach(e => {
+      const rating = zoneRating(e.data);
+      lines.push(`- ${e.name}: ${rating.toUpperCase()} (${e.data.photos.length} flagged, ${e.data.videos.length} video)`);
+      if(e.data.notes) lines.push(`    Notes: ${e.data.notes}`);
+      e.data.photos.forEach(p => { if(p.note) lines.push(`    Flag: ${p.note}`); });
+      e.data.videos.forEach(v => { if(v.driveLink) lines.push(`    Video: ${v.driveLink}`); });
+    });
+    const prior = linkedInspection(insp);
+    if(prior){
+      lines.push('');
+      lines.push(`COMPARISON AGAINST: ${prior.type.toUpperCase()} — ${prior.date}`);
+      buildComparison(insp, prior).forEach(c => {
+        lines.push(`- ${c.name}: ${c.priorRating} -> ${c.curRating}${c.degraded ? '  [NEW DAMAGE]' : ''}`);
+      });
+    }
   }
-  lines.push('');
-  lines.push('APPLIANCES');
-  insp.appliances.forEach(a=>{
-    lines.push(`- ${a.type} (${a.room}): model ${a.model||'—'}, serial ${a.serial||'—'}, installed ${a.installDate||'—'}`);
-  });
   const text = lines.join('\n');
   navigator.clipboard.writeText(text).then(()=>alert('Report copied to clipboard.')).catch(()=>alert(text));
 }
 
 function exportReportPDF(){
   const insp = current();
-  const filename = ['Fieldwalk', insp.address || 'Untitled unit', insp.type, insp.date]
+  const filename = ['Fieldwalk', propertyLabel(insp), insp.type, insp.date]
     .filter(Boolean).join(' - ').replace(/[\\/:*?"<>|]/g, '-');
   const prevTitle = document.title;
   document.title = filename;
@@ -1221,7 +1702,7 @@ function exportReportPDF(){
 }
 
 document.getElementById('backBtn').addEventListener('click', function(){
-  if(state.view === 'setup' || state.view === 'walkthrough' || state.view === 'report') goto('home');
+  if(state.view !== 'home') goto('home');
 });
 
 loadState();
