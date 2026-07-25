@@ -438,6 +438,18 @@
   .report-row .k{color:var(--steel);}
 
   .unit-row{display:flex; gap:6px; align-items:flex-end; margin-bottom:10px;}
+
+  .suggest-list{
+    position:absolute; left:0; right:0; top:calc(100% + 4px);
+    background:#fff; border:1px solid var(--line-strong); border-radius:6px;
+    max-height:220px; overflow-y:auto; z-index:10;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  }
+  .suggest-list:empty{display:none; border:none; box-shadow:none;}
+  .suggest-item{padding:9px 11px; font-size:13.5px; cursor:pointer; border-bottom:1px solid var(--line);}
+  .suggest-item:last-child{border-bottom:none;}
+  .suggest-item:hover{background:var(--paper);}
+  .suggest-empty{padding:9px 11px; font-size:12.5px; color:var(--steel);}
   .unit-row > div{margin-bottom:0;}
 
   ::-webkit-scrollbar{display:none;}
@@ -1007,21 +1019,55 @@ function renderProperties(app){
 function captureSetupFields(){
   const insp = current();
   const typeEl = document.getElementById('f_type');
-  const propEl = document.getElementById('f_property');
   const unitEl = document.getElementById('f_unit');
   const inspectorEl = document.getElementById('f_inspector');
   const dateEl = document.getElementById('f_date');
   const linkEl = document.getElementById('f_link');
   if(typeEl) insp.type = typeEl.value;
-  if(propEl) insp.propertyId = propEl.value;
   if(unitEl) insp.unitId = unitEl.value;
   if(inspectorEl) insp.inspector = inspectorEl.value;
   if(dateEl) insp.date = dateEl.value;
   if(linkEl) insp.linkedInspectionId = linkEl.value;
 }
 function onTypeChange(){ captureSetupFields(); render(); }
-function onPropertyChange(){ captureSetupFields(); current().unitId = ''; render(); }
 function onUnitChange(){ captureSetupFields(); render(); }
+
+function onPropertySearchInput(val){
+  const box = document.getElementById('propertySuggestions');
+  if(!box) return;
+  const q = val.trim().toLowerCase();
+  if(!q){ box.innerHTML = ''; return; }
+  const matches = state.propertyOrder
+    .map(id => state.properties[id])
+    .filter(p => p && p.address && p.address.toLowerCase().includes(q))
+    .slice(0, 8);
+  box.innerHTML = matches.length
+    ? matches.map(p => `<div class="suggest-item" data-prop-id="${p.id}" onmousedown="selectPropertyFromSearch('${p.id}')">${esc(p.address)}</div>`).join('')
+    : `<div class="suggest-empty">No matching properties</div>`;
+}
+function closePropertySuggestions(){
+  const box = document.getElementById('propertySuggestions');
+  if(box) box.innerHTML = '';
+}
+function selectFirstPropertySuggestion(){
+  const box = document.getElementById('propertySuggestions');
+  const first = box && box.querySelector('.suggest-item[data-prop-id]');
+  if(first) selectPropertyFromSearch(first.getAttribute('data-prop-id'));
+}
+function selectPropertyFromSearch(propId){
+  captureSetupFields();
+  const insp = current();
+  insp.propertyId = propId;
+  insp.unitId = '';
+  render();
+}
+function clearSelectedProperty(){
+  captureSetupFields();
+  const insp = current();
+  insp.propertyId = '';
+  insp.unitId = '';
+  render();
+}
 
 function renderSetup(app){
   const insp = current();
@@ -1044,10 +1090,18 @@ function renderSetup(app){
       </select>
 
       <label>Property</label>
-      <select id="f_property" onchange="onPropertyChange()">
-        <option value="">— Select a property —</option>
-        ${props.map(p => `<option value="${p.id}" ${insp.propertyId===p.id?'selected':''}>${esc(p.address)||'Untitled property'}</option>`).join('')}
-      </select>
+      <div style="position:relative; margin-bottom:14px;">
+        <input type="text" id="f_property_search" autocomplete="off"
+          style="margin-bottom:0; ${selectedProp ? 'padding-right:32px;' : ''}"
+          value="${esc(selectedProp ? selectedProp.address : '')}"
+          placeholder="Start typing an address..."
+          oninput="onPropertySearchInput(this.value)"
+          onfocus="onPropertySearchInput(this.value)"
+          onblur="setTimeout(closePropertySuggestions, 150)"
+          onkeydown="if(event.key==='Enter'){ event.preventDefault(); selectFirstPropertySuggestion(); }">
+        ${selectedProp ? `<button type="button" onmousedown="event.preventDefault(); clearSelectedProperty()" title="Clear" style="position:absolute; right:8px; top:9px; background:none; border:none; color:var(--steel); font-size:18px; line-height:1; cursor:pointer; padding:2px 4px;">&times;</button>` : ''}
+        <div id="propertySuggestions" class="suggest-list"></div>
+      </div>
       ${props.length === 0 ? `<p style="font-size:12px; color:var(--steel); margin:-10px 0 14px;">No properties saved yet — <a href="#" onclick="goto('properties'); return false;" style="color:var(--amber-dark);">add one</a> to enable auto room templates.</p>` : ''}
 
       ${needsUnit ? `
