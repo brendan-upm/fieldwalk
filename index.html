@@ -680,8 +680,64 @@ async function saveProperty(id){
   try{ await storageBackend.set('property:'+id, JSON.stringify(state.properties[id]), false); }catch(e){}
 }
 
+/* --- Weekly property/unit list sync ---
+   A recurring job (outside this page) parses an emailed CSV and writes the result to
+   properties.seed.json in this repo (committed & pushed, so GitHub Pages redeploys it).
+   On every load, we fetch that file and merge it in: existing properties/units are
+   matched by a stable slug of their address/label and updated in place; nothing already
+   in the app is ever deleted here, so inspections never lose their property/unit link. */
+function slugify(s){
+  return (s || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'unnamed';
+}
+async function syncPropertiesFromSeed(){
+  let seed;
+  try{
+    const res = await fetch('./properties.seed.json', { cache: 'no-store' });
+    if(!res.ok) return;
+    seed = await res.json();
+  }catch(e){ return; }
+
+  let changed = false;
+  (seed.properties || []).forEach(sp => {
+    const propId = 'prop_seed_' + slugify(sp.address);
+    let prop = state.properties[propId];
+    if(!prop){
+      prop = { id: propId, address: sp.address || '', units: [], seeded: true };
+      state.properties[propId] = prop;
+      state.propertyOrder.push(propId);
+      changed = true;
+    } else if(prop.address !== sp.address){
+      prop.address = sp.address || prop.address;
+      changed = true;
+    }
+    (sp.units || []).forEach(su => {
+      const unitId = 'unit_seed_' + slugify(su.label);
+      let unit = prop.units.find(u => u.id === unitId);
+      const bedrooms = Number(su.bedrooms) || 0;
+      const bathrooms = Number(su.bathrooms) || 0;
+      if(!unit){
+        prop.units.push({ id: unitId, label: su.label || unitId, bedrooms, bathrooms, seeded: true });
+        changed = true;
+      } else if(unit.label !== su.label || unit.bedrooms !== bedrooms || unit.bathrooms !== bathrooms){
+        unit.label = su.label || unit.label;
+        unit.bedrooms = bedrooms;
+        unit.bathrooms = bathrooms;
+        changed = true;
+      }
+    });
+  });
+
+  if(changed){
+    await savePropertiesIndex();
+    for(const propId of Object.keys(state.properties)){
+      await saveProperty(propId);
+    }
+  }
+}
+
 async function loadState(){
   try{ await loadProperties(); }catch(e){}
+  try{ await syncPropertiesFromSeed(); }catch(e){}
   try{
     const idx = await storageBackend.get('inspections-index', false);
     if(idx && idx.value){
@@ -915,6 +971,7 @@ function renderProperties(app){
   } else {
     html += props.map(p => `
       <div class="card" style="margin-bottom:14px;">
+        ${p.seeded ? `<p style="font-size:11px; color:var(--steel); margin:0 0 8px;">&#8635; Synced from weekly property list</p>` : ''}
         <label>Property address</label>
         <input type="text" value="${esc(p.address)}" placeholder="123 Ocean Ave, Portsmouth NH" onblur="updatePropertyAddress('${p.id}', this.value)">
         ${p.units.map(u => `
