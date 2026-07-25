@@ -1,5 +1,6636 @@
 {
-  "_comment": "Auto-generated from the weekly property list email. Do not hand-edit — edits here are overwritten on the next sync. Use the app's 'Manage properties' screen for one-off additions instead.",
-  "updatedAt": null,
-  "properties": []
+  "_comment": "Auto-generated from the weekly property list email. Do not hand-edit \u2014 edits here are overwritten on the next sync. Use the app's 'Manage properties' screen for one-off additions instead.",
+  "updatedAt": "2026-07-25T10:27:29.638074Z",
+  "properties": [
+    {
+      "address": "1 Beacon St Somersworth, NH 03878",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "1 Greenleaf Woods Dr #301 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "1 Harding Street Rochester, NH 03867",
+      "units": [
+        {
+          "label": "1 Harding Street",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "1 Hillrise Lane Unit 1 Meredith, NH 03253",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "1 Philbrick Ln Unit 6 Kittery, ME 03904",
+      "units": [
+        {
+          "label": "1 Philbrick Ln Unit 6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "1 Surrey Run Dover, NH 03820",
+      "units": [
+        {
+          "label": "1 Surrey Run",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "1-3 Lincoln Ave Newmarket, NH 03857",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "10 Carrol St - 10 Carroll St Exeter, NH 03833",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "10 Folsom Rd Ossipee, NH 03814",
+      "units": [
+        {
+          "label": "10 Folsom Rd",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "10 Hillside Ln Newmarket, NH 03857",
+      "units": [
+        {
+          "label": "10 Hillside Ln",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "10 Westwoods Rd Kennebunk, ME 04043",
+      "units": [
+        {
+          "label": "10 Westwoods Rd",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "10-12 Atkinson St Dover, NH 03820",
+      "units": [
+        {
+          "label": "10",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "12",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "12B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "10-12 Pine St Kittery, ME 03904",
+      "units": [
+        {
+          "label": "Apt 1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Apt 2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Apt 3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Apt 4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Apt 5",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "100 Granite St Biddeford, ME 04005",
+      "units": [
+        {
+          "label": "101",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "102",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "201",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "100 New Garden Rd Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "100 New Garden Rd",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "1000 U.S. Rt. 1 York, ME 03909",
+      "units": [
+        {
+          "label": "Unit 101 & 102",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 103",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 204 - Office F",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 204 - Office G",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 204 - Office H",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 204 - Office I",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 204 - Office J",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 205 - Office A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 205 - Office B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 205 - Office C",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 205 - Office D",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 205 - Office E",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "201",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "202",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "203",
+          "bedrooms": 1,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "1039 Islington St. Unit 3 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1039 Islington St. Unit 3",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "105-107 Richards Ave Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "105",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "107",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "107B",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "107 Berwick Road Berwick, ME 03901",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 5,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "107 Messer St Laconia, NH 03246",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "107 Treetop Circle #724 - 107 Treetop Circle Unit 724 Laconia, NH 03246",
+      "units": [
+        {
+          "label": "107 Treetop Circle #724",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "109B Main St. Meredith, NH 03253",
+      "units": [
+        {
+          "label": "109B Main St.",
+          "bedrooms": 1,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "11 Federal Street Dover, NH 03820",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "11 Kentfield Court Laconia, NH 03246",
+      "units": [
+        {
+          "label": "11 Kentfield Court",
+          "bedrooms": 4,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "11-13 Lafayette Street Rochester, NH 03687",
+      "units": [
+        {
+          "label": "11",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "13",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "112 Hopewell Road Alton, NH 03809",
+      "units": [
+        {
+          "label": "112 Hopewell Road",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "121 Messer Street Laconia, NH 03246",
+      "units": [
+        {
+          "label": "#1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#2",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "#3",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "#4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "1230 White Mountain Highway Ossipee, NH 03864",
+      "units": [
+        {
+          "label": "Suite 2A/2B/2C/2D",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Suite 3",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Suite 4",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 5",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 7",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "125 Main St. Apt. 71 Newmarket, NH 03857",
+      "units": [
+        {
+          "label": "125 Main St. Apt. 71",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "126 Concord Way Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "126 Concord Way",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "126 Pease Rd Meredith, NH 03253",
+      "units": [
+        {
+          "label": "126 Pease Rd",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "128 Concord Way Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "128 Concord Way",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "13 Pleasant St Ashland, NH 03217",
+      "units": [
+        {
+          "label": "13 Pleasant St",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "13 Staysail Way Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "13 Staysail Way",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "13 Young Drive Durham, NH 03824",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "130 Endicott St  - Unit 314 - 130 Endicott St North - Unit 314 Laconia, NH 03246",
+      "units": [
+        {
+          "label": "130 Endicott St  - Unit 314",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "131-135 Spruce Street Manchester, NH 03103",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "132-136 State Street Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1st Floor",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "132",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "136-2nd Floor",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "136-3rd Floor",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "133 State Rd Kittery, ME 03907",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "1333 NH-175 Campton, NH 03223",
+      "units": [
+        {
+          "label": "#1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#4",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#6",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#8",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#9",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#10",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#11",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#12",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#13",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#14",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "#15",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "135 Tolend Rd Dover, NH 03820",
+      "units": [
+        {
+          "label": "135 Tolend Rd",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "136 Hill St Unit 3 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "136 Hill St",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "136 So Main Street - KW - 136 So Main Street - KW Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "14 Baldwin Way Dover, NH 03820",
+      "units": [
+        {
+          "label": "14 Baldwin Way",
+          "bedrooms": 4,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "1430 Woodbury Ave Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1430 Woodbury Ave",
+          "bedrooms": 5,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "145 Main Street Newmarket, NH 03857",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "7",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "145-153 Union Avenue Laconia, NH 03246",
+      "units": [
+        {
+          "label": "145 #1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "145 #2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "145 #3",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "147 #1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "147 #2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "147 #3",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "153 #1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "153 #2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "149 Islington St Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Unit 1",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "Unit 2",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "149 Union Rd Stratham, NH 03885",
+      "units": [
+        {
+          "label": "149 Union Rd",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "15 Cricket Brook Dover, NH 03820",
+      "units": [
+        {
+          "label": "15 Cricket Brook",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "15 Lapanne Way Unit 3 Strafford, NH 03884",
+      "units": [
+        {
+          "label": "15 Lapanne Way Unit 3",
+          "bedrooms": 2,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "15-17 Sherman Street Portland, ME 04101",
+      "units": [
+        {
+          "label": "GL",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "1503 White Cedar Blvd Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1503 White Cedar Blvd",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "154 Center St Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "156 Catamount Road Northwood, NH 03261",
+      "units": [
+        {
+          "label": "156 Catamount Road",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "156 Main St Newmarket, NH 03857",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "16 Follett Road Meredith, NH 03253",
+      "units": [
+        {
+          "label": "16 Follett Road",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "160 Wentworth Rd New Castle, NH 03854",
+      "units": [
+        {
+          "label": "160 Wentworth Rd",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "161 Endicott St #14 Laconia, NH 03246",
+      "units": [
+        {
+          "label": "161 Endicott St #14",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "161 Rines Rd Alton, NH 03809",
+      "units": [
+        {
+          "label": "161 Rines Rd",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "166 Sandown Rd Fremont, NH 03044",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        },
+        {
+          "label": "3",
+          "bedrooms": 0,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "4",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "168 Black Cat Island Rd Moultonborough, NH 03254",
+      "units": [
+        {
+          "label": "168 Black Cat Island Rd",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "1701 White Cedar Blvd Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1701 White Cedar Blvd",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "1703 White Cedar Blvd Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1703 White Cedar Blvd",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "175-177 Myrtle Ave Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "175",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "177",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "178 Treetop Circle #1023 - 178 Treetop Circle Unit 1023 Laconia, NH 03246",
+      "units": [
+        {
+          "label": "178 Treetop Circle #1023",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "18 Fifth St Dover, NH 03820",
+      "units": [
+        {
+          "label": "First Floor",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "18 Haven Ave Laconia, NH 03246",
+      "units": [
+        {
+          "label": "18 Haven Ave",
+          "bedrooms": 4,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "18-20 Dover St Dover, NH 03820",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "1810 Post Road Wells, ME 04090",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "186 West Bow St Franklin, NH 03235",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "189 Gilford Ave Laconia, NH 03246",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 4,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "189-193 Cedar Street Manchester, NH 03103",
+      "units": [
+        {
+          "label": "189-1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "189-2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "189-3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "193-1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "193-2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "193-3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "19 Jacobs Cove Fremont, NH 03044",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "1904 White Cedar Blvd Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1904 White Cedar Blvd",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "1913 Dover Road Epsom, NH 03234",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "2L",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "192 York St York, ME 03909",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "7",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "8",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "9",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "10",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "11",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "12",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "2 Folsom Rd Ossipee, NH 03814",
+      "units": [
+        {
+          "label": "First Floor",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Second Floor",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "2 Franklin Heights Rochester, NH 03867",
+      "units": [
+        {
+          "label": "2 Franklin Heights",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "2 Greenleaf Woods Drive #102 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "2 Greenleaf Woods Drive #102",
+          "bedrooms": 0,
+          "bathrooms": 0.5
+        }
+      ]
+    },
+    {
+      "address": "2 Greenleaf Woods Drive - Suite 301 - 2 Greenleaf Woods Drive Suite 301 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "2 Greenleaf Woods Drive",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "2 Greenleaf Woods Drive Unit 101 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "2 Ireland Dr Berwick, ME 03901",
+      "units": [
+        {
+          "label": "2 Ireland Dr",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "20 Aldis Lane York Harbor, ME 03909",
+      "units": [
+        {
+          "label": "20 Aldis Lane",
+          "bedrooms": 3,
+          "bathrooms": 4.0
+        }
+      ]
+    },
+    {
+      "address": "20 Brookhurst Lane East - 20 Brookhurst Lane Meredith, NH 03253",
+      "units": [
+        {
+          "label": "20 Brookhurst Lane East",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "20 Parker Street Laconia, NH 03246",
+      "units": [
+        {
+          "label": "20 Parker Street",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "20-22 Winter Street Dover, NH 03820",
+      "units": [
+        {
+          "label": "20",
+          "bedrooms": 5,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "22",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "207 Gilford Avenue Laconia, NH 03246",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "21 Essex St #2 Newburyport, MA 01950",
+      "units": [
+        {
+          "label": "21 Essex St #2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "21 Lincoln Street Rochester, NH 03867",
+      "units": [
+        {
+          "label": "21A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "21B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "23A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "23B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "21 Winter St Dover, NH 03820",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "211 Intervale Rd Gilford, NH 03249",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "7",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "8",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "214 Chester Road Fremont, NH 03038",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "6",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "22 Concord Hill Rd Pittsfield, NH 03263",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "22 Mendum Ave Kittery, ME 03904",
+      "units": [
+        {
+          "label": "22 Mendum Ave",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "22 Ritsher Road Meredith, NH 03253",
+      "units": [
+        {
+          "label": "22 Ritsher Road",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "222 North Main St. Rochester, NH 03867",
+      "units": [
+        {
+          "label": "222 North Main St.",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "23 Adams Shore Rd Moultonborough, NH 03254",
+      "units": [
+        {
+          "label": "23 Adams Shore Rd",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "23 Gale Ave Laconia, NH 03246",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "23 Sunnybrooke Dr Dover, NH 03820",
+      "units": [
+        {
+          "label": "23 Sunnybrooke Dr",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "235 Maplewood Ave Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "2393 Lake Shore Road #9 Gilford, NH 03249",
+      "units": [
+        {
+          "label": "2393 Lake Shore Road #9",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "24 Russell St Franklin, NH 03235",
+      "units": [
+        {
+          "label": "24 Russell St",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "24 School Street - 24 School St Berwick, ME 03901",
+      "units": [
+        {
+          "label": "Owner",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "24A",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "24B",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "24 State Street Biddeford, ME 04005",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "7",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "8",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "9",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "10",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "11",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "12",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "13",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "14",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "15",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "16",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "18",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "19",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "20",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "21",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "22",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "23",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "24",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "25",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "26",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "27",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "28",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "30",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "31",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "32",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "33",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "34",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "35",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "36",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "37",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "38",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "39",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "40",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "41",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "42",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "25 C Riverview Drive North Berwick, ME 03906",
+      "units": [
+        {
+          "label": "25 C Riverview Drive",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "25 Foss St Biddeford, ME 04005",
+      "units": [
+        {
+          "label": "Office",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "101",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "102",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "201",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "202",
+          "bedrooms": 5,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "257 Weirs Boulevard Unit 22 Laconia, NH 03246",
+      "units": [
+        {
+          "label": "257 Weirs Boulevard",
+          "bedrooms": 2,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "26 Jug Hill Road Milton Mills, NH 03852",
+      "units": [
+        {
+          "label": "26 Jug Hill Road",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "26 Lafayette St Rochester, NH 03867",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "26 School Street - 26 School St Berwick, ME 03901",
+      "units": [
+        {
+          "label": "Owner",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "26A",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "26B",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "260 West Main St Conway, NH 03818",
+      "units": [
+        {
+          "label": "260 West Main St",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "264 Lafayette Road, B-10 - 264 Lafayette Road Unit B-10 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "264 Lafayette Road, B-10",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "2696 Lakeshore Rd #79 Gilford, NH 03249",
+      "units": [
+        {
+          "label": "2696 Lakeshore Rd #79",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "26B Plaza Village Road Plymouth, NH 03264",
+      "units": [
+        {
+          "label": "26B Plaza Village Road",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "271 Bolt Hill Rd Eliot, ME 03903",
+      "units": [
+        {
+          "label": "271 Bolt Hill Rd",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "277 Main Street Somersworth, NH 03878",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "282 Central Ave #3 Dover, NH 03820",
+      "units": [
+        {
+          "label": "282 Central Ave #3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "29 Chestnut Street Rochester, NH 03867",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "29 Pleasant Street Saco, ME 04072",
+      "units": [
+        {
+          "label": "101",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "102",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "103",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "201",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "202",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "203",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "3 Court St - 1 Dover, NH 03820",
+      "units": [
+        {
+          "label": "3 Court St - 1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "3 Greenleaf Woods Drive Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Suite 101",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "3 Philbrick Lane #2 Kittery, ME 03904",
+      "units": [
+        {
+          "label": "3 Philbrick Lane #2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "3 Philbrick Lane #4 - 3 Philbrick Lane Unit 4 Kittery, ME 03904",
+      "units": [
+        {
+          "label": "3 Philbrick Lane #4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "3 Philbrick Lane Unit #1 Kittery, ME 03904",
+      "units": [
+        {
+          "label": "3 Philbrick Lane Unit #1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "3 Philbrick Lane Unit 3 Kittery, ME 03904",
+      "units": [
+        {
+          "label": "3 Philbrick Lane Unit 3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "3 Rock St Newmarket, NH 03857",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "30 Bay Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "30 Bay Street",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "30 Central St Farmington, NH 03835",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "30 Ham St Dover, NH 03820",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "D",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "30 School Street Berwick, ME 03901",
+      "units": [
+        {
+          "label": "Owner",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "7",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "8",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "9",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "10",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "11",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "13",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "31 Chestnut Street A-B Franklin, NH 03235",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "310-312 Miller Ave Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "310-2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "310-3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "312",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "311 Kearsarge Road North Conway, NH 03860",
+      "units": [
+        {
+          "label": "Unit 1",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "Unit 2",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "315-319 NH Rt 108 Madbury, NH 03823",
+      "units": [
+        {
+          "label": "315",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "317",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "319",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "32 Harvard St Laconia, NH 03246",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "32/34 Union St - 32 Union St Somersworth, NH 03878",
+      "units": [
+        {
+          "label": "32 Union St.",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "34 Union St",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "323 West Main Street Tilton, NH 03276",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "329 Old Lake Shore Road Gilford, NH 03249",
+      "units": [
+        {
+          "label": "#4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "33 Meadowbrook Dr Barrington, NH 03825",
+      "units": [
+        {
+          "label": "33 Meadowbrook Dr",
+          "bedrooms": 3,
+          "bathrooms": 3.0
+        }
+      ]
+    },
+    {
+      "address": "33 Washington St Rochester, NH 03867",
+      "units": [
+        {
+          "label": "33 Washington St",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "33-35 Green St - 35 Green St Somersworth, NH 03878",
+      "units": [
+        {
+          "label": "33",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "35",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "33-35 Richmond St. Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "33",
+          "bedrooms": 2,
+          "bathrooms": 2.5
+        },
+        {
+          "label": "35",
+          "bedrooms": 2,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "331 Stage Rd Nottingham, NH 03290",
+      "units": [
+        {
+          "label": "In-Law",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "339 Water Village Rd Ossipee, NH 03864",
+      "units": [
+        {
+          "label": "339 Water Village Rd",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "34 Jenkins Rd Saco, ME 04072",
+      "units": [
+        {
+          "label": "101",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "102",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "34 Lafayette Street Rochester, NH 03867",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "34 Shane Way #6 Laconia, NH 03246",
+      "units": [
+        {
+          "label": "34 Shane Way #6",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "35 Andrew St Apt. 23 - 35 Andrew St. APT 23 Manchester, NH 03104",
+      "units": [
+        {
+          "label": "35 Andrew St Apt. 23",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "35 Dow Lane Rye, NH 03870",
+      "units": [
+        {
+          "label": "35 Dow Lane",
+          "bedrooms": 4,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "35 Merrimac Street Laconia, NH 03246",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "35 Wells Street North Berwick, ME 03906",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "351 N. Main St - 351 North Main St Franklin, NH 03235",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "36 Toftree Ln Dover, NH 03820",
+      "units": [
+        {
+          "label": "36 Toftree Ln",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "365 Water Village Rd Ossipee, NH 03864",
+      "units": [
+        {
+          "label": "2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "38 Belvidere St Laconia, NH 03246",
+      "units": [
+        {
+          "label": "Unit 1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "38 Dodge Ave Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "38 Dodge Ave",
+          "bedrooms": 4,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "38 New York St Dover, NH 03820",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "D",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "E",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "F",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "38 Pearl Street Dover, NH 03820",
+      "units": [
+        {
+          "label": "38 Pearl Street",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "381 Littlefield Rd Wells, ME 04090",
+      "units": [
+        {
+          "label": "House",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "39-41 Union Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "39 Union Street",
+          "bedrooms": 4,
+          "bathrooms": 2.5
+        },
+        {
+          "label": "41 Union Street",
+          "bedrooms": 4,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "39A Spring St Newmarket, NH 03857",
+      "units": [
+        {
+          "label": "39A Spring St",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "4 Brookside Dr. Unit 11 Rockingham, NH 03885",
+      "units": [
+        {
+          "label": "4 Brookside Dr. Unit 11",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "4 Foster Lane Rye, NH 03970",
+      "units": [
+        {
+          "label": "4 Foster Lane",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "4 Greenleaf Woods Drive - Unit 101 - 4 Greenleaf Woods Drive Unit 101 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "101",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "4 U.S. Route 1 York, ME 03909",
+      "units": [
+        {
+          "label": "1A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "1B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "1C",
+          "bedrooms": 0,
+          "bathrooms": 0.5
+        },
+        {
+          "label": "2A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2C",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2D",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2E",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2F",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2G",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3A",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3C",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3D",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3E",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3F",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4C",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4D",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4E",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4F",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4G",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5C",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5D",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5E",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5F",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5G",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5H",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "4 Wade Farm Rd. Unit C Newmarket, NH 03857",
+      "units": [
+        {
+          "label": "4 Wade Farm Rd. Unit C",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "40 Bowman St. - 40 Bowman Street Laconia, NH 03246",
+      "units": [
+        {
+          "label": "40 Bowman St.",
+          "bedrooms": 4,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "40 Harvard St Laconia, NH 03246",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "D",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "40 Highland Street A-F Ashland, NH 03217",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "D",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "E",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "F",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "40 New York St Dover, NH 03820",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "D",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "404-406 Pleasant St Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "41 Rollins Rd Rollinsford, NH 03869",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "413 High Street Hampton, NH 03842",
+      "units": [
+        {
+          "label": "R",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit E",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit W",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "416 South Main Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "416 South Main Street",
+          "bedrooms": 5,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "42 Water St Meredith, NH 03253",
+      "units": [
+        {
+          "label": "42 Water St",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "429 Long Island Rd Moultonborough, NH 03254",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "43 King Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "439 Governor Wentworth Highway Melvin Village, NH 03850",
+      "units": [
+        {
+          "label": "439 Governor Wentworth Highway",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "44 Harvard St Laconia, NH 03246",
+      "units": [
+        {
+          "label": "Unit 1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "441 Lakeside Ave Laconia, NH 03246",
+      "units": [
+        {
+          "label": "441 Lakeside Ave",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "443 Governor Wentworth Highway Melvin Village, NH 03850",
+      "units": [
+        {
+          "label": "443 Governor Wentworth Highway",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "45 Brackett Street Westbrook, ME 04092",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "45 King Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "Unit 1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "46 Plymouth St Meredith, NH 03253",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "46-50 Cocheco St Dover, NH 03820",
+      "units": [
+        {
+          "label": "46",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "48",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "50-1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "50-2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "50-3",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "47 Aldrich Rd Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "47 Aldrich Rd",
+          "bedrooms": 4,
+          "bathrooms": 3.0
+        }
+      ]
+    },
+    {
+      "address": "48 Huntington Way Kittery, ME 03904",
+      "units": [
+        {
+          "label": "48 Huntington Way",
+          "bedrooms": 3,
+          "bathrooms": 4.0
+        }
+      ]
+    },
+    {
+      "address": "49 North Main Street Newmarket, NH 03857",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "494 Winnacunnet Rd Hampton, NH 03842",
+      "units": [
+        {
+          "label": "E",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "W",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "5 Cumberland St / 558 Amory St - 5 Cumberland Street 558 Amory Street Manchester, NH 03102",
+      "units": [
+        {
+          "label": "Amory 1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Amory 2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Amory 3",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "5 Elm Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 0,
+          "bathrooms": 0.5
+        }
+      ]
+    },
+    {
+      "address": "5 Philbrick Ln Unit 6 Kittery, ME 03904",
+      "units": [
+        {
+          "label": "5 Philbrick Ln Unit 6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "501 Bean Hill Rd #6 Northfield, NH 03276",
+      "units": [
+        {
+          "label": "501 Bean Hill Rd",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "502 White Cedar Blvd Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "502 White Cedar Blvd",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "51 Acorn Lane Moultonboro, NH 03254",
+      "units": [
+        {
+          "label": "51 Acorn Lane",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "51 Bergen St Moultonboro, NH 03254",
+      "units": [
+        {
+          "label": "51 Bergen St",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "52 Harding Rd Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "52 Harding Rd",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "53 Stonedam Circle Meredith, NH 03253",
+      "units": [
+        {
+          "label": "53 Stonedam Circle",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "547-549 State Street Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Unit 4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Unit 5",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "55 Congress Street - Unit 503 - 55 Congress Street Unit 503 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "55 Congress Street - Unit 503",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "55 Langdorf St Moultonborough, NH 03254",
+      "units": [
+        {
+          "label": "55 Langdorf St",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "55 Pointe Place Unit 207 - 55 Point Place Unit 207 Dover, NH 03820",
+      "units": [
+        {
+          "label": "55 Pointe Place Unit 207",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "56 East Side Drive Alton, NH 03810",
+      "units": [
+        {
+          "label": "Left",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        },
+        {
+          "label": "Right",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "56 Gilbert Street Laconia, NH 03246",
+      "units": [
+        {
+          "label": "56 Gilbert Street",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "56 Mellen St Portland, ME 04101",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "56 Pinnacle Park Meredith, NH 03253",
+      "units": [
+        {
+          "label": "56 Pinnacle Park",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "56 Singing Eagle Rd Moultonboro, NH 03254",
+      "units": [
+        {
+          "label": "56 Singing Eagle Rd",
+          "bedrooms": 2,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "562 Straits Rd New Hampton, NH 03256",
+      "units": [
+        {
+          "label": "562 Straits Rd",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "57 Gables Drive Laconia, NH 03246",
+      "units": [
+        {
+          "label": "57 Gables Drive",
+          "bedrooms": 3,
+          "bathrooms": 3.0
+        }
+      ]
+    },
+    {
+      "address": "579 Sagamore #67 - Tidewatch - 579 Sagamore Ave #67 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "579 Sagamore #67 - Tidewatch",
+          "bedrooms": 4,
+          "bathrooms": 3.0
+        }
+      ]
+    },
+    {
+      "address": "58 Main St Durham, NH 03824",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "58 Patrician Shores Circle Meredith, NH 03253",
+      "units": [
+        {
+          "label": "58 Patrician Shores Circle",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "58 Tidy Rd Eliot, ME 03903",
+      "units": [
+        {
+          "label": "58 Tidy Rd",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "580 Salmon Falls Rd Rochester, NH 03867",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "D",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "587 Main & 62 Beacon - 587 Main Street Laconia, NH 03246",
+      "units": [
+        {
+          "label": "ATM",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Citizens Bank",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "6 Church Street Sanford, ME 04073",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "D",
+          "bedrooms": 4,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "6 Cumberland Road #24 Gilford, NH 03249",
+      "units": [
+        {
+          "label": "6 Cumberland Road #24",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "6 Founders Rd Meredith, NH 03253",
+      "units": [
+        {
+          "label": "6 Founders Rd",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "6 Mechanic Street Farmington, NH 03835",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "6 Neal Shore Rd Meredith, NH 03253",
+      "units": [
+        {
+          "label": "6 Neal Shore Rd",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "6 Shadow Dr Dover, NH 03820",
+      "units": [
+        {
+          "label": "6 Shadow Dr",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "6-10 Ford St Somersworth, NH 03878",
+      "units": [
+        {
+          "label": "6",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "8",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "10",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "6-8 Phelps Street Kittery, ME 03904",
+      "units": [
+        {
+          "label": "6",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "8",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "60 Marshall Court Laconia, NH 03246",
+      "units": [
+        {
+          "label": "60 Marshall Court",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "603 Holderness Rd Sandwich, NH 03227",
+      "units": [
+        {
+          "label": "603 Holderness Rd",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "607 Springbrook Circle Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "607 Springbrook Circle",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "616 Portland Street Unit 4 Rochester, NH 03867",
+      "units": [
+        {
+          "label": "616 Portland Street Unit 4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "62 Charles Street Rochester, NH 03867",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "623 South Main Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "63 - 65 Belvidere Street - 63 - 65 Belvidere Street Laconia, NH 03246",
+      "units": [
+        {
+          "label": "63",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "65",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "63 Evergreens Drive #7 - 63 Evergreens Drive Unit 7 Laconia, NH 03247",
+      "units": [
+        {
+          "label": "63 Evergreens Drive #7",
+          "bedrooms": 2,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "65 Toftree Lane Dover, NH 03820",
+      "units": [
+        {
+          "label": "65 Toftree Lane",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "66 NH Rt. 25 Meredith, NH 03253",
+      "units": [
+        {
+          "label": "Citizens Bank",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Parking Lot",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "66 NH Rt 25 KW-1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "67 Main Street Center Ossipee, NH 03814",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 67",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "68 Skyview Circle Meredith, NH 03253",
+      "units": [
+        {
+          "label": "68 Skyview Circle",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "693 White Mountain Highway Milton, NH 03851",
+      "units": [
+        {
+          "label": "Suite 1",
+          "bedrooms": 0,
+          "bathrooms": 0.5
+        },
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "7",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "8",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "7 Browns Freehold York, ME 03909",
+      "units": [
+        {
+          "label": "7 Browns Freehold",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "7 Court St Dover, NH 03820",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "7 Easy St New Hampton, NH 03256",
+      "units": [
+        {
+          "label": "7 Easy St",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "7 Gowen St Sanford, ME 04073",
+      "units": [
+        {
+          "label": "7",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "9",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "11",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "7 Rocky Hill Rd Somersworth, NH 03867",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "70 Trestle Way Dover, NH 03820",
+      "units": [
+        {
+          "label": "70 Trestle Way",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "71 Green St Biddeford, ME 04005",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "72 Green Street Biddeford, ME 04005",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "720 Crawford Notch Rd Bartlett, NH 03812",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "720-750 Lafayette Road Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "720",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "750 Ste 101",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "750 Ste 102",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "750 Ste 103",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "750 Ste 104",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "750 Ste 201",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "73 Tideview Dr Dover, NH 03820",
+      "units": [
+        {
+          "label": "73 Tideview Dr",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "75-81 Maple Street Rochester, NH 03867",
+      "units": [
+        {
+          "label": "75",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "77",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "79",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "81",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "760 West Side Rd - 760 West Side Road Bartlett, NH 03812",
+      "units": [
+        {
+          "label": "760 West Side Rd",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "77 Norton Street South Berwick, ME 03908",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "80 Pendleton Road Laconia, NH 03246",
+      "units": [
+        {
+          "label": "80 Pendleton Road",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "82 Suissevale Avenue Moultonborough, NH 03254",
+      "units": [
+        {
+          "label": "82 Suissevale Avenue",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "83 Batchelder Hill Rd Meredith, NH 03253",
+      "units": [
+        {
+          "label": "83 Batchelder Hill Rd",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "83 Lake Shore Drive Moultonboro, NH 03254",
+      "units": [
+        {
+          "label": "83 Lake Shore Drive",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "833 Weirs Blvd #B8 Laconia, NH 03246",
+      "units": [
+        {
+          "label": "833 Weirs Blvd",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "85-87 Bay Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "85 Bay Street A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "85 Bay Street B",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "87 Bay St",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "86 Lafayette Rd North Hampton, NH 03862",
+      "units": [
+        {
+          "label": "Unit 6",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Unit 7",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "86 Stacy Lane Eliot, ME 03903",
+      "units": [
+        {
+          "label": "86 Stacy Lane",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "86 Wentworth Rd Sanbornville, NH 03872",
+      "units": [
+        {
+          "label": "86 Wentworth Rd",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "9 Cortland Ave Stratham, NH 03885",
+      "units": [
+        {
+          "label": "9 Cortland Ave",
+          "bedrooms": 3,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "9 Fortier Rd Meredith, NH 03253",
+      "units": [
+        {
+          "label": "9 Fortier Rd",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "9 Lehner Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "9 Lehner Street",
+          "bedrooms": 4,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "9 Rochester St Berwick, ME 03901",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "9 Stephen Drive Stratham, NH 03885",
+      "units": [
+        {
+          "label": "9 Stephen Drive",
+          "bedrooms": 3,
+          "bathrooms": 2.5
+        }
+      ]
+    },
+    {
+      "address": "906 Portland Street East Rochester, NH 03868",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "D",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "E",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "F",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "909 State St Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "D",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "92 Old Dover Rd Rochester, NH 03867",
+      "units": [
+        {
+          "label": "92 Old Dover Rd",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "933 Ocean Blvd. #27 Hampton, NH 03842",
+      "units": [
+        {
+          "label": "933 Ocean Blvd. #27",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "94 Center Street Wolfeboro, NH 03894",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "95 Neal Shore Rd Meredith, NH 03253",
+      "units": [
+        {
+          "label": "95 Neal Shore Rd",
+          "bedrooms": 3,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "96 Broadway Dover, NH 03820",
+      "units": [
+        {
+          "label": "A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "B",
+          "bedrooms": 1,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "C",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "96-98 Winter St - 98 Winter St 96A-98A Rochester, NH 03867",
+      "units": [
+        {
+          "label": "96",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "96A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "98",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "98A",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "97 Meredith Way Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "97 Meredith Way",
+          "bedrooms": 4,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "98 Henry Law, Unit 2 - 98 Henry Law Ave Unit 2 Dover, NH 03820",
+      "units": [
+        {
+          "label": "98 Henry Law, Unit 2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Cardinal Way Apartments - 16 Burma Road North Berwick, ME 03906",
+      "units": [
+        {
+          "label": "Unit 1",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 2",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 3",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 4",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 5",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 6",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 7",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 8",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 9",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 10",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 11",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "Unit 12",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "Cliffside Apartments - 2659 West Side Rd North Conway, NH 03860",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "20",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "21",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "22",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "23",
+          "bedrooms": 1,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "24",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "25",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Cox Building - 226 York Street York, ME 03909",
+      "units": [
+        {
+          "label": "B1 & B2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "101",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "102",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "103",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "104",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "105",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "200",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "201",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "202",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "203",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "204",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "301",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "Emery Court - 7 SB Emery Court Sanford, ME 04083",
+      "units": [
+        {
+          "label": "SB-101",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "SB-102",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "SB-201",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "SB-202",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Franklin Square Apartments - 459 Central Ave Dover, NH 03820",
+      "units": [
+        {
+          "label": "Commercial",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "101",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "102",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "103",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "104",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "105",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "201",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "202",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "203",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "204",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "205",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "206",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "208",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "301",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "302",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "303",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "304",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "305",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "306",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Great Falls School Apartments - 90 Indigo Hill Road Somersworth, NH 03878",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "2",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "7",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "8",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "9",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "10",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "11",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "12",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "13",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "14",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "15",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "16",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Hampton Towne Estates #6 - 6 Towle Farm Road #6 Hampton, NH 03842",
+      "units": [
+        {
+          "label": "Hampton Towne Estates #6",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "Harbor Village - 60-72 Whittier Rd Moultonborough, NH 03254",
+      "units": [
+        {
+          "label": "60-1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-3A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-4A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-4B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-5",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-6",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-7A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-7B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-8A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-8B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-8B2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-9",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-10A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-10B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-12",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-13",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-14",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-14A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-15",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-16",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-17",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "60-18",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "64-1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "68-1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "68-5",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "70-1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "70-2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "70-3",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "70-8-E2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "70-8A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "70-8B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "70-8D",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "72-S1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "72-6",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "72-7",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "72-9A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "72-9B",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "72-9C",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "72-9D",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "72-9E",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "72-9F",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "Heritage Hill #13 - 1275 Maplewood Ave #13 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Heritage Hill #13",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Heritage Hill #22 - 1275 Maplewood Ave #22 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Heritage Hill #22",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "Heritage Hill #31 - 1275 Maplewood Ave #31 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Heritage Hill #31",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        }
+      ]
+    },
+    {
+      "address": "Heritage Hill #41 - 1275 Maplewood Ave #41 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Heritage Hill #41",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Horne-Block Building - 14 Main Street Meredith, NH 03253",
+      "units": [
+        {
+          "label": "Center Unit",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Left Unit",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Right Unit",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "101",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "102",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "104",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "201 - Office",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "202",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "204",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "205/HS MTR",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "301",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "302",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "303",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "304",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "305",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Kingsley Apartments - 13-17 Washington Street Sanford, ME 04083",
+      "units": [
+        {
+          "label": "201",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "202",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "203",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "204",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "205",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "206",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "207",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "208",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "209",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "210",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "211",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "212",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "301",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "302",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "303",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "304",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "305",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "306",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "307",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "308",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "309",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "310",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "311",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "312",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Kingsley Apartments-Commercial - 13-17 Washington Street Sanford, ME 04083",
+      "units": [
+        {
+          "label": "C-1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "C-2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "C-4",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "C-5",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "15 Washington Street Suite 1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "Kittery Business Center - 72 Rt. 236 Kittery, ME 03904",
+      "units": [
+        {
+          "label": "Bay 1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Bay 2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Bay 3",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Bay 4",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 1",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 10",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 11",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 12",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 13",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 14",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 2",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 3",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 4",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 5",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 6",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 7",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 8",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Container 9",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "Suite 50",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "101",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "102-L",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "102-R",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "103",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "104 A",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "150",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "151",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "160",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "161",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "200",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "201",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "202",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "203",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "204",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "205",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "206",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "250",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "251",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "252",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "253",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "254",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "260",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "261",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "Riverbrook Condos Unit #35 - 777 Middle Rd #35 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Riverbrook Condos Unit #35",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Riverbrook Condos Unit #51 - 777 Middle Rd #51 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Riverbrook Condos Unit #51",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "Sample Property- New Hampshire - 123 Main St Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "Application Unit",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "1",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Sandwich Children's Center - 54 Maple St Center Sandwich, NH 03227",
+      "units": [
+        {
+          "label": "Suite 1",
+          "bedrooms": 0,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "Suite 2",
+          "bedrooms": 3,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Springbrook Condos Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "309",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "605",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "801",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "814",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "The Howard - 55 North Main St Rochester, NH 03867",
+      "units": [
+        {
+          "label": "201",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "202",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "203",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "204",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "205",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "206",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "207",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "208",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "209",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "301",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "302",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "303",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "304",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "305",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "306",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "307",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "308",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "309",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "401",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "402",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "403",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "404",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "405",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "406",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "407",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "408",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "409",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "501",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "502",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "503",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "504",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "505",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "506",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "507",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "508",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "509",
+          "bedrooms": 1,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "601",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "602",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "603",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "604",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "605",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "606",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "607",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        },
+        {
+          "label": "608",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "609",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "The Sage - 201 - 80 Constitution Ave Unit 201 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "The Sage - 201",
+          "bedrooms": 2,
+          "bathrooms": 2.0
+        }
+      ]
+    },
+    {
+      "address": "The Sage - 316 - 80 Constitution Ave Unit 316 Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "The Sage - 316",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Town Edge Apartments - 1140 Eastman Rd Center Conway, NH 03813",
+      "units": [
+        {
+          "label": "1",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "2",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "3",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "4",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "5",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "6",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "7",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "8",
+          "bedrooms": 2,
+          "bathrooms": 1.5
+        },
+        {
+          "label": "9",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "10",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "11",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    },
+    {
+      "address": "Vaughan Mall - 29 Vaughan St Portsmouth, NH 03801",
+      "units": [
+        {
+          "label": "25",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "29",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "31",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "33",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "35",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "37",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        },
+        {
+          "label": "39",
+          "bedrooms": 0,
+          "bathrooms": 0.0
+        }
+      ]
+    },
+    {
+      "address": "Winchester Woods - 17 Winchester Drive Portland, ME 04103",
+      "units": [
+        {
+          "label": "17-101",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-102",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-103",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-104",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-201",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-202",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-203",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-204",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-301",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-302",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-303",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "17-304",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-101",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-102",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-103",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-104",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-201",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-202",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-203",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-204",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-301",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-302",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-303",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "29-304",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-101",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-102",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-103",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-104",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-201",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-202",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-203",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-204",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-301",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-302",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-303",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "41-304",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-101",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-102",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-103",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-104",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-201",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-202",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-203",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-204",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-301",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-302",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-303",
+          "bedrooms": 1,
+          "bathrooms": 1.0
+        },
+        {
+          "label": "48-304",
+          "bedrooms": 2,
+          "bathrooms": 1.0
+        }
+      ]
+    }
+  ]
 }
