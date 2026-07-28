@@ -759,6 +759,28 @@ async function syncPropertiesFromSeed(){
   }
 }
 
+/* Heals zones saved under older versions of this app. Most notably: videos used to live
+   in a flat zone.videos list before moving to per-checklist-item zone.itemVideos — without
+   this, any inspection saved before that change crashes the whole render() on load. Returns
+   true if the zone needed migrating (caller uses this to decide whether to persist the fix). */
+function normalizeZone(zone){
+  let migrated = false;
+  if(!zone.itemVideos){
+    zone.itemVideos = {};
+    const legacyVideos = Array.isArray(zone.videos) ? zone.videos : [];
+    (zone.checklist || []).forEach((item, i) => {
+      zone.itemVideos[item] = (i === 0) ? legacyVideos : [];
+    });
+    delete zone.videos;
+    migrated = true;
+  } else {
+    (zone.checklist || []).forEach(item => {
+      if(!zone.itemVideos[item]){ zone.itemVideos[item] = []; migrated = true; }
+    });
+  }
+  return migrated;
+}
+
 async function loadState(){
   try{ await loadProperties(); }catch(e){}
   try{ await syncPropertiesFromSeed(); }catch(e){}
@@ -774,6 +796,12 @@ async function loadState(){
       }
     }
   }catch(e){}
+  Object.values(state.inspections).forEach(insp => {
+    let changed = false;
+    Object.values(insp.rooms || {}).forEach(zone => { if(normalizeZone(zone)) changed = true; });
+    Object.values(insp.exterior || {}).forEach(zone => { if(normalizeZone(zone)) changed = true; });
+    if(changed) saveInspection(insp.id);
+  });
   render();
 }
 
