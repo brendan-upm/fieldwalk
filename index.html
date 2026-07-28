@@ -360,6 +360,9 @@
     background:none; border:none; color:#fff; font-size:28px; cursor:pointer; line-height:1;
   }
   .lightbox .loading{color:#fff; font-size:13px;}
+  .lightbox-capture{margin-top:14px; text-align:center;}
+  .lightbox-capture .btn{width:auto;}
+  .lightbox-capture-count{color:#fff; font-size:12px; margin-top:8px;}
 
   .appliance-card{
     border:1px solid var(--line);
@@ -911,17 +914,28 @@ function render(){
 function renderLightbox(){
   const root = document.getElementById('lightboxRoot');
   if(!state.lightbox){ root.innerHTML = ''; return; }
-  const { kind, url } = state.lightbox;
+  const { kind, url, zoneKey, capturedCount } = state.lightbox;
   if(!url){
     root.innerHTML = `<div class="lightbox"><button class="close" onclick="closeLightbox()">&times;</button><div class="loading">Loading…</div></div>`;
     return;
   }
-  const media = kind === 'video' ? `<video src="${url}" controls autoplay playsinline></video>` : `<img src="${url}">`;
-  root.innerHTML = `<div class="lightbox"><button class="close" onclick="closeLightbox()">&times;</button>${media}</div>`;
+  const canCapture = kind === 'video' && zoneKey;
+  const media = kind === 'video'
+    ? `<video id="lightboxVideo" src="${url}" controls autoplay playsinline></video>`
+    : `<img src="${url}">`;
+  root.innerHTML = `<div class="lightbox">
+    <button class="close" onclick="closeLightbox()">&times;</button>
+    ${media}
+    ${canCapture ? `
+      <div class="lightbox-capture">
+        <button class="btn btn-amber btn-sm" onclick="captureLightboxFrame()">&#128247; Capture this frame</button>
+        ${capturedCount ? `<div class="lightbox-capture-count">${capturedCount} frame${capturedCount===1?'':'s'} captured</div>` : ''}
+      </div>` : ''}
+  </div>`;
 }
 
-async function openLightbox(kind, id){
-  state.lightbox = { kind, id, url:null };
+async function openLightbox(kind, id, zoneKey, isExt){
+  state.lightbox = { kind, id, url:null, zoneKey: zoneKey || null, isExt: !!isExt, capturedCount: 0 };
   render();
   try{
     const blob = await getMediaBlob(id);
@@ -935,6 +949,40 @@ async function openLightbox(kind, id){
 function closeLightbox(){
   if(state.lightbox && state.lightbox.url) URL.revokeObjectURL(state.lightbox.url);
   state.lightbox = null;
+  render();
+}
+
+function captureVideoFrame(videoEl, maxW){
+  const vw = videoEl.videoWidth || 320, vh = videoEl.videoHeight || 240;
+  const scale = Math.min(1, maxW / vw);
+  const w = Math.max(1, Math.round(vw * scale)), h = Math.max(1, Math.round(vh * scale));
+  const canvas = document.createElement('canvas');
+  canvas.width = w; canvas.height = h;
+  canvas.getContext('2d').drawImage(videoEl, 0, 0, w, h);
+  return canvas;
+}
+function canvasToBlob(canvas, quality){
+  return new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+}
+
+async function captureLightboxFrame(){
+  const lb = state.lightbox;
+  if(!lb || lb.kind !== 'video' || !lb.zoneKey) return;
+  const videoEl = document.getElementById('lightboxVideo');
+  if(!videoEl) return;
+  const insp = current();
+  const zone = lb.isExt ? insp.exterior[lb.zoneKey] : insp.rooms[lb.zoneKey];
+  if(!zone) return;
+
+  const canvas = captureVideoFrame(videoEl, 640);
+  const thumb = canvas.toDataURL('image/jpeg', 0.75);
+  const blob = await canvasToBlob(canvas, 0.8);
+  const id = mediaId();
+  await putMediaBlob(id, blob);
+  zone.photos.push({ id, thumb, note:'', createdAt: Date.now(), autoExtracted:false, capturedFromVideoId: lb.id });
+  saveInspection(insp.id);
+
+  lb.capturedCount = (lb.capturedCount || 0) + 1;
   renderLightbox();
 }
 
@@ -1209,7 +1257,7 @@ function renderWalkthrough(app){
   }).join('');
 
   let videoRow = zone.videos.map(v => `
-    <div class="video-thumb" onclick="openLightbox('video','${v.id}')">
+    <div class="video-thumb" onclick="openLightbox('video','${v.id}','${jsEsc(activeKey)}', ${isExt})">
       <img src="${v.thumb}">
       <div class="play">&#9658;</div>
       ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
@@ -1261,8 +1309,10 @@ function renderWalkthrough(app){
       <button class="media-add" onclick="recordVideo('${jsEsc(activeKey)}')">&#9679; Record</button>
     </div>
     ${zone.videos.length ? `<div class="drive-caption">${driveStatusCaption(zone.videos)}</div>` : ''}
+    ${state.extractingStills ? `<p class="drive-caption">Extracting stills from video…</p>` : ''}
 
-    <div class="section-title">Damage photos</div>
+    <div class="section-title">Photos</div>
+    <p style="font-size:11.5px; color:var(--steel); margin:-6px 0 10px;">Stills are auto-extracted from each video (~every 5s). Tap any photo to add a damage note, or add one manually.</p>
     <div class="dphoto-grid">
       ${photoGrid}
       <button class="dphoto-add" onclick="addDamagePhoto('${jsEsc(activeKey)}')">+</button>
@@ -1358,12 +1408,67 @@ document.getElementById('videoInput').addEventListener('change', async function(
       const entry = { id, thumb, duration, createdAt: Date.now(), driveFileId:null, driveLink:null, driveStatus:'local' };
       zone.videos.push(entry);
       if(driveConnected()) uploadVideoToDrive(insp, entry, file);
+      await autoExtractStillsFromVideo(insp, zone, entry, file);
     }catch(err){}
   }
   saveInspection(insp.id);
   render();
   e.target.value = '';
 });
+
+/* Auto-extract still frames from a recorded video (~every 5s, capped) so a single
+   walkthrough video can stand in for taking many separate photos. */
+function extractFramesAtTimes(file, times, maxW){
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video');
+    const url = URL.createObjectURL(file);
+    video.preload = 'auto';
+    video.muted = true;
+    video.playsInline = true;
+    video.src = url;
+    const results = [];
+    let idx = 0;
+    function captureNext(){
+      if(idx >= times.length){
+        URL.revokeObjectURL(url);
+        resolve(results);
+        return;
+      }
+      video.currentTime = Math.min(times[idx], Math.max(0, (video.duration || times[idx]) - 0.05));
+    }
+    video.onloadedmetadata = () => captureNext();
+    video.onseeked = async () => {
+      const canvas = captureVideoFrame(video, maxW);
+      const thumb = canvas.toDataURL('image/jpeg', 0.7);
+      const blob = await canvasToBlob(canvas, 0.75);
+      results.push({ atSeconds: times[idx], thumb, blob });
+      idx++;
+      captureNext();
+    };
+    video.onerror = () => { URL.revokeObjectURL(url); reject(new Error('video decode failed')); };
+  });
+}
+
+async function autoExtractStillsFromVideo(insp, zone, videoEntry, file){
+  const duration = videoEntry.duration || 0;
+  if(!duration || duration < 1) return;
+  const interval = 5;
+  const count = Math.min(12, Math.max(1, Math.round(duration / interval)));
+  const times = Array.from({length: count}, (_, i) => (i + 0.5) * duration / count);
+  state.extractingStills = true;
+  render();
+  try{
+    const frames = await extractFramesAtTimes(file, times, 480);
+    for(const f of frames){
+      const id = mediaId();
+      await putMediaBlob(id, f.blob);
+      zone.photos.push({ id, thumb: f.thumb, note:'', createdAt: Date.now(), autoExtracted:true, sourceVideoId: videoEntry.id });
+    }
+    saveInspection(insp.id);
+  }catch(e){}
+  state.extractingStills = false;
+  render();
+}
 
 function toggleEditPhoto(id){
   state.editingPhoto = state.editingPhoto === id ? null : id;
@@ -1657,7 +1762,8 @@ function renderReport(app){
 
   let zoneDetails = entries.map(e => {
     const rating = zoneRating(e.data);
-    const videoBlocks = e.data.videos.map(v => videoLinkHTML(v)).join('');
+    const isExtZone = EXTERIOR_ZONES.includes(e.name);
+    const videoBlocks = e.data.videos.map(v => videoLinkHTML(v, e.name, isExtZone)).join('');
     const photoBlocks = e.data.photos.map(p => `
       <div>
         <div class="dphoto" style="width:100%;" onclick="openLightbox('photo','${p.id}')"><img src="${p.thumb}"></div>
@@ -1711,13 +1817,13 @@ function renderReport(app){
   `;
 }
 
-function videoLinkHTML(v){
+function videoLinkHTML(v, zoneName, isExtZone){
   if(v.driveLink){
     return `<a class="drive-video-link" href="${v.driveLink}" target="_blank" rel="noopener">&#9658; View video${v.duration ? ` (${formatDuration(v.duration)})` : ''} — Google Drive &#8599;</a>`;
   }
   const label = v.driveStatus === 'uploading' ? 'Backing up to Drive…' : v.driveStatus === 'error' ? 'Backup failed — tap to retry' : (driveConfigured() ? 'Not yet backed up to Drive' : '');
   return `<div style="display:inline-block; margin-right:10px;">
-    <div class="video-thumb" onclick="openLightbox('video','${v.id}')">
+    <div class="video-thumb" onclick="openLightbox('video','${v.id}','${jsEsc(zoneName)}', ${!!isExtZone})">
       <img src="${v.thumb}"><div class="play">&#9658;</div>
       ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
     </div>
