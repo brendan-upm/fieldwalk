@@ -236,15 +236,21 @@
     border:1.5px solid var(--paper);
   }
 
-  .check-row{
+  .check-item{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:10px;
+  }
+  .check-item-head{
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:10px;
-    padding:10px 0;
-    border-bottom:1px solid var(--line);
+    margin-bottom:10px;
   }
-  .check-row:last-child{border-bottom:none;}
+  .check-item-media{display:flex; gap:8px; overflow-x:auto; padding-bottom:2px;}
   .check-name{font-size:14px;}
   .cond-btn{
     font-family:'IBM Plex Mono', monospace;
@@ -303,6 +309,8 @@
     flex:0 0 auto;
     cursor:pointer;
   }
+  .video-thumb.small{width:72px; height:54px;}
+  .media-add.small{width:72px; height:54px; font-size:11px;}
   .drive-caption{font-size:11.5px; color:var(--steel); margin:0 0 16px;}
   .drive-caption a{color:var(--amber-dark);}
   .drive-video-link{
@@ -464,7 +472,7 @@
     .frame{max-width:100%; min-height:0;}
     .content{padding:0;}
     .tag{box-shadow:none;}
-    .card, .appliance-card, .photo-editor{box-shadow:none; break-inside:avoid;}
+    .card, .appliance-card, .photo-editor, .check-item{box-shadow:none; break-inside:avoid;}
     .section-title{break-after:avoid-page;}
     .dphoto-grid{break-inside:avoid;}
   }
@@ -836,8 +844,17 @@ function newInspection(){
 
 function blankZone(checklistItems){
   const c = {};
-  checklistItems.forEach(item => c[item] = "good");
-  return { checklist: checklistItems, conditions: c, notes: "", videos: [], photos: [] };
+  const itemVideos = {};
+  checklistItems.forEach(item => { c[item] = "good"; itemVideos[item] = []; });
+  return { checklist: checklistItems, conditions: c, itemVideos, notes: "", photos: [] };
+}
+
+/* Videos now live per checklist item (short, focused clips) rather than one per room. */
+function zoneAllVideos(zone){
+  return Object.values(zone.itemVideos).flat();
+}
+function zoneVideoCount(zone){
+  return zoneAllVideos(zone).length;
 }
 
 function goto(view, opts){
@@ -888,7 +905,7 @@ function roomProgress(insp){
   const entries = allZoneEntries(insp);
   if(entries.length === 0) return 0;
   let done = 0;
-  entries.forEach(e => { if(e.data.notes || e.data.photos.length>0 || e.data.videos.length>0) done++; });
+  entries.forEach(e => { if(e.data.notes || e.data.photos.length>0 || zoneVideoCount(e.data)>0) done++; });
   return Math.round((done/entries.length)*100);
 }
 
@@ -1039,7 +1056,7 @@ async function deleteInspection(id){
 
   allZoneEntries(insp).forEach(e => {
     e.data.photos.forEach(p => deleteMediaBlob(p.id).catch(()=>{}));
-    e.data.videos.forEach(v => deleteMediaBlob(v.id).catch(()=>{}));
+    zoneAllVideos(e.data).forEach(v => deleteMediaBlob(v.id).catch(()=>{}));
   });
 
   state.order = state.order.filter(oid => oid !== id);
@@ -1244,26 +1261,33 @@ function renderWalkthrough(app){
 
   let chips = zoneNames.map(key => {
     const d = zoneMap[key];
-    const done = d.notes || d.photos.length>0 || d.videos.length>0;
+    const done = d.notes || d.photos.length>0 || zoneVideoCount(d)>0;
     return `<div class="room-chip ${key===activeKey?'active':''} ${done?'done':''}" onclick="selectRoom('${jsEsc(key)}')">${esc(key)}</div>`;
   }).join('');
 
   let checklist = zone.checklist.map(item => {
     const cond = zone.conditions[item] || 'good';
-    return `<div class="check-row">
-      <span class="check-name">${esc(item)}</span>
-      <button class="cond-btn ${cond}" onclick="cycleCondition('${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}')">${cond}</button>
+    const itemVideos = zone.itemVideos[item] || [];
+    const itemVideosHTML = itemVideos.map(v => `
+      <div class="video-thumb small" onclick="openLightbox('video','${v.id}','${jsEsc(activeKey)}', ${isExt})">
+        <img src="${v.thumb}">
+        <div class="play">&#9658;</div>
+        ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
+        <button class="del" onclick="event.stopPropagation(); removeVideo('${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}', '${v.id}')">&times;</button>
+      </div>
+    `).join('');
+    return `<div class="check-item">
+      <div class="check-item-head">
+        <span class="check-name">${esc(item)}</span>
+        <button class="cond-btn ${cond}" onclick="cycleCondition('${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}')">${cond}</button>
+      </div>
+      <div class="check-item-media">
+        ${itemVideosHTML}
+        <button class="media-add small" onclick="recordVideo('${jsEsc(activeKey)}', '${jsEsc(item)}')">&#9679; Record</button>
+      </div>
+      ${itemVideos.length ? `<div class="drive-caption">${driveStatusCaption(itemVideos)}</div>` : ''}
     </div>`;
   }).join('');
-
-  let videoRow = zone.videos.map(v => `
-    <div class="video-thumb" onclick="openLightbox('video','${v.id}','${jsEsc(activeKey)}', ${isExt})">
-      <img src="${v.thumb}">
-      <div class="play">&#9658;</div>
-      ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
-      <button class="del" onclick="event.stopPropagation(); removeVideo('${jsEsc(activeKey)}', ${isExt}, '${v.id}')">&times;</button>
-    </div>
-  `).join('');
 
   let photoGrid = zone.photos.map(p => `
     <div class="dphoto" onclick="toggleEditPhoto('${p.id}')">
@@ -1303,13 +1327,9 @@ function renderWalkthrough(app){
 
     <div class="room-list">${chips}</div>
 
-    <div class="section-title">${esc(activeKey)} &mdash; walkthrough video</div>
-    <div class="media-row">
-      ${videoRow}
-      <button class="media-add" onclick="recordVideo('${jsEsc(activeKey)}')">&#9679; Record</button>
-    </div>
-    ${zone.videos.length ? `<div class="drive-caption">${driveStatusCaption(zone.videos)}</div>` : ''}
-    ${zone.videos.length ? `<p style="font-size:11.5px; color:var(--steel); margin:0 0 10px;">Tap a video to scrub through it and capture stills at the moments that matter.</p>` : ''}
+    <div class="section-title">Condition checklist</div>
+    <p style="font-size:11.5px; color:var(--steel); margin:-6px 0 10px;">Record a short video for each item, then scrub through it to capture a still if something needs documenting.</p>
+    ${checklist}
 
     <div class="section-title">Photos</div>
     <p style="font-size:11.5px; color:var(--steel); margin:-6px 0 10px;">Tap any photo to add a damage note, or add one manually.</p>
@@ -1318,9 +1338,6 @@ function renderWalkthrough(app){
       <button class="dphoto-add" onclick="addDamagePhoto('${jsEsc(activeKey)}')">+</button>
     </div>
     ${photoEditor}
-
-    <div class="section-title">Condition checklist</div>
-    <div class="card">${checklist}</div>
 
     <div class="section-title">Notes</div>
     <div class="card">
@@ -1365,8 +1382,8 @@ function saveNotes(roomKey, isExt, val){
   saveInspection(insp.id);
 }
 
-function recordVideo(zoneKey){
-  pendingMediaTarget = { room: zoneKey };
+function recordVideo(zoneKey, item){
+  pendingMediaTarget = { room: zoneKey, item };
   document.getElementById('videoInput').click();
 }
 function addDamagePhoto(zoneKey){
@@ -1399,6 +1416,8 @@ document.getElementById('videoInput').addEventListener('change', async function(
   if(!pendingMediaTarget) return;
   const insp = current();
   const zone = zoneOf(insp, pendingMediaTarget.room);
+  const itemVideos = zone.itemVideos[pendingMediaTarget.item];
+  if(!itemVideos) return;
   const files = Array.from(e.target.files);
   for(const file of files){
     try{
@@ -1406,7 +1425,7 @@ document.getElementById('videoInput').addEventListener('change', async function(
       const id = mediaId();
       await putMediaBlob(id, file);
       const entry = { id, thumb, duration, createdAt: Date.now(), driveFileId:null, driveLink:null, driveStatus:'local' };
-      zone.videos.push(entry);
+      itemVideos.push(entry);
       if(driveConnected()) uploadVideoToDrive(insp, entry, file);
     }catch(err){}
   }
@@ -1437,10 +1456,10 @@ async function removePhoto(roomKey, isExt, id){
   deleteMediaBlob(id).catch(()=>{});
 }
 
-async function removeVideo(roomKey, isExt, id){
+async function removeVideo(roomKey, isExt, item, id){
   const insp = current();
   const zone = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
-  zone.videos = zone.videos.filter(v => v.id !== id);
+  zone.itemVideos[item] = zone.itemVideos[item].filter(v => v.id !== id);
   saveInspection(insp.id);
   render();
   deleteMediaBlob(id).catch(()=>{});
@@ -1660,7 +1679,7 @@ function retryVideoUpload(videoId){
   if(!driveConnected()){ connectDrive(); return; }
   const insp = current();
   for(const e of allZoneEntries(insp)){
-    const v = e.data.videos.find(v => v.id === videoId);
+    const v = zoneAllVideos(e.data).find(v => v.id === videoId);
     if(v){
       getMediaBlob(videoId).then(blob => { if(blob) uploadVideoToDrive(insp, v, blob); });
       return;
@@ -1671,7 +1690,7 @@ function retryVideoUpload(videoId){
 function retryAllPendingUploads(){
   Object.values(state.inspections).forEach(insp => {
     allZoneEntries(insp).forEach(e => {
-      e.data.videos.forEach(v => {
+      zoneAllVideos(e.data).forEach(v => {
         if(v.driveStatus !== 'uploaded' && v.driveStatus !== 'uploading'){
           getMediaBlob(v.id).then(blob => { if(blob) uploadVideoToDrive(insp, v, blob); });
         }
@@ -1701,14 +1720,22 @@ function renderReport(app){
       </div>
       <span class="rating-pill ${rating}">${rating}</span>
       <span class="cnt">${flags ? '&#9873; '+flags : '—'}</span>
-      <span class="cnt">${e.data.videos.length ? '&#9658; '+e.data.videos.length : '—'}</span>
+      <span class="cnt">${zoneVideoCount(e.data) ? '&#9658; '+zoneVideoCount(e.data) : '—'}</span>
     </div>`;
   }).join('');
 
   let zoneDetails = entries.map(e => {
     const rating = zoneRating(e.data);
     const isExtZone = EXTERIOR_ZONES.includes(e.name);
-    const videoBlocks = e.data.videos.map(v => videoLinkHTML(v, e.name, isExtZone)).join('');
+    const videoCount = zoneVideoCount(e.data);
+    const videoBlocks = e.data.checklist
+      .filter(item => (e.data.itemVideos[item] || []).length > 0)
+      .map(item => `
+        <div style="margin-bottom:10px;">
+          <div style="font-size:12px; font-weight:500; color:var(--steel); margin-bottom:4px;">${esc(item)}</div>
+          ${e.data.itemVideos[item].map(v => videoLinkHTML(v, e.name, isExtZone)).join('')}
+        </div>
+      `).join('');
     const photoBlocks = e.data.photos.map(p => `
       <div>
         <div class="dphoto" style="width:100%;" onclick="openLightbox('photo','${p.id}')"><img src="${p.thumb}"></div>
@@ -1720,10 +1747,10 @@ function renderReport(app){
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <span class="rating-pill ${rating}">${rating}</span>
-          <span class="mono" style="font-size:12px; color:var(--steel);">${e.data.photos.length} flagged &middot; ${e.data.videos.length} video${e.data.videos.length===1?'':'s'}</span>
+          <span class="mono" style="font-size:12px; color:var(--steel);">${e.data.photos.length} flagged &middot; ${videoCount} video${videoCount===1?'':'s'}</span>
         </div>
         ${e.data.notes ? `<div style="font-size:13px; margin-bottom:10px;">${esc(e.data.notes)}</div>` : ''}
-        ${videoBlocks ? `<div style="margin-bottom:10px;">${videoBlocks}</div>` : ''}
+        ${videoBlocks ? `<div>${videoBlocks}</div>` : ''}
         ${photoBlocks ? `<div class="dphoto-grid">${photoBlocks}</div>` : ''}
         ${(!videoBlocks && !photoBlocks) ? `<div style="font-size:12.5px; color:var(--steel);">No media captured.</div>` : ''}
       </div>
@@ -1861,10 +1888,12 @@ function copyReport(){
     lines.push('ZONE SUMMARY');
     entries.forEach(e => {
       const rating = zoneRating(e.data);
-      lines.push(`- ${e.name}: ${rating.toUpperCase()} (${e.data.photos.length} flagged, ${e.data.videos.length} video)`);
+      lines.push(`- ${e.name}: ${rating.toUpperCase()} (${e.data.photos.length} flagged, ${zoneVideoCount(e.data)} video)`);
       if(e.data.notes) lines.push(`    Notes: ${e.data.notes}`);
       e.data.photos.forEach(p => { if(p.note) lines.push(`    Flag: ${p.note}`); });
-      e.data.videos.forEach(v => { if(v.driveLink) lines.push(`    Video: ${v.driveLink}`); });
+      e.data.checklist.forEach(item => {
+        (e.data.itemVideos[item] || []).forEach(v => { if(v.driveLink) lines.push(`    ${item} video: ${v.driveLink}`); });
+      });
     });
     const prior = linkedInspection(insp);
     if(prior){
