@@ -426,6 +426,7 @@
   }
   .home-item .addr{font-weight:500; font-size:14.5px;}
   .home-item .sub{font-size:12px; color:var(--steel); margin-top:2px;}
+  .home-item-delete{background:none; border:none; color:var(--red); font-size:16px; cursor:pointer; padding:4px; line-height:1;}
   .empty{
     text-align:center;
     padding:60px 20px;
@@ -954,12 +955,16 @@ function renderHome(app){
     items.forEach(insp => {
       const scope = typeScope(insp.type);
       const sub = scope === 'assets' ? `${insp.assets.length} asset${insp.assets.length===1?'':'s'} logged` : `${roomProgress(insp)}% complete`;
+      const canDelete = !isInspectionComplete(insp);
       html += `<div class="home-item" onclick="openInspection('${insp.id}')">
         <div>
           <div class="addr">${esc(propertyLabel(insp))}</div>
           <div class="sub">${esc(insp.type)} &middot; ${esc(insp.date)} &middot; ${sub}</div>
         </div>
-        <span style="color:var(--steel); font-size:18px;">&rsaquo;</span>
+        <div style="display:flex; align-items:center; gap:12px;">
+          ${canDelete ? `<button class="home-item-delete" onclick="event.stopPropagation(); deleteInspection('${insp.id}')" title="Delete incomplete inspection">&#128465;</button>` : ''}
+          <span style="color:var(--steel); font-size:18px;">&rsaquo;</span>
+        </div>
       </div>`;
     });
   }
@@ -971,6 +976,28 @@ function renderHome(app){
 function openInspection(id){
   state.currentId = id;
   goto('setup');
+}
+
+function isInspectionComplete(insp){
+  const scope = typeScope(insp.type);
+  if(scope === 'assets') return false; // no completion concept for an asset registry — always deletable
+  return roomProgress(insp) === 100;
+}
+
+async function deleteInspection(id){
+  const insp = state.inspections[id];
+  if(!insp) return;
+  if(!confirm(`Delete this ${insp.type} for ${propertyLabel(insp)}? This can't be undone.`)) return;
+
+  allZoneEntries(insp).forEach(e => {
+    e.data.photos.forEach(p => deleteMediaBlob(p.id).catch(()=>{}));
+    e.data.videos.forEach(v => deleteMediaBlob(v.id).catch(()=>{}));
+  });
+
+  state.order = state.order.filter(oid => oid !== id);
+  delete state.inspections[id];
+  await saveIndex();
+  render();
 }
 
 /* ============ Properties admin ============ */
