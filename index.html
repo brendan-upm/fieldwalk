@@ -313,6 +313,8 @@
   }
   .video-thumb.small{width:72px; height:54px;}
   .media-add.small{width:72px; height:54px; font-size:11px;}
+  .dphoto.small{width:64px; height:64px; flex:0 0 auto;}
+  .dphoto-add.small{width:64px; height:64px; flex:0 0 auto; aspect-ratio:auto; font-size:18px;}
   .drive-caption{font-size:11.5px; color:var(--steel); margin:0 0 16px;}
   .drive-caption a{color:var(--amber-dark);}
   .drive-video-link{
@@ -766,10 +768,11 @@ async function syncPropertiesFromSeed(){
   }
 }
 
-/* Heals zones saved under older versions of this app. Most notably: videos used to live
-   in a flat zone.videos list before moving to per-checklist-item zone.itemVideos — without
-   this, any inspection saved before that change crashes the whole render() on load. Returns
-   true if the zone needed migrating (caller uses this to decide whether to persist the fix). */
+/* Heals zones saved under older versions of this app. Most notably: videos and photos used
+   to live in flat zone.videos / zone.photos lists before moving to per-checklist-item
+   zone.itemVideos / zone.itemPhotos — without this, any inspection saved before either change
+   crashes the whole render() on load. Returns true if the zone needed migrating (caller uses
+   this to decide whether to persist the fix). */
 function normalizeZone(zone){
   let migrated = false;
   if(!zone.itemVideos){
@@ -783,6 +786,19 @@ function normalizeZone(zone){
   } else {
     (zone.checklist || []).forEach(item => {
       if(!zone.itemVideos[item]){ zone.itemVideos[item] = []; migrated = true; }
+    });
+  }
+  if(!zone.itemPhotos){
+    zone.itemPhotos = {};
+    const legacyPhotos = Array.isArray(zone.photos) ? zone.photos : [];
+    (zone.checklist || []).forEach((item, i) => {
+      zone.itemPhotos[item] = (i === 0) ? legacyPhotos : [];
+    });
+    delete zone.photos;
+    migrated = true;
+  } else {
+    (zone.checklist || []).forEach(item => {
+      if(!zone.itemPhotos[item]){ zone.itemPhotos[item] = []; migrated = true; }
     });
   }
   return migrated;
@@ -880,13 +896,21 @@ function newInspection(){
 function blankZone(checklistItems){
   const c = {};
   const itemVideos = {};
-  checklistItems.forEach(item => { c[item] = "good"; itemVideos[item] = []; });
-  return { checklist: checklistItems, conditions: c, itemVideos, notes: "", photos: [] };
+  const itemPhotos = {};
+  checklistItems.forEach(item => { c[item] = "good"; itemVideos[item] = []; itemPhotos[item] = []; });
+  return { checklist: checklistItems, conditions: c, itemVideos, itemPhotos, notes: "" };
 }
 
-/* Videos now live per checklist item (short, focused clips) rather than one per room. */
+/* Videos and photos both live per checklist item now, so all media for a given item
+   (e.g. "Countertops & backsplash") stays grouped together through the walkthrough and report. */
 function zoneAllVideos(zone){
   return Object.values(zone.itemVideos).flat();
+}
+function zoneAllPhotos(zone){
+  return Object.values(zone.itemPhotos).flat();
+}
+function zonePhotoCount(zone){
+  return zoneAllPhotos(zone).length;
 }
 function zoneVideoCount(zone){
   return zoneAllVideos(zone).length;
@@ -943,7 +967,7 @@ function roomProgress(insp){
   const entries = allZoneEntries(insp);
   if(entries.length === 0) return 0;
   let done = 0;
-  entries.forEach(e => { if(e.data.notes || e.data.photos.length>0 || zoneVideoCount(e.data)>0) done++; });
+  entries.forEach(e => { if(e.data.notes || zonePhotoCount(e.data)>0 || zoneVideoCount(e.data)>0) done++; });
   return Math.round((done/entries.length)*100);
 }
 
@@ -989,8 +1013,8 @@ function renderLightbox(){
   </div>`;
 }
 
-async function openLightbox(kind, id, zoneKey, isExt){
-  state.lightbox = { kind, id, url:null, zoneKey: zoneKey || null, isExt: !!isExt, capturedCount: 0 };
+async function openLightbox(kind, id, zoneKey, isExt, item){
+  state.lightbox = { kind, id, url:null, zoneKey: zoneKey || null, isExt: !!isExt, item: item || null, capturedCount: 0 };
   render();
   try{
     const blob = await getMediaBlob(id);
@@ -1022,7 +1046,7 @@ function canvasToBlob(canvas, quality){
 
 async function captureLightboxFrame(){
   const lb = state.lightbox;
-  if(!lb || lb.kind !== 'video' || !lb.zoneKey) return;
+  if(!lb || lb.kind !== 'video' || !lb.zoneKey || !lb.item) return;
   const videoEl = document.getElementById('lightboxVideo');
   if(!videoEl) return;
   const insp = current();
@@ -1034,7 +1058,7 @@ async function captureLightboxFrame(){
   const blob = await canvasToBlob(canvas, 0.8);
   const id = mediaId();
   await putMediaBlob(id, blob);
-  zone.photos.push({ id, thumb, note:'', createdAt: Date.now(), capturedFromVideoId: lb.id });
+  zone.itemPhotos[lb.item].push({ id, thumb, note:'', createdAt: Date.now(), capturedFromVideoId: lb.id });
   saveInspection(insp.id);
 
   lb.capturedCount = (lb.capturedCount || 0) + 1;
@@ -1093,7 +1117,7 @@ async function deleteInspection(id){
   if(!confirm(`Delete this ${insp.type} for ${propertyLabel(insp)}? This can't be undone.`)) return;
 
   allZoneEntries(insp).forEach(e => {
-    e.data.photos.forEach(p => deleteMediaBlob(p.id).catch(()=>{}));
+    zoneAllPhotos(e.data).forEach(p => deleteMediaBlob(p.id).catch(()=>{}));
     zoneAllVideos(e.data).forEach(v => deleteMediaBlob(v.id).catch(()=>{}));
   });
 
@@ -1299,7 +1323,7 @@ function renderWalkthrough(app){
 
   let chips = zoneNames.map(key => {
     const d = zoneMap[key];
-    const done = d.notes || d.photos.length>0 || zoneVideoCount(d)>0;
+    const done = d.notes || zonePhotoCount(d)>0 || zoneVideoCount(d)>0;
     return `<div class="room-chip ${key===activeKey?'active':''} ${done?'done':''}" onclick="selectRoom('${jsEsc(key)}')">${esc(key)}</div>`;
   }).join('');
   if(!isExt) chips += `<div class="room-chip add-room-chip" onclick="toggleAddRoom()">+ Add room</div>`;
@@ -1308,13 +1332,40 @@ function renderWalkthrough(app){
     const cond = zone.conditions[item] || 'good';
     const itemVideos = zone.itemVideos[item] || [];
     const itemVideosHTML = itemVideos.map(v => `
-      <div class="video-thumb small" onclick="openLightbox('video','${v.id}','${jsEsc(activeKey)}', ${isExt})">
+      <div class="video-thumb small" onclick="openLightbox('video','${v.id}','${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}')">
         <img src="${v.thumb}">
         <div class="play">&#9658;</div>
         ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
         <button class="del" onclick="event.stopPropagation(); removeVideo('${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}', '${v.id}')">&times;</button>
       </div>
     `).join('');
+
+    const itemPhotos = zone.itemPhotos[item] || [];
+    const itemPhotosHTML = itemPhotos.map(p => `
+      <div class="dphoto small" onclick="toggleEditPhoto('${jsEsc(item)}', '${p.id}')">
+        <img src="${p.thumb}">
+        ${p.note ? `<div class="flagdot">FLAG</div>` : ''}
+      </div>
+    `).join('');
+
+    let itemPhotoEditor = '';
+    if(state.editingPhoto && state.editingPhoto.item === item){
+      const p = itemPhotos.find(p => p.id === state.editingPhoto.id);
+      if(p){
+        itemPhotoEditor = `
+          <div class="photo-editor">
+            <img src="${p.thumb}" onclick="openLightbox('photo','${p.id}','${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}')">
+            <label>Damage note</label>
+            <textarea id="photoNoteInput" placeholder="Describe the damage (e.g. 2in gouge in hardwood floor near closet door)">${esc(p.note)}</textarea>
+            <div class="btn-row" style="margin-top:10px;">
+              <button class="btn btn-ghost btn-sm" onclick="removePhoto('${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}', '${p.id}')">Delete photo</button>
+              <button class="btn btn-primary btn-sm" onclick="toggleEditPhoto('${jsEsc(item)}', '${p.id}')">Done</button>
+            </div>
+          </div>
+        `;
+      }
+    }
+
     return `<div class="check-item">
       <div class="check-item-head">
         <span class="check-name">${esc(item)}</span>
@@ -1325,33 +1376,13 @@ function renderWalkthrough(app){
         <button class="media-add small" onclick="recordVideo('${jsEsc(activeKey)}', '${jsEsc(item)}')">&#9679; Record</button>
       </div>
       ${itemVideos.length ? `<div class="drive-caption">${driveStatusCaption(itemVideos)}</div>` : ''}
+      <div class="check-item-media">
+        ${itemPhotosHTML}
+        <button class="dphoto-add small" onclick="addDamagePhoto('${jsEsc(activeKey)}', '${jsEsc(item)}')">+</button>
+      </div>
+      ${itemPhotoEditor}
     </div>`;
   }).join('');
-
-  let photoGrid = zone.photos.map(p => `
-    <div class="dphoto" onclick="toggleEditPhoto('${p.id}')">
-      <img src="${p.thumb}">
-      ${p.note ? `<div class="flagdot">FLAG</div>` : ''}
-    </div>
-  `).join('');
-
-  let photoEditor = '';
-  if(state.editingPhoto){
-    const p = zone.photos.find(p => p.id === state.editingPhoto);
-    if(p){
-      photoEditor = `
-        <div class="photo-editor">
-          <img src="${p.thumb}" onclick="openLightbox('photo','${p.id}')">
-          <label>Damage note</label>
-          <textarea id="photoNoteInput" placeholder="Describe the damage (e.g. 2in gouge in hardwood floor near closet door)">${esc(p.note)}</textarea>
-          <div class="btn-row" style="margin-top:10px;">
-            <button class="btn btn-ghost btn-sm" onclick="removePhoto('${jsEsc(activeKey)}', ${isExt}, '${p.id}')">Delete photo</button>
-            <button class="btn btn-primary btn-sm" onclick="toggleEditPhoto('${p.id}')">Done</button>
-          </div>
-        </div>
-      `;
-    }
-  }
 
   app.innerHTML = `
     <div class="tag">
@@ -1381,16 +1412,8 @@ function renderWalkthrough(app){
     </div>` : ''}
 
     <div class="section-title">Condition checklist</div>
-    <p style="font-size:11.5px; color:var(--steel); margin:-6px 0 10px;">Record a short video for each item, then scrub through it to capture a still if something needs documenting.</p>
+    <p style="font-size:11.5px; color:var(--steel); margin:-6px 0 10px;">Record a short video and add photos for each item — everything for that item stays together in the report. Tap a photo to add a damage note.</p>
     ${checklist}
-
-    <div class="section-title">Photos</div>
-    <p style="font-size:11.5px; color:var(--steel); margin:-6px 0 10px;">Tap any photo to add a damage note, or add one manually.</p>
-    <div class="dphoto-grid">
-      ${photoGrid}
-      <button class="dphoto-add" onclick="addDamagePhoto('${jsEsc(activeKey)}')">+</button>
-    </div>
-    ${photoEditor}
 
     <div class="section-title">Notes</div>
     <div class="card">
@@ -1411,7 +1434,7 @@ function renderWalkthrough(app){
     const noteEl = document.getElementById('photoNoteInput');
     if(noteEl){
       noteEl.addEventListener('blur', function(){
-        updatePhotoNote(activeKey, isExt, state.editingPhoto, this.value);
+        updatePhotoNote(activeKey, isExt, state.editingPhoto.item, state.editingPhoto.id, this.value);
       });
     }
   }
@@ -1442,7 +1465,7 @@ async function removeRoom(roomKey){
   if(insp.roomOrder.length <= 1){ alert("Can't remove the only room in this inspection."); return; }
   if(!confirm(`Remove "${roomKey}" from this inspection? Its photos, videos, and notes will be deleted. This can't be undone.`)) return;
   const zone = insp.rooms[roomKey];
-  zone.photos.forEach(p => deleteMediaBlob(p.id).catch(()=>{}));
+  zoneAllPhotos(zone).forEach(p => deleteMediaBlob(p.id).catch(()=>{}));
   zoneAllVideos(zone).forEach(v => deleteMediaBlob(v.id).catch(()=>{}));
   delete insp.rooms[roomKey];
   insp.roomOrder = insp.roomOrder.filter(r => r !== roomKey);
@@ -1472,8 +1495,8 @@ function recordVideo(zoneKey, item){
   pendingMediaTarget = { room: zoneKey, item };
   document.getElementById('videoInput').click();
 }
-function addDamagePhoto(zoneKey){
-  pendingMediaTarget = { room: zoneKey };
+function addDamagePhoto(zoneKey, item){
+  pendingMediaTarget = { room: zoneKey, item };
   document.getElementById('photoInput').click();
 }
 
@@ -1481,6 +1504,8 @@ document.getElementById('photoInput').addEventListener('change', async function(
   if(!pendingMediaTarget) return;
   const insp = current();
   const zone = zoneOf(insp, pendingMediaTarget.room);
+  const itemPhotos = zone.itemPhotos[pendingMediaTarget.item];
+  if(!itemPhotos) return;
   const files = Array.from(e.target.files);
   let lastId = null;
   for(const file of files){
@@ -1488,12 +1513,12 @@ document.getElementById('photoInput').addEventListener('change', async function(
       const id = mediaId();
       const thumb = await imageThumbFromFile(file, 320);
       await putMediaBlob(id, file);
-      zone.photos.push({ id, thumb, note:'', createdAt: Date.now() });
+      itemPhotos.push({ id, thumb, note:'', createdAt: Date.now() });
       lastId = id;
     }catch(err){}
   }
   saveInspection(insp.id);
-  if(lastId) state.editingPhoto = lastId;
+  if(lastId) state.editingPhoto = { item: pendingMediaTarget.item, id: lastId };
   render();
   e.target.value = '';
 });
@@ -1520,23 +1545,23 @@ document.getElementById('videoInput').addEventListener('change', async function(
   e.target.value = '';
 });
 
-function toggleEditPhoto(id){
-  state.editingPhoto = state.editingPhoto === id ? null : id;
+function toggleEditPhoto(item, id){
+  state.editingPhoto = (state.editingPhoto && state.editingPhoto.id === id) ? null : { item, id };
   render();
 }
 
-function updatePhotoNote(roomKey, isExt, id, val){
+function updatePhotoNote(roomKey, isExt, item, id, val){
   const insp = current();
   const zone = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
-  const p = zone.photos.find(p => p.id === id);
+  const p = (zone.itemPhotos[item] || []).find(p => p.id === id);
   if(p){ p.note = val; saveInspection(insp.id); }
 }
 
-async function removePhoto(roomKey, isExt, id){
+async function removePhoto(roomKey, isExt, item, id){
   const insp = current();
   const zone = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
-  zone.photos = zone.photos.filter(p => p.id !== id);
-  if(state.editingPhoto === id) state.editingPhoto = null;
+  zone.itemPhotos[item] = (zone.itemPhotos[item] || []).filter(p => p.id !== id);
+  if(state.editingPhoto && state.editingPhoto.id === id) state.editingPhoto = null;
   saveInspection(insp.id);
   render();
   deleteMediaBlob(id).catch(()=>{});
@@ -1796,7 +1821,7 @@ function renderReport(app){
   let summaryRows = entries.map(e => {
     const p = zonePercentages(e.data);
     const rating = zoneRating(e.data);
-    const flags = e.data.photos.length;
+    const flags = zonePhotoCount(e.data);
     return `<div class="summary-row">
       <span class="zn">${esc(e.name)}</span>
       ${rating === 'na' ? `<div class="bar" style="background:none;"></div>` : `
@@ -1815,31 +1840,38 @@ function renderReport(app){
     const rating = zoneRating(e.data);
     const isExtZone = EXTERIOR_ZONES.includes(e.name);
     const videoCount = zoneVideoCount(e.data);
-    const videoBlocks = e.data.checklist
-      .filter(item => (e.data.itemVideos[item] || []).length > 0)
-      .map(item => `
-        <div style="margin-bottom:10px;">
-          <div style="font-size:12px; font-weight:500; color:var(--steel); margin-bottom:4px;">${esc(item)}</div>
-          ${e.data.itemVideos[item].map(v => videoLinkHTML(v, e.name, isExtZone)).join('')}
-        </div>
-      `).join('');
-    const photoBlocks = e.data.photos.map(p => `
-      <div>
-        <div class="dphoto" style="width:100%;" onclick="openLightbox('photo','${p.id}')"><img src="${p.thumb}"></div>
-        ${p.note ? `<div style="font-size:12px; color:var(--red-dark); margin-top:4px;">&#9873; ${esc(p.note)}</div>` : ''}
-      </div>
-    `).join('');
+    const photoCount = zonePhotoCount(e.data);
+    // Each checklist item's video(s) and photo(s) render together, so all the media for
+    // e.g. "Countertops & backsplash" stays grouped under that one heading in the report.
+    const itemSections = e.data.checklist
+      .filter(item => (e.data.itemVideos[item] || []).length > 0 || (e.data.itemPhotos[item] || []).length > 0)
+      .map(item => {
+        const vids = e.data.itemVideos[item] || [];
+        const pics = e.data.itemPhotos[item] || [];
+        const videoHTML = vids.map(v => videoLinkHTML(v, e.name, isExtZone, item)).join('');
+        const photoHTML = pics.map(p => `
+          <div>
+            <div class="dphoto" style="width:100%;" onclick="openLightbox('photo','${p.id}','${jsEsc(e.name)}', ${isExtZone}, '${jsEsc(item)}')"><img src="${p.thumb}"></div>
+            ${p.note ? `<div style="font-size:12px; color:var(--red-dark); margin-top:4px;">&#9873; ${esc(p.note)}</div>` : ''}
+          </div>
+        `).join('');
+        return `
+          <div style="margin-bottom:14px;">
+            <div style="font-size:12px; font-weight:600; color:var(--ink); margin-bottom:6px;">${esc(item)}</div>
+            ${videoHTML ? `<div style="margin-bottom:8px;">${videoHTML}</div>` : ''}
+            ${photoHTML ? `<div class="dphoto-grid">${photoHTML}</div>` : ''}
+          </div>
+        `;
+      }).join('');
     return `
       <div class="section-title">${esc(e.name)}</div>
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <span class="rating-pill ${rating}">${condLabel(rating)}</span>
-          <span class="mono" style="font-size:12px; color:var(--steel);">${e.data.photos.length} flagged &middot; ${videoCount} video${videoCount===1?'':'s'}</span>
+          <span class="mono" style="font-size:12px; color:var(--steel);">${photoCount} flagged &middot; ${videoCount} video${videoCount===1?'':'s'}</span>
         </div>
         ${e.data.notes ? `<div style="font-size:13px; margin-bottom:10px;">${esc(e.data.notes)}</div>` : ''}
-        ${videoBlocks ? `<div>${videoBlocks}</div>` : ''}
-        ${photoBlocks ? `<div class="dphoto-grid">${photoBlocks}</div>` : ''}
-        ${(!videoBlocks && !photoBlocks) ? `<div style="font-size:12.5px; color:var(--steel);">No media captured.</div>` : ''}
+        ${itemSections || `<div style="font-size:12.5px; color:var(--steel);">No media captured.</div>`}
       </div>
     `;
   }).join('');
@@ -1876,13 +1908,13 @@ function renderReport(app){
   `;
 }
 
-function videoLinkHTML(v, zoneName, isExtZone){
+function videoLinkHTML(v, zoneName, isExtZone, item){
   if(v.driveLink){
     return `<a class="drive-video-link" href="${v.driveLink}" target="_blank" rel="noopener">&#9658; View video${v.duration ? ` (${formatDuration(v.duration)})` : ''} — Google Drive &#8599;</a>`;
   }
   const label = v.driveStatus === 'uploading' ? 'Backing up to Drive…' : v.driveStatus === 'error' ? 'Backup failed — tap to retry' : (driveConfigured() ? 'Not yet backed up to Drive' : '');
   return `<div style="display:inline-block; margin-right:10px;">
-    <div class="video-thumb" onclick="openLightbox('video','${v.id}','${jsEsc(zoneName)}', ${!!isExtZone})">
+    <div class="video-thumb" onclick="openLightbox('video','${v.id}','${jsEsc(zoneName)}', ${!!isExtZone}, '${jsEsc(item||'')}')">
       <img src="${v.thumb}"><div class="play">&#9658;</div>
       ${v.duration ? `<div class="dur">${formatDuration(v.duration)}</div>` : ''}
     </div>
@@ -1949,8 +1981,8 @@ function renderComparisonHTML(insp, prior, comparison){
         const zoneData = zoneOf(insp, c.name);
         return `<div class="card" style="margin-bottom:8px;">
           <div style="font-weight:500; font-size:14px; margin-bottom:6px;">${esc(c.name)}</div>
-          ${zoneData.photos.length ? `<div class="dphoto-grid">${zoneData.photos.map(p=>`<div class="dphoto" onclick="openLightbox('photo','${p.id}')"><img src="${p.thumb}"></div>`).join('')}</div>` : `<div style="font-size:12.5px; color:var(--steel);">No damage photos logged for this zone yet — add one from the walkthrough.</div>`}
-          ${zoneData.photos.filter(p=>p.note).map(p=>`<div style="font-size:12.5px; color:var(--red-dark); margin-top:6px;">&#9873; ${esc(p.note)}</div>`).join('')}
+          ${(() => { const pics = zoneAllPhotos(zoneData); return pics.length ? `<div class="dphoto-grid">${pics.map(p=>`<div class="dphoto" onclick="openLightbox('photo','${p.id}')"><img src="${p.thumb}"></div>`).join('')}</div>` : `<div style="font-size:12.5px; color:var(--steel);">No damage photos logged for this zone yet — add one from the walkthrough.</div>`; })()}
+          ${zoneAllPhotos(zoneData).filter(p=>p.note).map(p=>`<div style="font-size:12.5px; color:var(--red-dark); margin-top:6px;">&#9873; ${esc(p.note)}</div>`).join('')}
         </div>`;
       }).join('')}
     ` : ''}
@@ -1975,11 +2007,11 @@ function copyReport(){
     lines.push('ZONE SUMMARY');
     entries.forEach(e => {
       const rating = zoneRating(e.data);
-      lines.push(`- ${e.name}: ${condLabel(rating)} (${e.data.photos.length} flagged, ${zoneVideoCount(e.data)} video)`);
+      lines.push(`- ${e.name}: ${condLabel(rating)} (${zonePhotoCount(e.data)} flagged, ${zoneVideoCount(e.data)} video)`);
       if(e.data.notes) lines.push(`    Notes: ${e.data.notes}`);
-      e.data.photos.forEach(p => { if(p.note) lines.push(`    Flag: ${p.note}`); });
       e.data.checklist.forEach(item => {
         (e.data.itemVideos[item] || []).forEach(v => { if(v.driveLink) lines.push(`    ${item} video: ${v.driveLink}`); });
+        (e.data.itemPhotos[item] || []).forEach(p => { if(p.note) lines.push(`    ${item} flag: ${p.note}`); });
       });
     });
     const prior = linkedInspection(insp);
