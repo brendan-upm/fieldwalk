@@ -226,6 +226,7 @@
     position:relative;
   }
   .room-chip.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .room-chip.add-room-chip{border-style:dashed; background:none;}
   .room-chip.done::after{
     content:"";
     position:absolute;
@@ -269,6 +270,7 @@
   .cond-btn.good{background:#EAF2ED; color:var(--green-dark); border-color:var(--green);}
   .cond-btn.fair{background:#F8EFE0; color:var(--amber-dark); border-color:var(--amber);}
   .cond-btn.poor{background:#F6E7E4; color:var(--red-dark); border-color:var(--red);}
+  .cond-btn.na{background:#F1F0EC; color:var(--steel); border-color:var(--line-strong);}
 
   /* --- Media capture: walkthrough video + notated damage photos --- */
   .media-row{display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; margin:10px 0 4px;}
@@ -416,6 +418,7 @@
   .rating-pill.good{background:#EAF2ED; color:var(--green-dark);}
   .rating-pill.fair{background:#F8EFE0; color:var(--amber-dark);}
   .rating-pill.poor{background:#F6E7E4; color:var(--red-dark);}
+  .rating-pill.na{background:#F1F0EC; color:var(--steel);}
 
   .bar{height:7px; border-radius:4px; overflow:hidden; display:flex; background:var(--line); flex:1; min-width:50px;}
   .bar span{height:100%;}
@@ -505,13 +508,15 @@ function typeScope(type){
 }
 
 const CHECKLIST_TEMPLATES = {
-  "Kitchen": ["Walls & ceiling","Flooring","Windows operate & lock","Doors operate & latch","Cabinets & drawers operate smoothly","Countertops & backsplash","Sink & faucet — no leaks, hot & cold work","Garbage disposal operates","Outlets & GFCI test properly","Exhaust fan / range hood operates","Light fixtures operate"],
+  "Kitchen": ["Walls & ceiling","Flooring","Windows operate & lock","Doors operate & latch","Cabinets & drawers operate smoothly","Countertops & backsplash","Sink & faucet — no leaks, hot & cold work","Garbage disposal operates","Outlets & GFCI test properly","Exhaust fan / range hood operates","Light fixtures operate","Photograph refrigerator, range, dishwasher & microwave (model/serial visible)"],
   "Bathroom": ["Walls & ceiling","Flooring","Windows operate & lock","Doors operate & latch","Toilet flushes, no leaks or rocking","Tub/shower — no leaks, drains properly","Sink & faucet — no leaks, hot & cold work","Exhaust fan operates","GFCI outlets test properly","Caulking & grout condition"],
   "Half bathroom": ["Walls & ceiling","Flooring","Doors operate & latch","Toilet flushes, no leaks or rocking","Sink & faucet — no leaks, hot & cold work","Exhaust fan operates","GFCI outlets test properly"],
   "Bedroom": ["Walls & ceiling","Flooring","Windows operate, lock & screens intact","Doors operate & latch","Closet doors & track","Outlets & switches","Smoke detector present & functions"],
   "Living room": ["Walls & ceiling","Flooring","Windows operate, lock & screens intact","Doors operate & latch","Outlets & switches","Light fixtures operate"],
   "Hallway": ["Walls & ceiling","Flooring","Doors operate & latch","Outlets & switches","Smoke / CO detector present & functions"],
-  "Laundry": ["Walls & ceiling","Flooring","Washer hookup — no leaks","Dryer vent clear & unobstructed","Outlets & GFCI test properly","Exhaust ventilation"],
+  "Laundry": ["Walls & ceiling","Flooring","Washer hookup — no leaks","Dryer vent clear & unobstructed","Outlets & GFCI test properly","Exhaust ventilation","Photograph washer & dryer (model/serial visible)"],
+  "Porch": ["Flooring / decking condition","Railings secure","Screens & windows intact (if enclosed)","Roof / ceiling condition","Steps even & stable","Light fixtures operate"],
+  "Basement": ["Walls & ceiling","Flooring","No visible moisture, water stains, or musty odor","Sump pump operates (if present)","Windows/egress operate & lock","Outlets & GFCI test properly","Smoke / CO detector present & functions"],
   "Generic": ["Walls & ceiling","Flooring","Windows operate & lock","Doors operate & latch","Outlets & switches"]
 };
 function checklistForRoom(name){
@@ -519,6 +524,8 @@ function checklistForRoom(name){
   if(/^Bedroom/.test(name)) return CHECKLIST_TEMPLATES.Bedroom;
   if(/^Bathroom/.test(name)) return CHECKLIST_TEMPLATES.Bathroom;
   if(/laundry/i.test(name)) return CHECKLIST_TEMPLATES.Laundry;
+  if(/porch|sunroom|deck room/i.test(name)) return CHECKLIST_TEMPLATES.Porch;
+  if(/basement|cellar/i.test(name)) return CHECKLIST_TEMPLATES.Basement;
   return CHECKLIST_TEMPLATES.Generic;
 }
 
@@ -575,7 +582,7 @@ const GOOGLE_DRIVE_CLIENT_ID = "";
 const GOOGLE_DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.file";
 const GOOGLE_DRIVE_ROOT_FOLDER_NAME = "Fieldwalk Inspections";
 
-let state = { view: "home", inspections: {}, order: [], properties: {}, propertyOrder: [], currentId: null, currentRoom: null, editingPhoto: null, lightbox: null };
+let state = { view: "home", inspections: {}, order: [], properties: {}, propertyOrder: [], currentId: null, currentRoom: null, editingPhoto: null, lightbox: null, addingRoom: false };
 let pendingMediaTarget = null;
 
 function uid(){ return 'insp_' + Math.random().toString(36).slice(2,9); }
@@ -897,14 +904,16 @@ function zoneOf(insp, key){ return EXTERIOR_ZONES.includes(key) ? insp.exterior[
 function linkedInspection(insp){ return insp.linkedInspectionId ? state.inspections[insp.linkedInspectionId] : null; }
 
 function condRank(v){ return v === 'poor' ? 2 : v === 'fair' ? 1 : 0; }
+function condLabel(v){ return v === 'na' ? 'N/A' : v.toUpperCase(); }
 function zoneRating(zone){
-  const vals = Object.values(zone.conditions);
+  const vals = Object.values(zone.conditions).filter(v => v !== 'na');
+  if(vals.length === 0) return 'na'; // every item marked not-applicable
   if(vals.some(v => v === 'poor')) return 'poor';
   if(vals.some(v => v === 'fair')) return 'fair';
   return 'good';
 }
 function zonePercentages(zone){
-  const vals = Object.values(zone.conditions);
+  const vals = Object.values(zone.conditions).filter(v => v !== 'na');
   const total = vals.length || 1;
   const good = vals.filter(v => v === 'good').length;
   const fair = vals.filter(v => v === 'fair').length;
@@ -925,7 +934,8 @@ function buildComparison(insp, prior){
     .map(e => {
       const priorRating = zoneRating(zoneOf(prior, e.name));
       const curRating = zoneRating(e.data);
-      return { name: e.name, priorRating, curRating, degraded: condRank(curRating) > condRank(priorRating) };
+      const degraded = priorRating !== 'na' && curRating !== 'na' && condRank(curRating) > condRank(priorRating);
+      return { name: e.name, priorRating, curRating, degraded };
     });
 }
 
@@ -1292,6 +1302,7 @@ function renderWalkthrough(app){
     const done = d.notes || d.photos.length>0 || zoneVideoCount(d)>0;
     return `<div class="room-chip ${key===activeKey?'active':''} ${done?'done':''}" onclick="selectRoom('${jsEsc(key)}')">${esc(key)}</div>`;
   }).join('');
+  if(!isExt) chips += `<div class="room-chip add-room-chip" onclick="toggleAddRoom()">+ Add room</div>`;
 
   let checklist = zone.checklist.map(item => {
     const cond = zone.conditions[item] || 'good';
@@ -1307,7 +1318,7 @@ function renderWalkthrough(app){
     return `<div class="check-item">
       <div class="check-item-head">
         <span class="check-name">${esc(item)}</span>
-        <button class="cond-btn ${cond}" onclick="cycleCondition('${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}')">${cond}</button>
+        <button class="cond-btn ${cond}" onclick="cycleCondition('${jsEsc(activeKey)}', ${isExt}, '${jsEsc(item)}')">${condLabel(cond)}</button>
       </div>
       <div class="check-item-media">
         ${itemVideosHTML}
@@ -1355,6 +1366,20 @@ function renderWalkthrough(app){
 
     <div class="room-list">${chips}</div>
 
+    ${(!isExt && state.addingRoom) ? `
+    <div class="card" style="margin-bottom:16px;">
+      <label>Room name</label>
+      <input type="text" id="newRoomName" placeholder="e.g. Sunroom, Mudroom, Attic" onkeydown="if(event.key==='Enter'){ event.preventDefault(); addCustomRoom(this.value); }">
+      <div class="btn-row" style="margin-bottom:10px;">
+        <button class="btn btn-ghost btn-sm" onclick="addCustomRoom('Porch')">+ Porch</button>
+        <button class="btn btn-ghost btn-sm" onclick="addCustomRoom('Basement')">+ Basement</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-ghost btn-sm" onclick="toggleAddRoom()">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="addCustomRoom(document.getElementById('newRoomName').value)">Add room</button>
+      </div>
+    </div>` : ''}
+
     <div class="section-title">Condition checklist</div>
     <p style="font-size:11.5px; color:var(--steel); margin:-6px 0 10px;">Record a short video for each item, then scrub through it to capture a still if something needs documenting.</p>
     ${checklist}
@@ -1371,6 +1396,7 @@ function renderWalkthrough(app){
     <div class="card">
       <textarea id="roomNotes" placeholder="Describe condition, damage, or anything notable...">${esc(zone.notes)}</textarea>
     </div>
+    ${!isExt ? `<button class="btn btn-ghost btn-sm" style="color:var(--red-dark); margin-top:10px;" onclick="removeRoom('${jsEsc(activeKey)}')">Remove this room</button>` : ''}
 
     <div class="btn-row" style="margin-top:8px;">
       <button class="btn btn-ghost" onclick="goto('home')">Save & exit</button>
@@ -1391,12 +1417,44 @@ function renderWalkthrough(app){
   }
 }
 
-function selectRoom(key){ state.currentRoom = key; state.editingPhoto = null; render(); }
+function selectRoom(key){ state.currentRoom = key; state.editingPhoto = null; state.addingRoom = false; render(); }
+
+function toggleAddRoom(){
+  state.addingRoom = !state.addingRoom;
+  render();
+}
+
+function addCustomRoom(name){
+  const trimmed = (name || '').trim();
+  if(!trimmed) return;
+  const insp = current();
+  if(insp.rooms[trimmed]){ alert('A room with that name already exists.'); return; }
+  insp.roomOrder.push(trimmed);
+  insp.rooms[trimmed] = blankZone(checklistForRoom(trimmed));
+  state.currentRoom = trimmed;
+  state.addingRoom = false;
+  saveInspection(insp.id);
+  render();
+}
+
+async function removeRoom(roomKey){
+  const insp = current();
+  if(insp.roomOrder.length <= 1){ alert("Can't remove the only room in this inspection."); return; }
+  if(!confirm(`Remove "${roomKey}" from this inspection? Its photos, videos, and notes will be deleted. This can't be undone.`)) return;
+  const zone = insp.rooms[roomKey];
+  zone.photos.forEach(p => deleteMediaBlob(p.id).catch(()=>{}));
+  zoneAllVideos(zone).forEach(v => deleteMediaBlob(v.id).catch(()=>{}));
+  delete insp.rooms[roomKey];
+  insp.roomOrder = insp.roomOrder.filter(r => r !== roomKey);
+  if(state.currentRoom === roomKey) state.currentRoom = insp.roomOrder[0];
+  saveInspection(insp.id);
+  render();
+}
 
 function cycleCondition(roomKey, isExt, item){
   const insp = current();
   const data = isExt ? insp.exterior[roomKey] : insp.rooms[roomKey];
-  const order = ['good','fair','poor'];
+  const order = ['good','fair','poor','na'];
   const next = order[(order.indexOf(data.conditions[item])+1) % order.length];
   data.conditions[item] = next;
   saveInspection(insp.id);
@@ -1741,12 +1799,13 @@ function renderReport(app){
     const flags = e.data.photos.length;
     return `<div class="summary-row">
       <span class="zn">${esc(e.name)}</span>
+      ${rating === 'na' ? `<div class="bar" style="background:none;"></div>` : `
       <div class="bar">
         <span style="width:${p.good}%; background:var(--green);"></span>
         <span style="width:${p.fair}%; background:var(--amber);"></span>
         <span style="width:${p.poor}%; background:var(--red);"></span>
-      </div>
-      <span class="rating-pill ${rating}">${rating}</span>
+      </div>`}
+      <span class="rating-pill ${rating}">${condLabel(rating)}</span>
       <span class="cnt">${flags ? '&#9873; '+flags : '—'}</span>
       <span class="cnt">${zoneVideoCount(e.data) ? '&#9658; '+zoneVideoCount(e.data) : '—'}</span>
     </div>`;
@@ -1774,7 +1833,7 @@ function renderReport(app){
       <div class="section-title">${esc(e.name)}</div>
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span class="rating-pill ${rating}">${rating}</span>
+          <span class="rating-pill ${rating}">${condLabel(rating)}</span>
           <span class="mono" style="font-size:12px; color:var(--steel);">${e.data.photos.length} flagged &middot; ${videoCount} video${videoCount===1?'':'s'}</span>
         </div>
         ${e.data.notes ? `<div style="font-size:13px; margin-bottom:10px;">${esc(e.data.notes)}</div>` : ''}
@@ -1876,9 +1935,9 @@ function renderComparisonHTML(insp, prior, comparison){
         <div class="report-row">
           <span class="k">${esc(c.name)}</span>
           <span>
-            <span class="rating-pill ${c.priorRating}">${c.priorRating}</span>
+            <span class="rating-pill ${c.priorRating}">${condLabel(c.priorRating)}</span>
             &rarr;
-            <span class="rating-pill ${c.curRating}">${c.curRating}</span>
+            <span class="rating-pill ${c.curRating}">${condLabel(c.curRating)}</span>
             ${c.degraded ? `<span class="flag-pill" style="margin-left:6px;">new damage</span>` : ''}
           </span>
         </div>
@@ -1916,7 +1975,7 @@ function copyReport(){
     lines.push('ZONE SUMMARY');
     entries.forEach(e => {
       const rating = zoneRating(e.data);
-      lines.push(`- ${e.name}: ${rating.toUpperCase()} (${e.data.photos.length} flagged, ${zoneVideoCount(e.data)} video)`);
+      lines.push(`- ${e.name}: ${condLabel(rating)} (${e.data.photos.length} flagged, ${zoneVideoCount(e.data)} video)`);
       if(e.data.notes) lines.push(`    Notes: ${e.data.notes}`);
       e.data.photos.forEach(p => { if(p.note) lines.push(`    Flag: ${p.note}`); });
       e.data.checklist.forEach(item => {
@@ -1928,7 +1987,7 @@ function copyReport(){
       lines.push('');
       lines.push(`COMPARISON AGAINST: ${prior.type.toUpperCase()} — ${prior.date}`);
       buildComparison(insp, prior).forEach(c => {
-        lines.push(`- ${c.name}: ${c.priorRating} -> ${c.curRating}${c.degraded ? '  [NEW DAMAGE]' : ''}`);
+        lines.push(`- ${c.name}: ${condLabel(c.priorRating)} -> ${condLabel(c.curRating)}${c.degraded ? '  [NEW DAMAGE]' : ''}`);
       });
     }
   }
